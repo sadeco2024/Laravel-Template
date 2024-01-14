@@ -20,6 +20,14 @@
     <!-- Favicon -->
     <link rel="icon" href="{{ Vite::asset('resources\assets\images\brand-logos\toggle-logo.png') }}"
         type="image/x-icon">
+    <link rel="stylesheet" href="{{ Vite::asset('resources/assets/libs/bootstrap/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ Vite::asset('resources/assets/css/styles.css') }}" />
+    <script src="{{ Vite::asset('resources/assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+    <script src="{{ Vite::asset('resources/assets/js/main.js') }}"></script>
+
+
+
+
 
     @yield('css', '')
     <style>
@@ -120,7 +128,8 @@
                                 {{-- !!TODO: HACER LA PÁGINA DEL PERFIL --}}
                                 {{-- Cambiar contraseña --}}
                                 {{-- <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.edit') }}"> --}}
-                                <a class="dropdown-item d-flex align-items-center" href="{{ route('empleado.change-passwd') }}">
+                                <a class="dropdown-item d-flex align-items-center"
+                                    href="{{ route('empleado.change-passwd') }}">
                                     <i class="bi bi-unlock fs-18 me-2 op-7"></i>
                                     {{ __('Change Password') }}</a>
                             </li>
@@ -170,16 +179,9 @@
                     {{-- Start:: Menu --}}
 
                     <ul class="main-menu">
-                        {{-- TODO: SECCIÓN DEL MENÚ. --}}
-
-                        @foreach ($menus as $menu)
-                            {{-- @if ($menu->concepto == 'dash') --}}
-                                <x-dash-menu-item ruta="{{ $menu->ruta }}" concepto="{{$menu->concepto}}" valor="{{ $menu->ruta }}"
-                                    icon="{{ $menu->icono }}">
-                                    {{ $menu->nombre }}
-                                </x-dash-menu-item>
-                            {{-- @endif --}}
-                        @endforeach
+                        {{--  //* SECCIÓN DEL MENÚ. */ --}}
+                        @include('layouts.partials.dash-menus')
+                        {{--  //* TERMINA SECCIÓN DEL MENU */ --}}
                     </ul>
                     <div class="slide-right" id="slide-right">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
@@ -198,30 +200,23 @@
         <div class="main-content app-content">
             <div class="container-fluid">
                 <div
-                    class="my-4 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
-
+                    class="my-3 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
                     <h1 class="page-title fw-medium fs-18 mb-2">
                         @yield('title-view')
                     </h1>
                     <div class="">
                         <nav>
-                            {{-- @dump(request()) --}}
                             {{-- yield: Breadcums --}}
-                            {{-- @yield ('breadcums') --}}
                             @include('layouts.partials.breadcrumbs')
-                            {{-- <ol class="breadcrumb mb-0">
-                                <li class="breadcrumb-item">
-                                    <a href="javascript:void(0);">Pages</a>
-                                </li>
-                                <li class="breadcrumb-item active" aria-current="page">
-                                    Empty
-                                </li>
-                            </ol> --}}
                         </nav>
                     </div>
                 </div>
 
-
+                @if (session('success'))
+                    <x-alert-top tipo="success">
+                        {{ session('success') }}
+                    </x-alert-top>
+                @endif
 
                 {{-- yield: Concent --}}
                 @yield('content')
@@ -289,16 +284,16 @@
     {{-- Se pone hasta el final, despues de usar los js que necesitemos en cada página. --}}
     <script src='{{ Vite::asset('resources/assets/js/custom.js') }}'></script>
 
-
+    @yield('script')
 
 
 
 </body>
-<script type="text/javascript">
-    jQuery(function($) {
-        @yield('script')
+{{-- <script type="text/javascript">
+    jQuery(function($) { --}}
 
-    })
-</script>
+
+{{-- })
+</script> --}}
 
 </html>

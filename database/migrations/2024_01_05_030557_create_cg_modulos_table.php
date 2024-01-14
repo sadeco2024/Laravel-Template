@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('icono')->default('bi bi-menu-button');
-            $table->string('ruta')->nullable();
+            $table->string('slug')->nullable(false);
             $table->decimal('precio', 8, 2)->default(700);
             $table->timestamps();
         });

@@ -22,7 +22,9 @@
         </span>
         <i class="fe fe-chevron-right side-menu__angle"></i>
     </a>
-    <ul class="slide-menu ">
+    <ul class="slide-menu child1">
+
+
         <li class="slide side-menu__label1">
             <a href="javascript:void(0)">Tables</a>
         </li>

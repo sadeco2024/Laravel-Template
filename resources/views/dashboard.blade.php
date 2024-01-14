@@ -6,10 +6,10 @@
     @vite(['resources/js/auth-app.js'])
 @endsection
 
-{{-- @section('title-view', 'Indicadores') --}}
+@section('title-view', 'Indicadores')
 
 @section('content')
-@dump($menus)
+ Menus!
 @endsection
 
 @section('js')

@@ -3,60 +3,82 @@
 namespace App\Http\Controllers\Rh;
 
 use App\Http\Controllers\Controller;
-use App\Models\Configuraciones\Menu;
 use App\Models\Rh\Empleado;
 use App\Models\Rh\Puesto;
 use App\Models\Rh\Sucursal;
-use App\Models\User;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class EmpleadoController extends Controller
 {
-
-    // const $menus = Menu::menus()->get();
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
+        // $menus = Menu::menus()->get();
+        // $puestos = Puesto::puestos()->get();
+        $empleados = Empleado::paginate(10);
+        $sucursales = Sucursal::all();
+        // return $empleados;
 
-        $menus = Menu::menus()->get();
-        $puestos = Puesto::puestos()->get();
-        $empleados = Empleado::empleados()->get();
-        $sucursales = Sucursal::sucursales()->get();
-        return view('rh.empleados', compact('empleados','sucursales','puestos','menus'));
+        return Inertia::render('rh.empleados.index', [
+            'empleados' => $empleados,
+            'sucursales' => $sucursales,
+        ]);
+
+
+        return view('rh.empleados.index', compact('empleados','sucursales'));
     }
 
-    public function create() {
-        $menus = Menu::menus()->get();
-        return view('rh.empleado-create', compact('menus'));
-    }
-
-
-    public function edit(Request $request): View
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        $empleado = User::find(auth()->user()->id);
-        return view('rh.empleado-editar', compact('empleado'));
-    }    
-
-    public function changePassd() {
-        $menus = Menu::menus()->get();
-        return view('rh.empleado-passwd', compact('menus'));
+        return view('rh.empleados.create');
     }
 
-
-    public function list()
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
     {
+        //
+    }
 
-        $puestos = Puesto::puestos()->get();
-        $empleados = Empleado::empleados()->get();
-        $sucursales = Sucursal::sucursales()->get();
-        $menus = Menu::menus()->get();
-        return view('rh.empleados', compact('empleados','sucursales','puestos','menus'));
-    }    
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
 
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
 
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $empleados = Empleado::paginate(10);
 
+        return Inertia::update('empleados_table', [
+            'empleados' => $empleados,
+        ]);
+    }
 
-
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
+    }
 }

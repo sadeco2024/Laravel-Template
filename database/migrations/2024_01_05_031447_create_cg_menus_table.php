@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('cg_menus', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('ruta');
+            $table->string('slug',100)->unique();
             $table->string('icono')->default('bi bi-menu-button');
-            $table->string('padre')->nullable();
-            // $table->string('permiso')->nullable();
-            $table->string('orden')->nullable();
-            
+            $table->unsignedInteger('padre_cg_menu_id')->default(0);
+            $table->string('auth_roles',50)->nullable();
+            $table->string('auth_permisos',100)->nullable();
+            $table->smallInteger('orden')->default(1);
+            $table->boolean('enabled')->default(true);
             $table->foreignId('tipo_concepto_id')->nullable(false)->constrained('conceptos')->onDelete('restrict');
             $table->foreignId('cg_modulo_id')->nullable(false)->constrained('cg_modulos')->onDelete('restrict');
             

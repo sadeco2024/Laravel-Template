@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('numero_interior', 10)->nullable();
             $table->string('colonia', 100)->nullable();
             $table->string('codigo_postal', 5)->nullable();
+            $table->string('ubicacion',255)->nullable();
 
             $table->foreignId('ciudad_id')->nullable()->constrained('ciudades')->onUpdate('cascade')->onDelete('restrict');
             $table->foreignId('estado_id')->nullable(false)->constrained('estados')->onUpdate('cascade')->onDelete('restrict');

@@ -29,7 +29,11 @@ class DireccionFactory extends Factory
             'codigo_postal'=>$this->faker->regexify('[0-9]{5}'),
             'ciudad_id'=>Ciudad::all()->random()->id,
             'estado_id'=>Estado::all()->random()->id,
-            'municipio_id'=>Municipio::all()->random()->id            
+            'municipio_id'=>Municipio::all()->random()->id,
+            'ubicacion' => implode(',',$this->faker->localCoordinates()) 
+            //quiero que el faker localCoordinates me de un array con dos valores, pero no se como hacerlo
+
+
         ];
     }
 }

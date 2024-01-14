@@ -28,16 +28,19 @@ class MenusSeeder extends Seeder
         //** Se cargan los modulos.
         $modulos = [
             [
-                'nombre' => 'Configuraciones',
-                'icono' => 'bi bi-bounding-box',
+                'nombre' => 'Confs',
+                'icono' => 'bi bi-gear-wide-connected',
+                'slug' => 'confs'
             ],            
             [
                 'nombre' => 'RH',
-                'icono' => 'bi person-bounding-box',
+                'icono' => 'bi bi-person-bounding-box',
+                'slug' => 'rh'
             ],            
             [
                 'nombre' => 'ERP',
                 'icono' => 'bi bi-bounding-box',
+                'slug' => 'erp'
             ]
         ];
 
@@ -46,41 +49,63 @@ class MenusSeeder extends Seeder
             Modulo::create($modulo);
 
 
+
         Menu::create([
             'nombre' => 'Indicadores',
             'icono' => 'bi bi-house',
-            'ruta' => 'dashboard',            
+            'slug' => 'dashboard',            
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'dash'])->id,
             'cg_modulo_id' => 1,
+            'orden' => 0
         ]);
 
         Menu::create([
             'nombre' => 'RH',
             'icono' => 'bi bi-person-workspace',
-            'ruta' => 'empleados',            
-            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'dash'])->id,
+            'slug' => 'rh',            
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'menu'])->id,
             'cg_modulo_id' => 2,
         ]);
+        Menu::create([
+            'nombre' => 'Sucursales',
+            'icono' => 'bi bi-shop',
+            'slug' => 'sucursales',            
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
+            'cg_modulo_id' => 2,
+            'orden' => 15,
+            'padre_cg_menu_id'=>Menu::where('slug', 'rh')->first()->id
+        ]);       
+        Menu::create([
+            'nombre' => 'Empleados',
+            'icono' => 'ri-user-settings-line',
+            'slug' => 'empleados',            
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
+            'cg_modulo_id' => 2,
+            'orden' => 1,
+            'padre_cg_menu_id'=>Menu::where('slug', 'rh')->first()->id
+        ]);               
 
         Menu::create([
-            'nombre' => 'RH',
-            'icono' => 'bi bi-person-workspace',
-            'ruta' => 'empleados.create',            
+            'nombre' => 'getMunicipios',
+            'icono' => 'ri-government-line',
+            'slug' => 'getMunicipios',            
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'interno'])->id,
             'cg_modulo_id' => 2,
+            'padre_cg_menu_id'=>Menu::where('slug', 'rh')->first()->id,
+            'enabled' => false,
         ]);        
-        Menu::create([
-            'nombre' => 'RH',
-            'icono' => 'bi bi-person-workspace',
-            'ruta' => 'empleados.edit',            
-            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'interno'])->id,
-            'cg_modulo_id' => 2,
-        ]);             
+        // Menu::create([
+        //     'nombre' => 'RH',
+        //     'icono' => 'bi bi-person-workspace',
+        //     'slug' => 'empleados.edit',            
+        //     'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'interno'])->id,
+        //     'cg_modulo_id' => 2,
+        // ]);             
 
         Menu::create([
             'nombre' => 'ERP',
             'icono' => 'bi bi-building',
-            'ruta' => 'erp',            
+            'slug' => 'erp',            
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'menu'])->id,
             'cg_modulo_id' => 3,
         ]);
@@ -88,12 +113,38 @@ class MenusSeeder extends Seeder
         Menu::create([
             'nombre' => 'Articulos',
             'icono' => 'bi bi-boxes',
-            'ruta' => 'erp.articulos',            
+            'slug' => 'articulos',            
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'vista'])->id,
             'cg_modulo_id' => 3,
-            'padre'=>Menu::where('ruta', 'erp')->first()->id
+            'padre_cg_menu_id'=>Menu::where('slug', 'erp')->first()->id
         ]);        
-                
 
+        //** Configuraciones */
+        Menu::create([
+            'nombre' => 'Confs',
+            'icono' => 'bi bi-gear-wide-connected',
+            'slug' => 'confs',
+            'orden'=>999,           
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'menu'])->id,
+            'cg_modulo_id' => 1,
+        ]);      
+        
+        Menu::create([
+            'nombre' => 'Roles',
+            'icono' => 'bi bi-shield-lock',
+            'slug' => 'roles',            
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
+            'cg_modulo_id' => 1,
+            'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id
+        ]);               
+
+        Menu::create([
+            'nombre' => 'Menus',
+            'icono' => 'bi bi-menu-button',
+            'slug' => 'menus',            
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
+            'cg_modulo_id' => 1,
+            'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id
+        ]);               
     }
 }

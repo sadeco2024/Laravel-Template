@@ -6,6 +6,7 @@ use App\Models\Data\Estado;
 use App\Models\Data\Municipio;
 use App\Models\Generales\Ciudad;
 use App\Models\Generales\Concepto;
+use App\Models\Generales\Correo;
 use App\Models\Generales\Direccion;
 use App\Models\Generales\Estatus;
 use App\Models\Generales\Referencia;
@@ -84,12 +85,14 @@ class InitialSeeder extends Seeder
                 'estado_id' => Estado::where('estado', 'YUCATÁN')->first()->id,
                 'municipio_id' => Municipio::where('municipio', 'MERIDA')->first()->id,
                 'referencia_id' => Referencia::firstOrCreate(['referencia' => 'Oficina Central'])->id,            
+                'ubicacion' => '21.0245,-89.6165',
             ])->id,
-            'ubicacion' => json_encode([
-                'latitud' => '21.0245',
-                'longitud' => '-89.6165',
-            ]),
-            'estatus_id' => Estatus::firstOrCreate(['estatus' => 'activo'])->id,
+            'correo_id' => Correo::firstOrCreate(['correo'=>'sadecoqr@gmail.com'])->id,
+            // 'ubicacion' => json_encode([
+            //     'latitud' => '21.0245',
+            //     'longitud' => '-89.6165',
+            // ]),
+            'estatus_id' => Estatus::firstOrCreate(['estatus' => 'Abierta'])->id,
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'Almacén'])->id
         ]);
         // Se crea el concepto de Tienda.

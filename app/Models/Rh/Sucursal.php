@@ -2,6 +2,7 @@
 
 namespace App\Models\Rh;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +11,32 @@ class Sucursal extends Model
     use HasFactory;
 
     protected $table = 'sucursales';
+
+    protected $guarded = ['id'];
+
+    protected $fillable = [
+        'nombre',
+        'fecha_apertura',
+        'telefono_id',
+        'direccion_id',
+        'tipo_concepto_id',
+        'correo_id',
+        'comentario_id',
+        'estatus_id',
+        // 'ubicacion'
+    ];
+
+    protected function nombre(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => ucwords($value),
+            set: fn (string $value) => strtolower($value)
+        );
+    }        
+
+    public function scopeSucursal() {
+        
+    }
 
     public function scopeSucursales($query)
     {
@@ -27,24 +54,63 @@ class Sucursal extends Model
         ->orderBy('conceptos.id','asc')
         ->orderBy('estatuses.id','asc')
         ->orderBy('sucursales.nombre','asc');
-
     }
 
+    public function telefono()
+    {
+        return $this->belongsTo('App\Models\Generales\Telefono', 'telefono_id');
+    }
 
+    public function direccion()
+    {
+        return $this->belongsTo('App\Models\Generales\Direccion', 'direccion_id');
+    }
+    public function estatus()
+    {
+        return $this->belongsTo('App\Models\Generales\Estatus', 'estatus_id');
+    }
+    public function empleados()
+    {
+        return $this->hasMany('App\Models\Rh\Empleado', 'sucursal_id');
+    }
 
+    public function gerenteEmpleadoId()
+    {
+        return $this->belongsTo('App\Models\Rh\Empleado', 'gerente_empleado_id');        
+    }
+    public function supervisorEmpleadoId()
+    {
+        return $this->belongsTo('App\Models\Rh\Empleado', 'supervisor_empleado_id');        
+    }
+    public function encargadoEmpleadoId()
+    {
+        return $this->belongsTo('App\Models\Rh\Empleado', 'encargado_empleado_id');        
+    }
+    public function correo()
+    {
+        return $this->belongsTo('App\Models\Generales\Correo', 'correo_id');
+    }
+    
 
-    protected $fillable = [
-        'id',
-        'nombre',
-        'telefono_id',
-        'direccion_id',
-        'estatus_id',
-        'ubicacion'
-    ];
+    public function tipo()
+    {
+        return $this->belongsTo('App\Models\Generales\Concepto', 'tipo_concepto_id');
+    }
+
+    public function comentario()
+    {
+        return $this->belongsTo('App\Models\Generales\Comentario', 'comentario_id');
+    }
+
+    protected $with = ['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId','correo','comentario'];
+    
 
     protected $hidden = [
+        'tipo_concepto_id',
         'telefono_id',
         'direccion_id',
+        'correo_id',
+        'comentario_id',
         'estatus_id',        
         'created_at',
         'updated_at'
