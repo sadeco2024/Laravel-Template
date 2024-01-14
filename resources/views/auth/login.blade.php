@@ -53,9 +53,10 @@
                                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                                     </div>
                                     <div class="mt-3">
-                                        <div class="form-check form-check-lg">
-                                            <input class="form-check-input " type="checkbox"  name="remember" value=""/>
-                                            <label class="form-check-label text-muted fw-normal" for="remember">
+                                        <div class="form-check">
+                                            {{--  class="form-check-label text-muted fw-normal" --}}
+                                            <label >
+                                                <input class="form-check-input " type="checkbox"  name="remember" value=""/>
                                                 {{ __('Remember me') }}
                                             </label>
                                         </div>

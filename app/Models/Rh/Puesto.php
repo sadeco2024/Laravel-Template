@@ -21,20 +21,25 @@ class Puesto extends Model
     ];
 
 
-    public function scopePuestos($query)
-    {
-        return $query->join('empleados', 'rh_puestos.id', 'empleados.puesto_id')
-        ->selectRaw('rh_puestos.id, rh_puestos.puesto, count(empleados.id) as empleados')
-        ->groupBy('rh_puestos.id', 'rh_puestos.puesto')
-        ->orderBy('rh_puestos.id');  //TODO: agregar la jearquía del puesto.
+    // public function scopePuestos($query)
+    // {
+    //     return $query->join('empleados', 'rh_puestos.id', 'empleados.puesto_id')
+    //     ->selectRaw('rh_puestos.id, rh_puestos.puesto, count(empleados.id) as empleados')
+    //     ->groupBy('rh_puestos.id', 'rh_puestos.puesto')
+    //     ->orderBy('rh_puestos.id');  //TODO: agregar la jearquía del puesto.
         
-    }
+    // }
 
 
     protected $hidden = [
         'created_at',
         'updated_at',
     ];
+
+    public function empleados()
+    {
+        return $this->hasMany(Empleado::class);
+    }
 
     protected function puesto(): Attribute
     {

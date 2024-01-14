@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-6 col-xl-4 order-0 order-xl-1">
+        <div class="col-12 col-xl-4 col-lg-6 col-md-6 col-sm-8 order-0 order-xl-1">
             <div class="card custom-card">
                 <div class="">
                     {{-- Tabs --}}
@@ -92,8 +92,6 @@
                         </div>
 
                         {{-- Puestos --}}
-                        {{-- @dump($puestos) --}}
-
                         <div id="puestos-tab-pane" class="tab-pane fade border-0 chat-groups-tab" role="tabpanel"
                             aria-labelledby="groups-tab" tabindex="0">
                             <ul class="list-unstyled mb-0 mt-2 ">
@@ -110,84 +108,10 @@
                                             </div>
                                             <div puesto="{{ strtolower(str_replace(' ', '', $puesto->puesto)) }}"
                                                 class="avatar-list-stacked my-auto">
-
-                                                {{-- <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                                href="javascript:void(0);">
-                                                +19
-                                            </a> --}}
                                             </div>
                                         </div>
                                     </li>
                                 @endforeach
-                                {{-- <li class="my-1">
-
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <p class="mb-0">Director General</p>
-                                            <p class="mb-0">
-                                                <span class="badge bg-success-transparent">
-                                                Total:  4</span>
-                                            </p>
-                                        </div>
-                                        <div class="avatar-list-stacked my-auto">
-                                            <span class="avatar avatar-sm avatar-rounded">
-                                                <img src="{{ Vite::asset('resources/assets/images/faces/9.jpg') }}"
-                                                alt="img">
-                                            </span>
-                                            <span class="avatar avatar-sm avatar-rounded">
-                                                <img src="{{ Vite::asset('resources/assets/images/faces/9.jpg') }}"
-                                                    alt="img">
-                                            </span>
-                                            <span class="avatar avatar-sm avatar-rounded">
-                                                <img src="{{ Vite::asset('resources/assets/images/faces/9.jpg') }}"
-                                                    alt="img">
-                                            </span>
-                                            <span class="avatar avatar-sm avatar-rounded">
-                                                <img src="{{ Vite::asset('resources/assets/images/faces/9.jpg') }}"
-                                                    alt="img">
-                                            </span>
-                                            <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                                href="javascript:void(0);">
-                                                +19
-                                            </a>
-                                        </div>
-                                    </div>
-
-                                </li>
-                                <li class="my-1">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <p class="mb-0">2) Empleado General </p>
-                                            <p class="mb-0">
-                                                <span class="badge bg-secondary-transparent">
-                                                    Total: 31
-                                                </span>
-                                            </p>
-                                        </div>
-                                        <div class="avatar-list-stacked my-auto">
-                                            <span class="avatar avatar-sm avatar-rounded">
-                                                <img src="{{ Vite::asset('resources/assets/images/faces/9.jpg') }}"
-                                                    alt="img">
-                                            </span>
-                                            <span class="avatar avatar-sm avatar-rounded">
-                                                <img src="{{ Vite::asset('resources/assets/images/faces/9.jpg') }}"
-                                                    alt="img">
-                                            </span>
-                                            <span class="avatar avatar-sm avatar-rounded">
-                                                <img src="{{ Vite::asset('resources/assets/images/faces/9.jpg') }}"
-                                                    alt="img">
-                                            </span>
-                                            <span class="avatar avatar-sm avatar-rounded">
-                                                <img src="{{ Vite::asset('resources/assets/images/faces/9.jpg') }}"
-                                                    alt="img">
-                                            </span>
-                                            <a class="avatar avatar-sm bg-primary text-fixed-white avatar-rounded"
-                                                href="javascript:void(0);">
-                                                +18
-                                            </a>
-                                        </div>
-                                    </div>
-                                </li> --}}
                             </ul>
                         </div>
                     </div>
@@ -235,7 +159,10 @@
 
 
 @section('script')
-    const user = {!! json_encode($empleados) !!};
-
-    getTablaEmpleados(user)
+<script type="text/javascript">
+    $(document).ready(function() {
+        const user = {!! json_encode($empleados) !!};
+        getTablaEmpleados(user)
+    })
+</script>
 @endsection

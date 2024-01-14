@@ -2,8 +2,10 @@
 
 namespace App\Models\Generales;
 
+use App\Models\Configuraciones\Menu;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Concepto extends Model
 {
@@ -14,6 +16,9 @@ class Concepto extends Model
     protected $fillable = [
         'concepto',
     ];
+
+
+
 
     protected $hidden = [
         'id',

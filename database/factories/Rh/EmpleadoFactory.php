@@ -33,10 +33,11 @@ class EmpleadoFactory extends Factory
             'fecha_nacimiento' => $this->faker->date(),
             'fecha_ingreso' => $this->faker->date(),
             'corpo_telefono_id' => Telefono::all()->random()->id,
+            'puesto_id'=>2,
             'no_empleado' => $this->faker->numberBetween(1000, 9999),
             'jefe_user_id' => User::all()->random()->id,
             'sucursal_id' => Sucursal::all()->random()->id,
-            'estatus_id' => Estatus::all()->random()->id,
+            'estatus_id' => Estatus::firstOrCreate(['estatus'=> $this->faker->randomElement(['activo','suspendido','baja'])])->id,
         ];
     }
 }

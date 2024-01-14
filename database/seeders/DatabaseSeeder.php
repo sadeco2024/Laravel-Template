@@ -21,24 +21,31 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+
+
         //* Usuario inciial
         //!!BORRARLO
-        User::create([
+        $user = User::create([
             'name' => 'Hermilo A. Sánchez',
             'email' => 'sadecoqr@gmail.com',
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('anarquia'),
             'remember_token' => Str::random(10),            
-        ]);
+        ]); 
 
         //* Los menus.
-        $this->call([ MenusSeeder::class ]);                
+        $this->call([ MenusSeeder::class ]);        
 
         //* Los datos iniciales necesarios.
         $this->call([ InitialSeeder::class ]);        
 
+
+        //* Los roles.
+        $this->call([ RolesSeeder::class ]);        
+
         //* Los datos de prueba.
         $this->call([ PruebasSeeder::class ]);  
 
+        $user->assignRole('Super Admin');
     }
 }

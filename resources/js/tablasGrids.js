@@ -1,6 +1,4 @@
 function getTablaEmpleados(data) {
-    console.log(data);
-
     let acts = 0;
     susps = 0;
     bajas = 0;
@@ -111,15 +109,3 @@ function getTablaEmpleados(data) {
     }).render(document.getElementById("grid-empleados"));
 }
 
-
-
-
-
-function btnCrud(element) {
-    let row = element?.closest("tr");
-    let data = Array.from(row.cells, cell => cell.textContent)
-    console.log(data);
-    
-    
-
-}

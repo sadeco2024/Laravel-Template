@@ -10,8 +10,12 @@ class ErpController extends Controller
 {
     public function index()
     {
-
-        $menus = Menu::menus()->get();
-        return view('erp.index', compact('menus'));
+        return view('erp.index');
     }
+
+    public function articulos()
+    {
+        return view('erp.articulos');
+    }
+    
 }

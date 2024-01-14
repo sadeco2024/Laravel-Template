@@ -31,7 +31,8 @@ class PruebasSeeder extends Seeder
         Nombre::factory()->count(15)->create();
         Ciudad::factory()->count(15)->create();
         Direccion::factory()->count(15)->create();
-        Sucursal::factory()->count(9)->create();
+        
+        // Sucursal::factory()->count(9)->create();
 
 
         
@@ -41,7 +42,7 @@ class PruebasSeeder extends Seeder
         $userIds = User::where('id','<>','1')->pluck('id')->shuffle();
 
         $puesto = Puesto::firstOrCreate(['puesto' => 'empleado general'])->id;
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 20; $i++) {
             Empleado::factory()->create(['user_id' => $userIds->pop(),'puesto_id'=> $puesto]);
         }        
     }

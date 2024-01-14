@@ -12,7 +12,7 @@ class Municipio extends Model
     protected $table = 'municipios';
 
     protected $fillable = [
-        'nombre',
+        'municipio',
         'clave',
         'abreviatura',
         'estado_id'
@@ -20,14 +20,20 @@ class Municipio extends Model
 
     protected $hidden = [
         'ciudad_id',
-        'estado_id',        
+        // 'estado_id',        
         'created_at',
         'updated_at'
     ];
 
-    protected function nombre(): Attribute
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class);
+    }
+
+    protected function municipio(): Attribute
     {
         return Attribute::make(
+            set: fn (string $value) => strtolower($value),    
             get: fn (string $value) => ucwords($value),
         );
     }     

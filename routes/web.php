@@ -1,12 +1,17 @@
 <?php
 
 use App\Http\Controllers\Configuraciones\MenuController;
+use App\Http\Controllers\Confs\PermisoController;
+use App\Http\Controllers\Confs\RoleController;
 use App\Http\Controllers\Erp\ErpController;
+use App\Http\Controllers\GeneralesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Rh\EmpleadoController;
+use App\Http\Controllers\Rh\SucursalController;
 use App\Models\Configuraciones\Menu;
 use App\Models\Rh\Empleado;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,25 +36,46 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
-    
-    
-    //** Rutas de configuraciones */
-    Route::get('/dashboard',[MenuController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+    Route::resource('confs/roles', RoleController::class)->names('confs.roles');
+    Route::resource('/confs/roles/permisos', PermisoController::class)->names('confs.roles.permissions');
+
+    //** Rutas CONFIGURACIONES */
+    Route::resource('confs/menus', MenuController::class)->names('confs.menus');
 
     //** Rutas de RH */
-    Route::get('/empleados',[EmpleadoController::class, 'index'])->name('empleados');
-    Route::get('/empleados/create',[EmpleadoController::class, 'create'])->name('empleados.create');
-    Route::get('/empleados/edit',[EmpleadoController::class, 'create'])->name('empleados.edit');
-    Route::get('/empleados/change-passwd',[EmpleadoController::class, 'changePassd'])->name('empleado.change-passwd');
+    Route::resource('rh/sucursales', SucursalController::class)->names('rh.sucursales');
+    Route::resource('rh/empleados', EmpleadoController::class)->names('rh.empleados');
+
+    //* Rutas de Generales
+    Route::group(['prefix' => 'generales'], function () {
+        // Route::get('/getMunicipios/$id', [GeneralesController::class, 'getMunicipios'])->name('getMunicipios');
+        Route::get('/getMunicipios/{id}', [GeneralesController::class, 'getMunicipios'])->name('getMunicipios');
+        // Aquí puedes agregar más rutas para GeneralesController
+    });
+
+
+
+
+
+    Route::get('/empleados', [EmpleadoController::class, 'index'])->name('empleados');
+    Route::get('/empleados/create', [EmpleadoController::class, 'create'])->name('empleados.create');
+    Route::get('/empleados/edit', [EmpleadoController::class, 'create'])->name('empleados.edit');
+    Route::get('/empleados/change-passwd', [EmpleadoController::class, 'changePassd'])->name('empleado.change-passwd');
 
     //** Rutas ERP */
-    Route::get('/erp',[ErpController::class, 'index'])->name('erp');
+    Route::get('/erp', [ErpController::class, 'index'])->name('erp');
+
+    Route::get('/erp/articulos', [ErpController::class, 'articulos'])->name('erp.articulos');
 
 
     //!!Ruta en blanco.
-    Route::get('/empty',function() { 
+    Route::get('/empty', function () {
         $menus = Menu::all();
-        return view('empty',compact('menus')); 
+        return view('empty', compact('menus'));
     })->name('empty');
 
     // Route::get('/empleados',[EmpleadoController::class, 'list'])->name('rh.empleados');
@@ -60,8 +86,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
-    
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

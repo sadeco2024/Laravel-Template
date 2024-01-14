@@ -13,7 +13,7 @@ class Ciudad extends Model
     protected $table = 'ciudades';
 
     protected $fillable = [
-        'nombre',
+        'ciudad',
         'abreviatura',
         'municipio_id',
         'estado_id'
@@ -29,7 +29,8 @@ class Ciudad extends Model
     protected function nombre(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => ucwords($value),
+            set: fn (string $value) => strtolower($value),
+            get: fn (string $value) => ucwords($value)
         );
     }     
 }

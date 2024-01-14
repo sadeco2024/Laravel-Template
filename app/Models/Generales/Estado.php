@@ -13,21 +13,32 @@ class Estado extends Model
     protected $table = 'estados';
 
     protected $fillable = [
-        'nombre',
+        'estado',
         'clave',
         'abreviatura'
     ];    
 
     protected $hidden = [
-        'estado_id',
+        'id',
         'created_at',
         'updated_at'
     ];
 
-    protected function nombre(): Attribute
+    public function scopeNoRandom($query)
+    {
+        return $query->whereBetween('clave',[1,35]);
+    }
+
+    public function municipios()
+    {
+        return $this->hasMany(Municipio::class);
+    }
+
+    protected function estado(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => ucwords($value),
+            set: fn (string $value) => strtolower($value),
+            get: fn (string $value) => ucfirst($value),
         );
     }     
 }    
