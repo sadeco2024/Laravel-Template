@@ -1,7 +1,7 @@
 {
-  "_icons-!~{005}~.js": {
+  "_icons-!~{006}~.js": {
     "file": "assets/icons-ir0vs_xg.css",
-    "src": "_icons-!~{005}~.js"
+    "src": "_icons-!~{006}~.js"
   },
   "resources/assets/css/1-URF37ZRY.png": {
     "file": "assets/1-URF37ZRY-temI4Jc4.png",
@@ -202,6 +202,11 @@
   "resources/assets/css/transparent-YCQASJQ4.png": {
     "file": "assets/transparent-YCQASJQ4-RbNa0E3N.png",
     "src": "resources/assets/css/transparent-YCQASJQ4.png"
+  },
+  "resources/assets/images/brand-logos/logo-70.png": {
+    "file": "assets/logo-70-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/assets/images/brand-logos/logo-70.png"
   },
   "resources/assets/images/media/backgrounds/1-OYFNBVC3.png": {
     "file": "assets/1-OYFNBVC3-gNOOJfrk.png",
