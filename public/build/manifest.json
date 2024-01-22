@@ -1,7 +1,8 @@
 {
-  "_icons-!~{00w}~.js": {
+  "_icons-!~{00D}~.js": {
     "file": "assets/icons-ir0vs_xg.css",
-    "src": "_icons-!~{00w}~.js"
+    "isEntry": true,
+    "src": "resources/assets/css/icons.css"
   },
   "resources/assets/css/1-URF37ZRY.png": {
     "file": "assets/1-URF37ZRY-temI4Jc4.png",
@@ -70,6 +71,11 @@
   "resources/assets/css/feather-webfont-XC6AAHIC.ttf": {
     "file": "assets/feather-webfont-XC6AAHIC-hsAjXEqz.ttf",
     "src": "resources/assets/css/feather-webfont-XC6AAHIC.ttf"
+  },
+  "resources/assets/css/icons.css": {
+    "file": "assets/icons-ir0vs_xg.css",
+    "isEntry": true,
+    "src": "resources/assets/css/icons.css"
   },
   "resources/assets/css/la-brands-400-CIWECNZM.woff2": {
     "file": "assets/la-brands-400-CIWECNZM-qvkeDhBZ.woff2",
@@ -301,6 +307,11 @@
     "isEntry": true,
     "src": "resources/assets/libs/@simonwep/pickr/pickr.es5.min.js"
   },
+  "resources/assets/libs/@simonwep/pickr/themes/nano.min.css": {
+    "file": "assets/nano-uhdsTHc3.css",
+    "isEntry": true,
+    "src": "resources/assets/libs/@simonwep/pickr/themes/nano.min.css"
+  },
   "resources/assets/libs/bootstrap/css/bootstrap.min.css": {
     "file": "assets/bootstrap-hRHgVuAh.css",
     "isEntry": true,
@@ -316,15 +327,35 @@
     "isEntry": true,
     "src": "resources/assets/libs/choices.js/public/assets/scripts/choices.min.js"
   },
+  "resources/assets/libs/choices.js/public/assets/styles/choices.min.css": {
+    "file": "assets/choices-KeTf4ZS3.css",
+    "isEntry": true,
+    "src": "resources/assets/libs/choices.js/public/assets/styles/choices.min.css"
+  },
+  "resources/assets/libs/flatpickr/flatpickr.min.css": {
+    "file": "assets/flatpickr-ugiwMDle.css",
+    "isEntry": true,
+    "src": "resources/assets/libs/flatpickr/flatpickr.min.css"
+  },
   "resources/assets/libs/gridjs/gridjs.umd.js": {
     "file": "assets/gridjs.umd-dw_R5gBu.js",
     "isEntry": true,
     "src": "resources/assets/libs/gridjs/gridjs.umd.js"
   },
+  "resources/assets/libs/node-waves/waves.min.css": {
+    "file": "assets/waves-V73QMkE6.css",
+    "isEntry": true,
+    "src": "resources/assets/libs/node-waves/waves.min.css"
+  },
   "resources/assets/libs/node-waves/waves.min.js": {
     "file": "assets/waves.min-ndbrgjzh.js",
     "isEntry": true,
     "src": "resources/assets/libs/node-waves/waves.min.js"
+  },
+  "resources/assets/libs/simplebar/simplebar.min.css": {
+    "file": "assets/simplebar-Eb51LkXI.css",
+    "isEntry": true,
+    "src": "resources/assets/libs/simplebar/simplebar.min.css"
   },
   "resources/assets/libs/simplebar/simplebar.min.js": {
     "file": "assets/simplebar.min-EmE-l2iW.js",
@@ -340,6 +371,11 @@
     "file": "assets/sweetalert2.min-pZjgSrgV.js",
     "isEntry": true,
     "src": "resources/assets/libs/sweetalert2/sweetalert2.min.js"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-PnpYQJab.css",
+    "isEntry": true,
+    "src": "resources/css/app.css"
   },
   "resources/js/alerts.js": {
     "file": "assets/alerts-y6IuNF1h.js",
