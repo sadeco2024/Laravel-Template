@@ -19,16 +19,14 @@
     
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ Vite::asset('resources/assets/images/brand-logos/toggle-logo.png') }}"
+    <link rel="icon" href="{{ url('resources/assets/images/brand-logos/toggle-logo.png') }}"
         type="image/x-icon">
 
         {{-- <script rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"></script> --}}
         
     <link rel="stylesheet" href="{{ Vite::asset('resources/assets/libs/bootstrap/css/bootstrap.min.css') }}" />
     
-    
-
-    
+   
     
     <link rel="stylesheet" href="{{ Vite::asset('resources/assets/css/styles.css') }}" />
     <script src="{{ Vite::asset('resources/assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
@@ -46,7 +44,7 @@
     {{-- @inertia --}}
     <!-- Loader -->
     <div id="loader" class="show">
-        <img src="{{ Vite::asset('resources/assets/images/media/loader.svg') }}" alt="loader" />
+        <img src="{{ url('resources/assets/images/media/loader.svg') }}" alt="loader" />
     </div>
     <!-- Loader -->
 
@@ -117,7 +115,7 @@
                             data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <div class="me-sm-2 me-0">
-                                    <img src="{{ Vite::asset('resources/assets/images/faces/8.jpg') }}" alt="img"
+                                    <img src="{{ url('resources/assets/images/faces/8.jpg') }}" alt="img"
                                         class="avatar avatar-sm avatar-rounded" />
                                 </div>
                                 <div class="d-lg-block d-none lh-1">
