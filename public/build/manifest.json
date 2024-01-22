@@ -1,5 +1,5 @@
 {
-  "_icons-!~{00D}~.js": {
+  "_icons-!~{00w}~.js": {
     "file": "assets/icons-ir0vs_xg.css",
     "isEntry": true,
     "src": "resources/assets/css/icons.css"
@@ -214,36 +214,6 @@
     "file": "assets/transparent-YCQASJQ4-RbNa0E3N.png",
     "src": "resources/assets/css/transparent-YCQASJQ4.png"
   },
-  "resources/assets/images/brand-logos/desktop-dark-s.png": {
-    "file": "assets/desktop-dark-s-w40geAFS.js",
-    "isEntry": true,
-    "src": "resources/assets/images/brand-logos/desktop-dark-s.png"
-  },
-  "resources/assets/images/brand-logos/desktop-logo-s.png": {
-    "file": "assets/desktop-logo-s-w40geAFS.js",
-    "isEntry": true,
-    "src": "resources/assets/images/brand-logos/desktop-logo-s.png"
-  },
-  "resources/assets/images/brand-logos/logo-70.png": {
-    "file": "assets/logo-70-w40geAFS.js",
-    "isEntry": true,
-    "src": "resources/assets/images/brand-logos/logo-70.png"
-  },
-  "resources/assets/images/brand-logos/toggle-dark.png": {
-    "file": "assets/toggle-dark-w40geAFS.js",
-    "isEntry": true,
-    "src": "resources/assets/images/brand-logos/toggle-dark.png"
-  },
-  "resources/assets/images/brand-logos/toggle-logo.png": {
-    "file": "assets/toggle-logo-w40geAFS.js",
-    "isEntry": true,
-    "src": "resources/assets/images/brand-logos/toggle-logo.png"
-  },
-  "resources/assets/images/faces/8.jpg": {
-    "file": "assets/8-w40geAFS.js",
-    "isEntry": true,
-    "src": "resources/assets/images/faces/8.jpg"
-  },
   "resources/assets/images/media/backgrounds/1-OYFNBVC3.png": {
     "file": "assets/1-OYFNBVC3-gNOOJfrk.png",
     "src": "resources/assets/images/media/backgrounds/1-OYFNBVC3.png"
@@ -251,11 +221,6 @@
   "resources/assets/images/media/backgrounds/media-65-XTYTW25B.jpg": {
     "file": "assets/media-65-XTYTW25B-RYM78kzg.jpg",
     "src": "resources/assets/images/media/backgrounds/media-65-XTYTW25B.jpg"
-  },
-  "resources/assets/images/media/loader.svg": {
-    "file": "assets/loader-w40geAFS.js",
-    "isEntry": true,
-    "src": "resources/assets/images/media/loader.svg"
   },
   "resources/assets/js/coming-soon.js": {
     "file": "assets/coming-soon-J-HeamrB.js",
