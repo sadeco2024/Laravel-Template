@@ -19,7 +19,7 @@
     
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ Vite::asset('resources\assets\images\brand-logos\toggle-logo.png') }}"
+    <link rel="icon" href="{{ Vite::asset('resources/assets/images/brand-logos/toggle-logo.png') }}"
         type="image/x-icon">
 
         {{-- <script rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"></script> --}}
