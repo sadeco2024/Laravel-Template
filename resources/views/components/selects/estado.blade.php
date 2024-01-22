@@ -1,7 +1,7 @@
 @props(['estados', 'name'=>'estado_id','value'=>''])
 
 <div class="form-group mb-2">
-    <label class="form-label">Estado</label>
+    <label class="form-label  mb-0">Estado</label>
     <div class="input-group">
         <div class="input-group-text">
             <i class="ri-community-line"></i>

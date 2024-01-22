@@ -102,7 +102,7 @@ class Sucursal extends Model
         return $this->belongsTo('App\Models\Generales\Comentario', 'comentario_id');
     }
 
-    protected $with = ['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId','correo','comentario'];
+    // protected $with = ['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId','correo','comentario'];
     
 
     protected $hidden = [
@@ -111,6 +111,7 @@ class Sucursal extends Model
         'direccion_id',
         'correo_id',
         'comentario_id',
+        'enabled',
         'estatus_id',        
         'created_at',
         'updated_at'

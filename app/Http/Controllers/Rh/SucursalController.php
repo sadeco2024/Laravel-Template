@@ -23,12 +23,15 @@ class SucursalController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+     public function index()
     {
         
         $sucursales = Sucursal::with(['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId'])->get();
         //TODO: Mandarle toda la lista de empleados, para que por el puesto, rellene los selects
+        // $empleados = Empleado::all();
         // return $empleados;
+
         return view('rh.sucursales.index',['sucursales'=>$sucursales]);
     }
 
@@ -118,9 +121,8 @@ class SucursalController extends Controller
      */
     public function edit( $sucursal)
     {
-        // $sucursal = Sucursal::with(['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId'])->get();
-        // dd($sucursal);
-        // dd($sucursal);
+
+
         $sucursal = Sucursal::with(['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId'])->where('id',$sucursal)->first();
         $estados = Estado::noRandom()->get();
         // return $sucursal;
@@ -170,17 +172,15 @@ class SucursalController extends Controller
         $sucursal->telefono_id = Telefono::firstOrCreate(['telefono' => $request->telefono])->id;
         $sucursal->correo_id = Correo::firstOrCreate(['correo' => $request->correo])->id;
 
+        //?Se actualiza la referencia de la sucursal.
         if ($request->referencia) {
             if ($sucursal->direccion->referencia_id) {
-                // $referencia = Referencia::firstOrCreate(['referencia' => $request->referencia])->id;
                 $referencia = Referencia::find($sucursal->direccion->referencia_id);
-                // dd($referencia);
                 $referencia->referencia = $request->referencia;
                 $sucursal->direccion->referencia_id = $referencia->id;
                 $referencia->save();
             } else {
                 $referencia = Referencia::firstOrCreate(['referencia' => $request->referencia]);
-                // dd($referencia);
                 $sucursal->direccion->referencia_id = $referencia->id;
                 $referencia->save();
             }
@@ -202,10 +202,9 @@ class SucursalController extends Controller
 
         
 
-        // ? Se actualiza o genera el comentario
+        //? Se actualiza o genera el comentario
         if ($request->comentario) {
             if ($sucursal->comentario_id) {
-                // $referencia = Referencia::firstOrCreate(['referencia' => $request->referencia])->id;
                 $comentario = Comentario::find($sucursal->comentario_id);
                 $comentario->comentario = $request->comentario;
                 $comentario->save();
@@ -225,13 +224,10 @@ class SucursalController extends Controller
         // $sucursal->encargado_empleado_id = $request->encargado_empleado_id;
         
 
-        //**  */
+        
         $sucursales = Sucursal::with(['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId'])->get();
+        // return $sucursales;
         return redirect()->route('rh.sucursales.index',['sucursales'=>$sucursales])->with('success','Sucursal actualizada correctamente');
-        // return redirect()->route('rh.sucursales.edit',$sucursal->id)->with('success','Sucursal actualizada correctamente');
-
-        // $sucursales = Sucursal::with(['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId'])->get();
-        // return view('rh.sucursales.index',['sucursales'=>$sucursales]);
 
     }
 

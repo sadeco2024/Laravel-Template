@@ -15,8 +15,8 @@ class Municipio extends Model
         'municipio',
         'clave',
         'abreviatura',
-        'estado_id'
-    ];    
+        'estado_id',
+    ];
 
     protected $hidden = [
         'ciudad_id',
@@ -33,9 +33,8 @@ class Municipio extends Model
     protected function municipio(): Attribute
     {
         return Attribute::make(
-            set: fn (string $value) => strtolower($value),    
+            set: fn (string $value) => strtolower($value),
             get: fn (string $value) => ucwords($value),
         );
-    }     
-
+    }
 }

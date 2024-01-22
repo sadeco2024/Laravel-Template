@@ -16,29 +16,34 @@
     <meta name="Author" content="Hermilo A. Sánchez de Córdova">
     <meta name="keywords" content="Telcel,Gestor,Comisiones,Información,Intranet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
 
     <!-- Favicon -->
     <link rel="icon" href="{{ Vite::asset('resources\assets\images\brand-logos\toggle-logo.png') }}"
         type="image/x-icon">
+
+        {{-- <script rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"></script> --}}
+        
     <link rel="stylesheet" href="{{ Vite::asset('resources/assets/libs/bootstrap/css/bootstrap.min.css') }}" />
+    
+    
+
+    
+    
     <link rel="stylesheet" href="{{ Vite::asset('resources/assets/css/styles.css') }}" />
     <script src="{{ Vite::asset('resources/assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
     <script src="{{ Vite::asset('resources/assets/js/main.js') }}"></script>
 
 
-
-
-
     @yield('css', '')
-    <style>
-
-    </style>
 
     @yield('vite-js')
+    {{-- @routes --}}
+    {{-- @inertiaHead --}}
 </head>
 
 <body>
-
+    {{-- @inertia --}}
     <!-- Loader -->
     <div id="loader" class="show">
         <img src="{{ Vite::asset('resources/assets/images/media/loader.svg') }}" alt="loader" />

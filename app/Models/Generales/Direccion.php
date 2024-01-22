@@ -21,7 +21,8 @@ class Direccion extends Model
         "ciudad_id",
         "estado_id",
         "municipio_id",
-        "referencia_id"        
+        "referencia_id",
+        'ubicacion'
     ];
 
     protected $hidden = [

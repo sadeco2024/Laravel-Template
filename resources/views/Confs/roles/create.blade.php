@@ -3,7 +3,7 @@
 @section('vite-js')
     @vite(['resources/js/auth-app.js'])
 @endsection
-@section('title-view', 'Crear Rol')
+@section('title-view', 'Datos del rol')
 @section('content')
 
     <div class="row">

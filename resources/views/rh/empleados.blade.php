@@ -50,7 +50,7 @@
                     {{-- Tabs - contenct --}}
                     <div class="tab-content">
                         {{-- Sucursales --}}
-                        <div id="sucursales-tab-pane" class="tab-pane fade show active border-0" role="tabpanel"
+                        {{-- <div id="sucursales-tab-pane" class="tab-pane fade show active border-0" role="tabpanel"
                             aria-labelledby="config-tab" tabindex="0">
                             <ul class="list-group list-group-flush list-unstyled ">
                                 @php
@@ -89,12 +89,13 @@
                                     </li>
                                 @endforeach
                             </ul>
-                        </div>
+                        </div> --}}
 
                         {{-- Puestos --}}
                         <div id="puestos-tab-pane" class="tab-pane fade border-0 chat-groups-tab" role="tabpanel"
                             aria-labelledby="groups-tab" tabindex="0">
                             <ul class="list-unstyled mb-0 mt-2 ">
+                                
                                 @foreach ($puestos as $puesto)
                                     <li class="my-1">
 
@@ -103,7 +104,7 @@
                                                 <p class="mb-0">{{ $puesto->puesto }}</p>
                                                 <p class="mb-0">
                                                     <span class="badge bg-success-transparent">
-                                                        Total: {{ $puesto->empleados }}</span>
+                                                        Total: {{ $puesto->empleados_count }}</span>
                                                 </p>
                                             </div>
                                             <div puesto="{{ strtolower(str_replace(' ', '', $puesto->puesto)) }}"
@@ -150,19 +151,22 @@
 @section('js')
     <!-- Grid JS -->
     <script src='{{ Vite::asset('resources/assets/libs/gridjs/gridjs.umd.js') }}'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+    <x-scripts.jquery>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                const user = {!! ($empleados) !!};
+                getTablaEmpleados(user)
+            })
+        </script>
+    </x-scripts.jquery>
 
     <!-- Internal Grid JS -->
     <script src='{{ Vite::asset('resources/js/tablasGrids.js') }}'></script>
-    {{-- <script src="../assets/js/grid.js"></script> --}}
+
 @endsection
 
 
 @section('script')
-<script type="text/javascript">
-    $(document).ready(function() {
-        const user = {!! json_encode($empleados) !!};
-        getTablaEmpleados(user)
-    })
-</script>
+
 @endsection

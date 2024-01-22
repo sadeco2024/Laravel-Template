@@ -10,20 +10,12 @@
 
 
 @section('content')
-    @if (session('success'))
-        <div class="alert alert-success  alert-dismissible fade show">
-            <i class="bi bi-check-circle me-2"></i>
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                <i class="bi bi-x"></i>
-            </button>
-        </div>
-    @endif
+
 
     <div class="row mb-3">
         <div class="col-12 d-flex justify-content-between">
             {{-- <span></span> --}}
-
+            <span></span>
             <a href="{{ route('confs.roles.create') }}" class="btn btn-success-transparent btn-sm">
                 <i class="bi bi-plus"></i>
                 Agregar rol

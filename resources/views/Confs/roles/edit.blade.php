@@ -9,16 +9,7 @@
 @section('title-view', 'Editar Rol')
 
 @section('content')
-    {{-- @dump($modulos) --}}
-    @if (session('success'))
-        <div class="alert alert-success  alert-dismissible fade show">
-            <i class="bi bi-check-circle me-2"></i>
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                <i class="bi bi-x"></i>
-            </button>
-        </div>
-    @endif
+
 
     <div class="row">
         <div class="col-12">
@@ -51,7 +42,7 @@
 
     </div>
 
-    
+
     {{-- Modal permisos --}}
 
     <div class="modal fade " id="modaldemo8">
@@ -72,7 +63,7 @@
                             @csrf
                             @method('POST')
                             <input type="hidden" name="rol_id" value="{{ $role->id }}">
-                            
+
                             <div class="col">
 
                                 <x-inputs.name :name="'pnombre'" />
@@ -93,25 +84,15 @@
         </div>
     </div>
 
-
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script>
-        function pulsar(e) {
-            if (e.which === 13 && !e.shiftKey) {
-                e.preventDefault();
-                return false;
+    <x-scripts.jquery>
+        <script>
+            function pulsar(e) {
+                if (e.which === 13 && !e.shiftKey) {
+                    e.preventDefault();
+                    return false;
+                }
             }
-        }
-    </script>
-
-    <script>
-        $(document).ready(function() {
-
-            //Si existe un error en la validación del formulario modaldemo8, entonces volver a mostrar el modal
-
-
-
+            $(document).ready(function() {
             @if (
                 $errors->get('pname') != null ||
                     $errors->get('pdescripcion') != null ||
@@ -120,7 +101,14 @@
                 $('#modaldemo8').modal('show');
             @endif
         });
-    </script>
+        </script>
+    </x-script.jquery>
+
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script></script>
+
+    <script></script> --}}
 
 
     @include('layouts.partials.swetalert')

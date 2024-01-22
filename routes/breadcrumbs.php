@@ -38,7 +38,7 @@ Breadcrumbs::for('confs.roles.show', function (BreadcrumbTrail $trail, Role $rol
 // ROLES > CREATE
 Breadcrumbs::for('confs.roles.create', function (BreadcrumbTrail $trail)  {
     $trail->parent('confs.roles.index');
-    $trail->push('Ver rol', route('confs.roles.create'));
+    $trail->push('Crear rol', route('confs.roles.create'));
 });
 
 // ROLES > EDIT
@@ -71,13 +71,39 @@ Breadcrumbs::for('rh.sucursales.edit', function (BreadcrumbTrail $trail, $sucurs
 //** RH - Empleados */
 Breadcrumbs::for('rh.empleados.index', function (BreadcrumbTrail $trail):void  {
     // $trail->parent('confs.roles.index');
-    $trail->push('Empleados', route('rh.sucursales.index'));
+    $trail->push('Empleados', route('rh.empleados.index'));
 });
 //** RH - Empleados */
 Breadcrumbs::for('rh.empleados.create', function (BreadcrumbTrail $trail):void  {
     $trail->parent('rh.empleados.index');
-    $trail->push('Agregar', route('rh.sucursales.create'));
+    $trail->push('Agregar', route('rh.empleados.create'));
 });
+Breadcrumbs::for('rh.empleados.edit', function (BreadcrumbTrail $trail, $empleado):void  {
+    $trail->parent('rh.empleados.index');
+    $trail->push('Editar', route('rh.empleados.edit',$empleado));
+});
+Breadcrumbs::for('rh.empleados.show', function (BreadcrumbTrail $trail, $empleado):void  {
+    $trail->parent('rh.empleados.index');
+    $trail->push('Ver', route('rh.empleados.show',$empleado));
+});
+
+//** ERP - ARTICULOS */
+Breadcrumbs::for('erp.articulos.index', function (BreadcrumbTrail $trail) {
+    // $trail->parent('erp');
+    $trail->push('Articulos', route('erp.articulos.index'));
+});
+
+
+
+//** Telcel - Canales */
+Breadcrumbs::for('telcel.canales.index', function (BreadcrumbTrail $trail) {
+    // $trail->parent('erp');
+    $trail->push('Canales Telcel', route('telcel.canales.index'));
+});
+
+
+
+
 
 // Breadcrumbs::for('confs.roles.show', function (BreadcrumbTrail $trail) {
 //     $trail->parent('conf.roles');
@@ -125,15 +151,15 @@ Breadcrumbs::for('empleado.change-passwd', function (BreadcrumbTrail $trail) {
 
 
 // ERP
-Breadcrumbs::for('erp', function (BreadcrumbTrail $trail) {
-    // $trail->parent('empleados');
-    $trail->push('ERP', route('erp'));
-});
+// Breadcrumbs::for('erp', function (BreadcrumbTrail $trail) {
+//     // $trail->parent('empleados');
+//     $trail->push('ERP', route('erp'));
+// });
 
-Breadcrumbs::for('erp.articulos', function (BreadcrumbTrail $trail) {
-    $trail->parent('erp');
-    $trail->push('Articulos', route('erp.articulos'));
-});
+// Breadcrumbs::for('erp.articulos', function (BreadcrumbTrail $trail) {
+//     $trail->parent('erp');
+//     $trail->push('Articulos', route('erp.articulos'));
+// });
 
 
 // ** Anteriores
