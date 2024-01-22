@@ -28,9 +28,7 @@ export default defineConfig({
                 'resources/assets/js/simplebar.js',
                 'resources/assets/libs/@simonwep/pickr/pickr.es5.min.js',
                 'resources/assets/js/custom-switcher.min.js',
-                'resources/assets/js/custom.js',
-                
-
+                'resources/assets/js/custom.js'
             ],
 
             
