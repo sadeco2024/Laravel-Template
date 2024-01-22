@@ -35,7 +35,7 @@ class CanalController extends Controller
         // $doc = $this->scrap->login(); // - TERMINADO
         $doc = $this->scrap->getCanales(); 
         
-        // return $doc;
+        return $doc;
 
 
     }
