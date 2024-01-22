@@ -71,11 +71,12 @@ document.querySelectorAll('[type="submit"]').forEach((element) => {
 
         const form =document.getElementById(element.getAttribute("form"))
         if(form && !form.classList.contains('form-modal'))
+            
           form.submit();
         else {
           console.log(form)
           console.log(form.action);
-          
+
           $.ajax({
             url: form.action,
             type: form.method,
