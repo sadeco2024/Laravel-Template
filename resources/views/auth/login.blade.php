@@ -17,7 +17,7 @@
                             @csrf
                             <div class="mb-3 d-flex justify-content-center">
                                 <img style="width: 80px; height: 80px;"
-                                    src="{{ Vite::asset('resources/assets/images/brand-logos/logo-70.png') }}" alt="img" />
+                                    src="{{ url('resources/assets/images/brand-logos/logo-70.png') }}" alt="img" />
                             </div>
                             <p class="h5 mb-2 text-center">{{ config('app.name') }}</p>
                             <p class="mb-4 text-muted op-9 fw-normal text-center">{{ __('Welcome!') }}</p>
