@@ -4,9 +4,7 @@ namespace App\Services;
 
 use Exception;
 use Illuminate\Support\Facades\Storage;
-use Symfony\Component\BrowserKit\HttpBrowser;
-use Symfony\Component\HttpClient\HttpClient;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+
 
 trait SendBrowser
 {
@@ -14,11 +12,7 @@ trait SendBrowser
     private $indexPage = 1;
     private $arrayResult = [];
 
-    // public function __construct()
-    // {
-    //     $this->browser = new HttpBrowser(HttpClient::create());
-    //     $this->getPasswd();
-    // }
+
 
 
     public function sendBrowser($opcs)
@@ -48,7 +42,6 @@ trait SendBrowser
 
         switch ($method) {
             case 'POST':
-
                 $doc = $this->browser->request('POST', $url, $array);
                 break;
             case 'SUBMIT':
@@ -79,14 +72,13 @@ trait SendBrowser
     function arrayMake($array, $form, $doc)
     {
         $arrayMake = is_object($form) ? $form->getValues() : (is_array($form) ? $form : array());
-        $indices = array_keys($array);
-        
-    
+      
         foreach ($arrayMake as $index => $value) {
             if (isset($array[$index])) {
                 $value = $array[$index];
                 unset($array[$index]);
             }
+            $indices = array_keys($array);
             foreach($indices as $indice)
                 if (strstr($index, $indice)) {
                     $value = $array[$indice];
@@ -102,6 +94,7 @@ trait SendBrowser
             }
             $arrayMake[$index] = $value;
         }
+        
     
         foreach ($array as $index => $value) {
             $javaFaces = [
