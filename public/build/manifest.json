@@ -1,7 +1,7 @@
 {
-  "_icons-!~{006}~.js": {
+  "_icons-!~{007}~.js": {
     "file": "assets/icons-ir0vs_xg.css",
-    "src": "_icons-!~{006}~.js"
+    "src": "_icons-!~{007}~.js"
   },
   "resources/assets/css/1-URF37ZRY.png": {
     "file": "assets/1-URF37ZRY-temI4Jc4.png",
@@ -215,6 +215,11 @@
   "resources/assets/images/media/backgrounds/media-65-XTYTW25B.jpg": {
     "file": "assets/media-65-XTYTW25B-RYM78kzg.jpg",
     "src": "resources/assets/images/media/backgrounds/media-65-XTYTW25B.jpg"
+  },
+  "resources/assets/js/coming-soon.js": {
+    "file": "assets/coming-soon-J-HeamrB.js",
+    "isEntry": true,
+    "src": "resources/assets/js/coming-soon.js"
   },
   "resources/js/alerts.js": {
     "file": "assets/alerts-y6IuNF1h.js",

@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/js/auth-app.js',
                 'resources/js/alerts.js',
                 'resources/assets/images/brand-logos/logo-70.png',
+                'resources/assets/js/coming-soon.js'
             ],
 
             
