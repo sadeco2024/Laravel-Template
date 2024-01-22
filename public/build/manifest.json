@@ -1,7 +1,7 @@
 {
-  "_icons-!~{007}~.js": {
+  "_icons-!~{00o}~.js": {
     "file": "assets/icons-ir0vs_xg.css",
-    "src": "_icons-!~{007}~.js"
+    "src": "_icons-!~{00o}~.js"
   },
   "resources/assets/css/1-URF37ZRY.png": {
     "file": "assets/1-URF37ZRY-temI4Jc4.png",
@@ -179,6 +179,11 @@
     "file": "assets/remixicon-KQADHDEE--pXCqt22.woff2",
     "src": "resources/assets/css/remixicon-KQADHDEE.woff2"
   },
+  "resources/assets/css/styles.css": {
+    "file": "assets/styles-vtB1E4vY.css",
+    "isEntry": true,
+    "src": "resources/assets/css/styles.css"
+  },
   "resources/assets/css/tabler-icons-E2OE56WE.svg": {
     "file": "assets/tabler-icons-E2OE56WE-8fCjxxDm.svg",
     "src": "resources/assets/css/tabler-icons-E2OE56WE.svg"
@@ -208,6 +213,16 @@
     "isEntry": true,
     "src": "resources/assets/images/brand-logos/logo-70.png"
   },
+  "resources/assets/images/brand-logos/toggle-logo.png": {
+    "file": "assets/toggle-logo-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/assets/images/brand-logos/toggle-logo.png"
+  },
+  "resources/assets/images/faces/8.jpg": {
+    "file": "assets/8-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/assets/images/faces/8.jpg"
+  },
   "resources/assets/images/media/backgrounds/1-OYFNBVC3.png": {
     "file": "assets/1-OYFNBVC3-gNOOJfrk.png",
     "src": "resources/assets/images/media/backgrounds/1-OYFNBVC3.png"
@@ -216,10 +231,80 @@
     "file": "assets/media-65-XTYTW25B-RYM78kzg.jpg",
     "src": "resources/assets/images/media/backgrounds/media-65-XTYTW25B.jpg"
   },
+  "resources/assets/images/media/loader.svg": {
+    "file": "assets/loader-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/assets/images/media/loader.svg"
+  },
   "resources/assets/js/coming-soon.js": {
     "file": "assets/coming-soon-J-HeamrB.js",
     "isEntry": true,
     "src": "resources/assets/js/coming-soon.js"
+  },
+  "resources/assets/js/custom-switcher.min.js": {
+    "file": "assets/custom-switcher.min-u9weYHty.js",
+    "isEntry": true,
+    "src": "resources/assets/js/custom-switcher.min.js"
+  },
+  "resources/assets/js/custom.js": {
+    "file": "assets/custom-TIaWbHMm.js",
+    "isEntry": true,
+    "src": "resources/assets/js/custom.js"
+  },
+  "resources/assets/js/defaultmenu.min.js": {
+    "file": "assets/defaultmenu.min-Hp6dbX3Q.js",
+    "isEntry": true,
+    "src": "resources/assets/js/defaultmenu.min.js"
+  },
+  "resources/assets/js/main.js": {
+    "file": "assets/main-XQi3oPs6.js",
+    "isEntry": true,
+    "src": "resources/assets/js/main.js"
+  },
+  "resources/assets/js/simplebar.js": {
+    "file": "assets/simplebar-IcYi5649.js",
+    "isEntry": true,
+    "src": "resources/assets/js/simplebar.js"
+  },
+  "resources/assets/js/sticky.js": {
+    "file": "assets/sticky--KhMqqcl.js",
+    "isEntry": true,
+    "src": "resources/assets/js/sticky.js"
+  },
+  "resources/assets/libs/@popperjs/core/umd/popper.min.js": {
+    "file": "assets/popper.min-U8mqGTZL.js",
+    "isEntry": true,
+    "src": "resources/assets/libs/@popperjs/core/umd/popper.min.js"
+  },
+  "resources/assets/libs/@simonwep/pickr/pickr.es5.min.js": {
+    "file": "assets/pickr.es5.min--XJ3vnXU.js",
+    "isEntry": true,
+    "src": "resources/assets/libs/@simonwep/pickr/pickr.es5.min.js"
+  },
+  "resources/assets/libs/bootstrap/css/bootstrap.min.css": {
+    "file": "assets/bootstrap-hRHgVuAh.css",
+    "isEntry": true,
+    "src": "resources/assets/libs/bootstrap/css/bootstrap.min.css"
+  },
+  "resources/assets/libs/bootstrap/js/bootstrap.bundle.min.js": {
+    "file": "assets/bootstrap.bundle.min-B4XwL0Ut.js",
+    "isEntry": true,
+    "src": "resources/assets/libs/bootstrap/js/bootstrap.bundle.min.js"
+  },
+  "resources/assets/libs/choices.js/public/assets/scripts/choices.min.js": {
+    "file": "assets/choices.min--GPaH0yz.js",
+    "isEntry": true,
+    "src": "resources/assets/libs/choices.js/public/assets/scripts/choices.min.js"
+  },
+  "resources/assets/libs/node-waves/waves.min.js": {
+    "file": "assets/waves.min-ndbrgjzh.js",
+    "isEntry": true,
+    "src": "resources/assets/libs/node-waves/waves.min.js"
+  },
+  "resources/assets/libs/simplebar/simplebar.min.js": {
+    "file": "assets/simplebar.min-EmE-l2iW.js",
+    "isEntry": true,
+    "src": "resources/assets/libs/simplebar/simplebar.min.js"
   },
   "resources/js/alerts.js": {
     "file": "assets/alerts-y6IuNF1h.js",
