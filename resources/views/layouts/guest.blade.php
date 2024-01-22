@@ -16,7 +16,8 @@
     <meta name="keywords" content="Telcel,Gestor,Comisiones,Información,Intranet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
-    <link rel="icon" href="{{ Vite::asset('resources\assets\images\brand-logos\toggle-logo.png') }}"
+        
+    <link rel="icon" href="{{ url('resources\assets\images\brand-logos\toggle-logo.png') }}"
         type="image/x-icon">
 
     @yield('vite-js')
