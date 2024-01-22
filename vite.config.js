@@ -10,7 +10,11 @@ export default defineConfig({
                 'resources/js/guest.js',
                 'resources/js/auth-app.js',
                 'resources/js/alerts.js',
+                'resources/assets/images/brand-logos/logo-70.png',
             ],
+
+            
+            
             refresh: true,
         }),
     ],
