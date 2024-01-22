@@ -87,7 +87,7 @@ class RoleController extends Controller
         $role->update($request->only('name','descripcion'));
         $role->permissions()->sync($request->permissions);
 
-        return redirect()->route('confs.roles.edit',$role)->with('success','Rol actualizado correctamente');
+        return redirect()->route('confs.roles.index',$role)->with('success','Rol actualizado correctamente');
     }
 
  

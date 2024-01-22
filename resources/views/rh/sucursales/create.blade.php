@@ -18,7 +18,7 @@
                 @include('rh.partials.form-sucursal',[
                     'btnText' => 'Guardar',
                     // 'btnIcon' => 'bi bi-arrow-clockwise',                    
-                ]);
+                ])
    
             </form>
         </div>

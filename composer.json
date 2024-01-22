@@ -8,10 +8,13 @@
         "php": "^8.1",
         "diglactic/laravel-breadcrumbs": "^8.1",
         "guzzlehttp/guzzle": "^7.2",
+        "inertiajs/inertia-laravel": "^0.6.11",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "spatie/laravel-permission": "^6.3",
+        "symfony/browser-kit": "^7.0",
+        "symfony/http-client": "^7.0",
         "twbs/bootstrap": "5.3.2"
     },
     "require-dev": {

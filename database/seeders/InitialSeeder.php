@@ -13,6 +13,7 @@ use App\Models\Generales\Referencia;
 use App\Models\Generales\Rfc;
 use App\Models\Generales\Telefono;
 use App\Models\Rh\Puesto;
+use App\Models\Rh\Rhextra;
 use App\Models\Rh\Sucursal;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -79,15 +80,15 @@ class InitialSeeder extends Seeder
                 'ciudad_id' => Ciudad::firstOrCreate([
                     'ciudad' => 'Mérida',
                     'abreviatura' => 'MER',
-                    'municipio_id'=> Municipio::where('municipio', 'MERIDA')->first()->id,
+                    'municipio_id' => Municipio::where('municipio', 'MERIDA')->first()->id,
                     'estado_id' => Estado::where('estado', 'YUCATÁN')->first()->id,
                 ])->id,
                 'estado_id' => Estado::where('estado', 'YUCATÁN')->first()->id,
                 'municipio_id' => Municipio::where('municipio', 'MERIDA')->first()->id,
-                'referencia_id' => Referencia::firstOrCreate(['referencia' => 'Oficina Central'])->id,            
+                'referencia_id' => Referencia::firstOrCreate(['referencia' => 'Oficina Central'])->id,
                 'ubicacion' => '21.0245,-89.6165',
             ])->id,
-            'correo_id' => Correo::firstOrCreate(['correo'=>'sadecoqr@gmail.com'])->id,
+            'correo_id' => Correo::firstOrCreate(['correo' => 'sadecoqr@gmail.com'])->id,
             // 'ubicacion' => json_encode([
             //     'latitud' => '21.0245',
             //     'longitud' => '-89.6165',
@@ -101,15 +102,24 @@ class InitialSeeder extends Seeder
         ]);
 
         //* Se generan los estatus uitilizados en el sistema.
-        $estatus = ["activo","inactivo", "suspendido", "baja"];
+        $estatus = ["activo", "inactivo", "suspendido", "baja"];
         //, "pendiente", "rechazado", "aceptado", "cancelado", "finalizado", "en proceso", "en espera", "en revisión", "en trámite", "en análisis", "en validación", "en aprobación", "en autorización", "en ejecución"
         foreach ($estatus as $estatus) {
             Estatus::firstOrCreate([
                 'estatus' => $estatus,
             ]);
-        }        
+        }
 
-
-
+        //** Se generan los RH-EXTRAS */        
+        $rhextras = [
+            "area" => ['investigación', 'captura', 'aseguramiento', 'control', 'diseño', 'logística', 'marketing', 'producción', 'ventas'],
+            "departamento" => ['administración', 'compras', 'contabilidad', 'finanzas', 'informática', 'logística', 'marketing', 'producción', 'recursos humanos', 'ventas'],
+            "puesto" => ['director general', 'director de área', 'gerente', 'subgerente', 'jefe de departamento', 'jefe de área', 'supervisor', 'empleado general'],
+            "contrato" => ['Tiempo completo', 'Indefinido', 'Medio tiempo', 'Por proyecto', 'Temporal', 'Prácticas profesionales']
+        ];
+        foreach ($rhextras as $index => $row) {
+            foreach ($row as $descripcion)
+                Rhextra::create(['concepto' => $index, 'descripcion' => $descripcion]);
+        }
     }
 }

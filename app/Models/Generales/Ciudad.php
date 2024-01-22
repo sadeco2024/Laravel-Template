@@ -20,6 +20,8 @@ class Ciudad extends Model
     ];    
 
     protected $hidden = [
+        'id',
+        'abreviatura',
         'municipio_id',
         'estado_id',
         'created_at',

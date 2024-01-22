@@ -5,20 +5,11 @@
     'text'=>'Descripción',
     'value'=>''
     ])
-@php
-if ($value!='') {
-    $value=$value;
-} elseif (isset($request->$name)) {
-    $value=$request->$name;
-} else {
-    $value=old($name);
-}
-    
-@endphp
+
 
 {{-- @if(isset($request->descripcion)){{$request->descripcion}}@elseif($value){{$value}}@else{{old($name)}}@endif --}}
 <div class="form-group mb-2">
-    <label class="form-label">{{$text}}</label>
+    <label class="form-label mb-0">{{$text}}</label>
     <div class="input-group">
         <div class="input-group-text">
             <i class="{{$icon}}"></i>

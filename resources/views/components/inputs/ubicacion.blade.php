@@ -1,14 +1,14 @@
 @props(['name' => 'ubicacion', 'icon' => 'bi bi-signpost-split', 'value' => ''])
 
 <div class="form-group mb-2">
-    <label class="form-label">Ubicación</label>
+    <label class="form-label mb-0">Ubicación</label>
     <div class="input-group">
         
         <div class="input-group-text">
             <i class="{{ $icon }}"></i>
         </div>
         <input type="text" name="{{ $name }}" id="getUbicacion" class="form-control" placeholder=""
-            value="{{ $value!='[]' ? $value : (isset($request->name) ? $request->name : old($name)) }}">
+            value="{{ $value }}">
         
             <button class="btn btn-primary-transparent btn-sm" type="button" id="getGeo">
                 <i class="bi bi-geo-alt"></i>

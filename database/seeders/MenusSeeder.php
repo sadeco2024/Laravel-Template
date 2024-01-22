@@ -41,7 +41,12 @@ class MenusSeeder extends Seeder
                 'nombre' => 'ERP',
                 'icono' => 'bi bi-bounding-box',
                 'slug' => 'erp'
-            ]
+            ],
+            [
+                'nombre' => 'Telcel',
+                'icono' => 'bi bi-align-top',
+                'slug' => 'erp'
+            ]            
         ];
 
 
@@ -84,16 +89,7 @@ class MenusSeeder extends Seeder
             'orden' => 1,
             'padre_cg_menu_id'=>Menu::where('slug', 'rh')->first()->id
         ]);               
-
-        Menu::create([
-            'nombre' => 'getMunicipios',
-            'icono' => 'ri-government-line',
-            'slug' => 'getMunicipios',            
-            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'interno'])->id,
-            'cg_modulo_id' => 2,
-            'padre_cg_menu_id'=>Menu::where('slug', 'rh')->first()->id,
-            'enabled' => false,
-        ]);        
+    
         // Menu::create([
         //     'nombre' => 'RH',
         //     'icono' => 'bi bi-person-workspace',
@@ -111,10 +107,10 @@ class MenusSeeder extends Seeder
         ]);
 
         Menu::create([
-            'nombre' => 'Articulos',
+            'nombre' => 'Productos',
             'icono' => 'bi bi-boxes',
             'slug' => 'articulos',            
-            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'vista'])->id,
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
             'cg_modulo_id' => 3,
             'padre_cg_menu_id'=>Menu::where('slug', 'erp')->first()->id
         ]);        
@@ -145,6 +141,35 @@ class MenusSeeder extends Seeder
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
             'cg_modulo_id' => 1,
             'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id
-        ]);               
+        ]);       
+        
+
+        Menu::create([
+            'nombre' => 'getMunicipios/{estado_id}',
+            'icono' => 'ri-government-line',
+            'slug' => 'getMunicipios',            
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'interno'])->id,
+            'cg_modulo_id' => 1,
+            'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id,
+            'enabled' => false,
+        ]);            
+
+        // ?TELCEL        
+        Menu::create([
+            'nombre' => 'Telcel',
+            'icono' => 'bi bi-align-top',
+            'slug' => 'tlc',            
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'menu'])->id,
+            'cg_modulo_id' => 34
+        ]);
+        Menu::create([
+            'nombre' => 'Canales',
+            'icono' => 'bi bi-shield-exclamation',
+            'slug' => 'menus',            
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
+            'cg_modulo_id' => 1,
+            'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id
+        ]);    
+
     }
 }

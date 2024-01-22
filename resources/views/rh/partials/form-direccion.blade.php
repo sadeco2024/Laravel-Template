@@ -2,38 +2,38 @@
 
 <div class="row">
     <div class="col-xxl-8 col-md-8 mb-2">
-        <x-inputs.calle value="{{ isset($sucursal) ? $sucursal->direccion->calle : '' }} " />
+        <x-inputs.calle value="{{ old('calle', $formGet->direccion->calle ?? '') }} " />
     </div>
     <div class="col-xxl-4 col-md-4">
-        <x-inputs.calle-no value="{{ isset($sucursal) ? $sucursal->direccion->numero_exterior : '' }}" />
+        <x-inputs.calle-no value="{{ old('numero_exterior',$formGet->direccion->numero_exterior ?? '') }}" />
     </div>
     <div class="col-xxl-4 col-md-4">
-        <x-inputs.calle-noint value="{{ isset($sucursal) ? $sucursal->direccion->numero_interior : '' }}" />
+        <x-inputs.calle-noint value="{{ old('numero_interior',$formGet->direccion->numero_interior ?? '') }}" />
     </div>
 
     <div class="col-xxl-8 col-md-8 mb-2">
-        <x-inputs.colonia value="{{ isset($sucursal) ? $sucursal->direccion->colonia : '' }}" />
+        <x-inputs.colonia value="{{ old('colonia',$formGet->direccion->colonia ?? '') }}" />
     </div>
     <div class="col-xxl-6 col-md-4 mb-2">
-        <x-inputs.ciudad value="{{ isset($sucursal) ? $sucursal->direccion->ciudad->ciudad : '' }}" />
+        <x-inputs.ciudad value="{{ old('ciudad',$formGet->direccion->ciudad->ciudad ?? '') }}" />
     </div>
     <div class="col-xxl-6 col-md-3 mb-2">
-        <x-inputs.cp value="{{ isset($sucursal) ? $sucursal->direccion->codigo_postal : '' }}" />
+        <x-inputs.cp value="{{ old('codigo_postal',$formGet->direccion->codigo_postal ?? '') }}" />
     </div>
     <div class="col-xxl-6 col-md-5 mb-2">
-        <x-selects.estado :estados="$estados" value="{{ isset($sucursal) ? $sucursal->direccion->estado_id : '' }}" />
+        <x-selects.estado :estados="$estados" value="{{ old('estado_id',$formGet->direccion->estado_id ?? '') }}" />
     </div>
 
     <div class="col-xxl-6 col-md-6 mb-2">
-        <x-selects.municipio value="{{ isset($sucursal) ? $sucursal->direccion->municipio_id : '' }}" />
+        <x-selects.municipio value="{{ old('municipio_id',$formGet->direccion->municipio_id ?? '') }}" />
     </div>
 
     <div class="col-xxl-12 col-md-6 mb-2">
-        <x-inputs.ubicacion value="{{ isset($sucursal) ? html_entity_decode($sucursal->direccion->ubicacion) : '' }}" />
+        <x-inputs.ubicacion value="{{ old('ubicacion',$formGet->direccion->ubicacion ?? '') }}" />
     </div>
     <div class="col-xxl-12 col-md-12 mb-2">
         <x-inputs.descripcion-textarea :name="'referencia'" :text="'Referencia'" class="noenter"
-            value="{{ isset($sucursal) ? $sucursal->direccion->referencia->referencia : '' }}" />
+            value="{{ old('referencia', $formGet->direccion->referencia->referencia ?? '') }}" />
     </div>
 </div>
 

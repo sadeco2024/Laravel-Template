@@ -1,4 +1,3 @@
-
 //** Cualquier componente que requiera confirmación dentro de un form. */
 document.getElementById('delete-confirm-form').onclick = function(e) {
     e.preventDefault();
@@ -23,6 +22,7 @@ document.getElementById('delete-confirm-form').onclick = function(e) {
         }
     })
 }
+
 
 
 function alertSuccess(message) {
@@ -59,4 +59,3 @@ function alertConfirm(message) {
         }
     });
 }
-

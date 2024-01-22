@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('direcciones', function (Blueprint $table) {
             $table->id();
             $table->string('calle', 100)->nullable(false);
-            $table->string('numero_exterior', 10)->nullable();
-            $table->string('numero_interior', 10)->nullable();
+            $table->string('numero_exterior', 20)->nullable();
+            $table->string('numero_interior', 20)->nullable();
             $table->string('colonia', 100)->nullable();
-            $table->string('codigo_postal', 5)->nullable();
+            $table->string('codigo_postal', 10)->nullable();
             $table->string('ubicacion',255)->nullable();
 
             $table->foreignId('ciudad_id')->nullable()->constrained('ciudades')->onUpdate('cascade')->onDelete('restrict');

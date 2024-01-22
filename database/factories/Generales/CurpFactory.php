@@ -17,7 +17,9 @@ class CurpFactory extends Factory
     public function definition(): array
     {
         return [
-            'curp' => $this->faker->regexify('[A-Z]{4}[0-9]{6}[A-Z]{6}[0-9]{2}')
+            // 'curp' => $this->faker->regexify('[A-Z]{4}[0-9]{6}[A-Z]{6}[0-9]{2}')
+            'curp' => $this->faker->regexify('[A-Z]{4}\d{6}[HM][A-Z]{5}\d{2}$')
+            
         ];
     }
 }

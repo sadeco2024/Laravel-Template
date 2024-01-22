@@ -1,15 +1,16 @@
 
-@props(['name'=>'name', 'icon'=>'bi bi-search'])
+@props(['name'=>'searchDatatable', 'icon'=>'bi bi-search'])
 
-<div class="form-group mb-2">
+<div class="form-group">
     {{-- <label class="form-label">Nombre</label> --}}
     <div class="input-group">
-        <div class="input-group-text bg-primary-transparent">
+        <div class="input-group-text bg-info-transparent">
             <i class="  {{$icon}}"></i>
         </div>
         <input
             name="{{$name}}"
-            value="{{isset($request->name) ? $request->name : old($name) }}"
+            id="{{$name}}"
+            {{-- value="{{isset($request->name) ? $request->name : old($name) }}" --}}
             class="form-control form-control-sm" 
             type="text" 
             placeholder="Busca aquí" 

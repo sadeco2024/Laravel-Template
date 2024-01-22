@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('nombres', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 250)->unique()->nullable(false);
+            $table->string('nombre', 250)->nullable(false);
             $table->string('primer_nombre', 50)->nullable(false);
             $table->string('segundo_nombre', 50)->nullable();
             $table->string('paterno', 50)->nullable(false);
             $table->string('materno', 50)->nullable();    
-            $table->foreignId('curp_id')->nullable(true)->constrained('curps')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreignId('curp_id')->unique()->nullable(true)->constrained('curps');
             
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();

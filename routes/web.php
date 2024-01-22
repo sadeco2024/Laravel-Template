@@ -3,11 +3,14 @@
 use App\Http\Controllers\Configuraciones\MenuController;
 use App\Http\Controllers\Confs\PermisoController;
 use App\Http\Controllers\Confs\RoleController;
+use App\Http\Controllers\Erp\ArticuloController;
 use App\Http\Controllers\Erp\ErpController;
 use App\Http\Controllers\GeneralesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Rh\EmpleadoController;
 use App\Http\Controllers\Rh\SucursalController;
+use App\Http\Controllers\RhExtraController;
+use App\Http\Controllers\Telcel\CanalController;
 use App\Models\Configuraciones\Menu;
 use App\Models\Rh\Empleado;
 use Illuminate\Support\Facades\Route;
@@ -49,14 +52,29 @@ Route::middleware('auth')->group(function () {
     //** Rutas de RH */
     Route::resource('rh/sucursales', SucursalController::class)->names('rh.sucursales');
     Route::resource('rh/empleados', EmpleadoController::class)->names('rh.empleados');
+    Route::get('rh/empleados/table', [GeneralesController::class, 'tablaEmpleados'])->name('rh.empleados.table');
+
+
+    //** Rutas de ERP */
+    Route::resource('erp/articulos', ArticuloController::class)->names('erp.articulos');
+
+
+    //** Rutas de Telcel */
+    // Route::resource('telcel/canales', CanalController::class)->names('telcel.canales');
+    Route::resource('telcel/canales', CanalController::class)->only(['index', 'show', 'store', 'update', 'destroy'])->names('telcel.canales');
+    Route::get('telcel/refresh/canales', [CanalController::class,'actualiza'])->name('telcel.canales.refresh');
+
 
     //* Rutas de Generales
     Route::group(['prefix' => 'generales'], function () {
-        // Route::get('/getMunicipios/$id', [GeneralesController::class, 'getMunicipios'])->name('getMunicipios');
         Route::get('/getMunicipios/{id}', [GeneralesController::class, 'getMunicipios'])->name('getMunicipios');
-        // Aquí puedes agregar más rutas para GeneralesController
-    });
+        Route::get('/getEmpleados', [EmpleadoController::class, 'tablaEmpleados'])->name('getEmpleados');
+        Route::post('/setRhExtras', [RhExtraController::class, 'store'])->name('set.rhextras');
+        Route::get('/getRhExtras', [RhExtraController::class, 'getRhextras'])->name('get.rhextras');
+        Route::get('/getArticulos', [GeneralesController::class, 'getArticulos'])->name('get.articulos');
 
+        
+    });
 
 
 
@@ -67,9 +85,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/empleados/change-passwd', [EmpleadoController::class, 'changePassd'])->name('empleado.change-passwd');
 
     //** Rutas ERP */
-    Route::get('/erp', [ErpController::class, 'index'])->name('erp');
-
-    Route::get('/erp/articulos', [ErpController::class, 'articulos'])->name('erp.articulos');
+    // Route::get('/erp', [ErpController::class, 'index'])->name('erp');
+    // Route::get('/erp/articulos', [ErpController::class, 'articulos'])->name('erp.articulos');
 
 
     //!!Ruta en blanco.

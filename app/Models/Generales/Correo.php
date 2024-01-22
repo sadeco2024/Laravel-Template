@@ -17,11 +17,12 @@ class Correo extends Model
     ];
 
     protected $hidden = [
+        'id',
+        'valid',
+        'created_at',
+        'updated_at',
         'send_info',
         'send_news',
-        'send_promotions',
-
-        'created_at',
-        'updated_at'
+        'send_promotions'
     ];
 }
