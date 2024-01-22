@@ -32,6 +32,14 @@ export default defineConfig({
                 'resources/assets/images/brand-logos/desktop-logo-s.png',
                 'resources/assets/images/brand-logos/desktop-dark-s.png',
                 'resources/assets/images/brand-logos/toggle-dark.png',
+                'resources/assets/js/show-password.js',
+                'resources/assets/libs/sweetalert2/sweetalert2.min.css',
+                'resources/assets/libs/sweetalert2/sweetalert2.min.js',
+                'resources/js/alerts.js',
+                'resources/assets/libs/gridjs/gridjs.umd.js',
+                'resources/js/tablasGrids.js',
+                
+
 
             ],
 

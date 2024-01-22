@@ -1,7 +1,7 @@
 {
-  "_icons-!~{00r}~.js": {
+  "_icons-!~{00w}~.js": {
     "file": "assets/icons-ir0vs_xg.css",
-    "src": "_icons-!~{00r}~.js"
+    "src": "_icons-!~{00w}~.js"
   },
   "resources/assets/css/1-URF37ZRY.png": {
     "file": "assets/1-URF37ZRY-temI4Jc4.png",
@@ -276,6 +276,11 @@
     "isEntry": true,
     "src": "resources/assets/js/main.js"
   },
+  "resources/assets/js/show-password.js": {
+    "file": "assets/show-password-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/assets/js/show-password.js"
+  },
   "resources/assets/js/simplebar.js": {
     "file": "assets/simplebar-IcYi5649.js",
     "isEntry": true,
@@ -311,6 +316,11 @@
     "isEntry": true,
     "src": "resources/assets/libs/choices.js/public/assets/scripts/choices.min.js"
   },
+  "resources/assets/libs/gridjs/gridjs.umd.js": {
+    "file": "assets/gridjs.umd-dw_R5gBu.js",
+    "isEntry": true,
+    "src": "resources/assets/libs/gridjs/gridjs.umd.js"
+  },
   "resources/assets/libs/node-waves/waves.min.js": {
     "file": "assets/waves.min-ndbrgjzh.js",
     "isEntry": true,
@@ -320,6 +330,16 @@
     "file": "assets/simplebar.min-EmE-l2iW.js",
     "isEntry": true,
     "src": "resources/assets/libs/simplebar/simplebar.min.js"
+  },
+  "resources/assets/libs/sweetalert2/sweetalert2.min.css": {
+    "file": "assets/sweetalert2-7MFAUSlI.css",
+    "isEntry": true,
+    "src": "resources/assets/libs/sweetalert2/sweetalert2.min.css"
+  },
+  "resources/assets/libs/sweetalert2/sweetalert2.min.js": {
+    "file": "assets/sweetalert2.min-pZjgSrgV.js",
+    "isEntry": true,
+    "src": "resources/assets/libs/sweetalert2/sweetalert2.min.js"
   },
   "resources/js/alerts.js": {
     "file": "assets/alerts-y6IuNF1h.js",
@@ -439,5 +459,10 @@
     "file": "assets/guest-uMV-PDH8.js",
     "isEntry": true,
     "src": "resources/js/guest.js"
+  },
+  "resources/js/tablasGrids.js": {
+    "file": "assets/tablasGrids-SdSL1bqm.js",
+    "isEntry": true,
+    "src": "resources/js/tablasGrids.js"
   }
 }
