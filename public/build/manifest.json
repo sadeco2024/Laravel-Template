@@ -1,7 +1,7 @@
 {
-  "_icons-!~{00o}~.js": {
+  "_icons-!~{00r}~.js": {
     "file": "assets/icons-ir0vs_xg.css",
-    "src": "_icons-!~{00o}~.js"
+    "src": "_icons-!~{00r}~.js"
   },
   "resources/assets/css/1-URF37ZRY.png": {
     "file": "assets/1-URF37ZRY-temI4Jc4.png",
@@ -208,10 +208,25 @@
     "file": "assets/transparent-YCQASJQ4-RbNa0E3N.png",
     "src": "resources/assets/css/transparent-YCQASJQ4.png"
   },
+  "resources/assets/images/brand-logos/desktop-dark-s.png": {
+    "file": "assets/desktop-dark-s-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/assets/images/brand-logos/desktop-dark-s.png"
+  },
+  "resources/assets/images/brand-logos/desktop-logo-s.png": {
+    "file": "assets/desktop-logo-s-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/assets/images/brand-logos/desktop-logo-s.png"
+  },
   "resources/assets/images/brand-logos/logo-70.png": {
     "file": "assets/logo-70-w40geAFS.js",
     "isEntry": true,
     "src": "resources/assets/images/brand-logos/logo-70.png"
+  },
+  "resources/assets/images/brand-logos/toggle-dark.png": {
+    "file": "assets/toggle-dark-w40geAFS.js",
+    "isEntry": true,
+    "src": "resources/assets/images/brand-logos/toggle-dark.png"
   },
   "resources/assets/images/brand-logos/toggle-logo.png": {
     "file": "assets/toggle-logo-w40geAFS.js",
@@ -358,7 +373,7 @@
       "assets/auth-app-sfdtxD28.css",
       "assets/icons-ir0vs_xg.css"
     ],
-    "file": "assets/auth-app-6ntoepa0.js",
+    "file": "assets/auth-app-Dcq3dBDd.js",
     "isEntry": true,
     "src": "resources/js/auth-app.js"
   },

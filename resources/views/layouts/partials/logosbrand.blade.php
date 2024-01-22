@@ -1,5 +1,6 @@
 <div class="{{$class}}">
     <a href="{{route('dashboard')}}" class="header-logo">
+        
         <img src="{{ Vite::asset('resources/assets/images/brand-logos/desktop-logo-s.png') }}" alt="logo"
             class="desktop-logo" />
         <img src="{{ Vite::asset('resources/assets/images/brand-logos/toggle-logo.png') }}" alt="logo"
