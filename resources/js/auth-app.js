@@ -6,6 +6,8 @@ import "../assets/libs/@simonwep/pickr/themes/nano.min.css";
 import "../assets/libs/choices.js/public/assets/styles/choices.min.css";
 import "../css/app.css";
 
+
+
 //** Oculta el loader */
 function hideLoader() {
     const loader = document.getElementById("loader");
@@ -71,6 +73,9 @@ document.querySelectorAll('[type="submit"]').forEach((element) => {
         if(form && !form.classList.contains('form-modal'))
           form.submit();
         else {
+          console.log(form)
+          console.log(form.action);
+          
           $.ajax({
             url: form.action,
             type: form.method,
