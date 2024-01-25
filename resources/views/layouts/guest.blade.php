@@ -16,28 +16,24 @@
     <meta name="keywords" content="Telcel,Gestor,Comisiones,Información,Intranet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
-        
-    <link rel="icon" href="{{ url('resources\assets\images\brand-logos\toggle-logo.png') }}"
-        type="image/x-icon">
+
+    <link rel="icon" href="{{ asset('images/logos/toggle-logo.png') }}" type="image/x-icon">
+
+    <script src="{{ Vite::asset('resources/js/authentication-main.js') }}"></script>
 
     @yield('vite-js')
-    
+
 
 
 </head>
 
 <body @yield('body-class')>
 
-    {{-- Content - Start --}}
+
     @yield('content')
-    {{-- Content - End --}}
 
 
-
-
-    <!-- Internal Coming Soon JS -->
-    @yield('js','')    
-    
+    @yield('js', '')
 
 
 </body>

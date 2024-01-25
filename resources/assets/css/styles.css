@@ -9982,10 +9982,13 @@ caption {
 }
 .coming-soon-main {
   position: relative;
-  background-image: url("/resources/assets/images/media/backgrounds/media-65-XTYTW25B.jpg");
-    background-size: cover;
+  /* background-image: url("/resources/assets/images/media/backgrounds/media-65-XTYTW25B.jpg"); */
+  background-image: 'resources/assets/css/media-65-LGWY5MEH.jpg';
+  
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  /* url("/resources/assets/images/media/backgrounds/media-65-XTYTW25B.jpg"); */
 }
 .coming-soon-main:before {
   position: absolute;
@@ -10008,7 +10011,8 @@ caption {
 }
 .authentication-background {
   position: relative;
-  background-image: url('/resources/assets/images/media/backgrounds/1-OYFNBVC3.png');
+  /* background-image: url('/resources/assets/images/media/backgrounds/1-OYFNBVC3.png'); */
+  background-image: ('/images/backgroud/1-OYFNBVC3.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

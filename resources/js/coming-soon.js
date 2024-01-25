@@ -21,4 +21,4 @@ function updateTimer() {
         '<div><div class=""><p class="mb-1 fs-12">Minutos</p><h4 class="mb-0 avatar d-block avatar-rounded bg-primary-transparent avatar-xxl mt-2">' + m + '</h4></div></div>' +
         '<div><div class=""><p class="mb-1 fs-12">Segundos</p><h4 class="mb-0 avatar d-block avatar-rounded bg-primary-transparent avatar-xxl mt-2">' + s + '</h4></div></div>'
 }
-// setInterval('updateTimer()', 1000);
+setInterval('updateTimer()', 1000);

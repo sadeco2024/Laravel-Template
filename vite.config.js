@@ -5,13 +5,20 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                "resources/js/app.js",
+                
                 "resources/js/guest.js",
-                "resources/js/auth-app.js",
-                "resources/js/alerts.js",
-                "resources/assets/js/coming-soon.js",
+                "resources/assets/libs/bootstrap/js/bootstrap.bundle.min.js",
+                "resources/js/coming-soon.js",
+                'resources/js/authentication-main.js',
                 "resources/assets/libs/bootstrap/css/bootstrap.min.css",
                 "resources/assets/css/styles.css",
+                "resources/assets/css/icons.css",                
+                "resources/js/app.js",
+                "resources/js/auth-app.js",
+                "resources/js/alerts.js",
+                
+       
+                
                 "resources/assets/libs/choices.js/public/assets/scripts/choices.min.js",
                 "resources/assets/js/main.js",
                 "resources/assets/libs/@popperjs/core/umd/popper.min.js",
@@ -30,7 +37,7 @@ export default defineConfig({
                 "resources/js/alerts.js",
                 "resources/assets/libs/gridjs/gridjs.umd.js",
                 "resources/js/tablasGrids.js",
-                "resources/assets/css/icons.css",
+                
                 "resources/assets/libs/node-waves/waves.min.css",
                 "resources/assets/libs/simplebar/simplebar.min.css",
                 "resources/assets/libs/flatpickr/flatpickr.min.css",
@@ -42,4 +49,5 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+ 
 });
