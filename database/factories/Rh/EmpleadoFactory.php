@@ -33,6 +33,7 @@ class EmpleadoFactory extends Factory
         return [
             'user_id' => $user->id,
             'nombre_id' => Nombre::factory()->create()->id,
+            
             'fecha_nacimiento' => $this->faker->date(),
             'fecha_ingreso' => $this->faker->date(),
             'genero' => $this->faker->randomElement(['F','M','GF','NB','I','O']),
