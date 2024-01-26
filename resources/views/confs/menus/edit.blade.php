@@ -3,6 +3,6 @@
     @csrf
     @method('PUT')
     
-    @include('Confs.partials.form-menus')
+    @include('confs.partials.form-menus')
     
 </form>
