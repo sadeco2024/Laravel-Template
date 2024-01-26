@@ -1,6 +1,7 @@
 /* src/assets/icon-fonts/RemixIcons/fonts/remixicon.css */
 @font-face {
   font-family: "remixicon";
+  /* src: url("./remixicon-6EX5DIDA.eot?t=1590207869815"); */
   src: url("./remixicon-6EX5DIDA.eot?t=1590207869815");
   src:
     url("./remixicon-6EX5DIDA.eot?t=1590207869815#iefix") format("embedded-opentype"),
@@ -26423,13 +26424,19 @@
   font-family: "boxicons";
   font-weight: normal;
   font-style: normal;
-  src: url("./boxicons-6NVWQSCQ.eot");
+  /* src: url("./boxicons-6NVWQSCQ.eot"); */
+  src: ('fonts/boxicons/fonts/boxicons.eot');
   src:
-    url("./boxicons-6NVWQSCQ.eot") format("embedded-opentype"),
+    /* url("./boxicons-6NVWQSCQ.eot") format("embedded-opentype"),
     url("./boxicons-AQ5N6WP7.woff2") format("woff2"),
     url("./boxicons-5JNJQPUP.woff") format("woff"),
     url("./boxicons-GDR4JU3X.ttf") format("truetype"),
-    url("./boxicons-NNFHLMOR.svg?#boxicons") format("svg");
+    url("./boxicons-NNFHLMOR.svg?#boxicons") format("svg"); */
+    ("fonts/boxicons/fonts/boxicons.eot") format("embedded-opentype"),
+    ("fonts/boxicons/fonts/boxicons.woff2") format("woff2"),
+    ("fonts/boxicons/fonts/boxicons.woff") format("woff"),
+    ("fonts/boxicons/fonts/boxicons.ttf") format("truetype"),
+    ("fonts/boxicons/fonts/boxicons.svg?#boxicons") format("svg");
 }
 .bx {
   font-family: "boxicons" !important;

@@ -17,10 +17,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
+
     <link rel="icon" href="{{ asset('/images/toggle-logo.png') }}" type="image/x-icon">
 
     {{-- @Vite - Start::Css --}}
     {{-- <link rel="stylesheet" href="{{Vite::asset('/resources/css/guest.css')}}"> --}}
+
 
     @vite(['resources/css/guest.css'])
     {{-- @Vite End::css --}}
@@ -31,6 +33,7 @@
 </head>
 
 <body @yield('body-class')>
+
 
     {{-- Content - Start --}}
     @yield('content')
@@ -45,6 +48,7 @@
     {{-- @Vite End:Js --}}
 
     @yield('js', '')
+
 
 </body>
 

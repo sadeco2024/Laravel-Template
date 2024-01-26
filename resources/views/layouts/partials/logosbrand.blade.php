@@ -7,7 +7,6 @@
             class="toggle-logo" />
         <img src="{{ asset('../images/desktop-dark-s.png') }}" alt="logo"
             class="desktop-dark" />
-        <img src="{{ asset('../images/toggle-dark.png') }}" alt="logo"
-            class="toggle-dark" />
+        <img src="{{ asset('../images/toggle-dark.png') }}" alt="logo" class="toggle-dark" />
     </a>
 </div>

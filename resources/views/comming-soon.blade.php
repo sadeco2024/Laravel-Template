@@ -1,8 +1,10 @@
 @extends('layouts.guest')
 
+
 @section('body-class')
 class="coming-soon-main"
 @endsection
+
 
 
 @section('content')
@@ -15,7 +17,9 @@ class="coming-soon-main"
                         <div class="col-xxl-6 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 mb-md-0 mb-5">
                             <div class="mb-2">
                                 <figure class="img-fluid bg-transparent">
+
                                         <img src="{{ asset('/images/logo.png') }}"
+
                                         alt="" class="authentication-brand img-fluid rounded-pill">
 
                                 </figure>
@@ -38,8 +42,6 @@ class="coming-soon-main"
             </div>
         </div>
     </div>
-
-
 
 
 @endsection

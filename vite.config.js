@@ -15,9 +15,10 @@ export default defineConfig({
                 // 'resources/assets/js/custom.js',
                 'resources/js/alerts.js',
                 'resources/js/modales.js',
-            ],
+           ],
 
             refresh: true,
         }),
     ],
+ 
 });

@@ -1,4 +1,5 @@
 {
+
   "resources/css/auth.css": {
     "file": "assets/auth-Z6PDhzHy.css",
     "isEntry": true,
@@ -8,6 +9,7 @@
     "file": "assets/guest-FIpNk2qv.css",
     "isEntry": true,
     "src": "resources/css/guest.css"
+
   },
   "resources/js/alerts.js": {
     "file": "assets/alerts-y6IuNF1h.js",
@@ -94,9 +96,11 @@
     "file": "assets/feather-webfont-hsAjXEqz.ttf",
     "src": "resources/theme/icon-fonts/feather/fonts/feather/feather-webfont.ttf"
   },
+
   "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.eot": {
     "file": "assets/la-brands-400-CzeAjJRo.eot",
     "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.eot"
+
   },
   "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.svg": {
     "file": "assets/la-brands-400-MLFCN1Cf.svg",
@@ -137,6 +141,7 @@
   "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.eot": {
     "file": "assets/la-solid-900-5Jl-BtsW.eot",
     "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.eot"
+
   },
   "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.svg": {
     "file": "assets/la-solid-900-HbZTzFm_.svg",
@@ -237,6 +242,7 @@
   "resources/theme/images/menu-bg-images/transparent.png": {
     "file": "assets/transparent-RbNa0E3N.png",
     "src": "resources/theme/images/menu-bg-images/transparent.png"
+
   },
   "resources/theme/js/show-password.js": {
     "file": "assets/show-password-w40geAFS.js",
