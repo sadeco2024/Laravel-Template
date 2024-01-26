@@ -4,6 +4,6 @@
     @csrf
     @method('POST')
 
-    @include('Confs.partials.form-menus')
+    @include('confs.partials.form-menus')
 
 </form>

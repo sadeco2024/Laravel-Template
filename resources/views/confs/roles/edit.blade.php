@@ -16,7 +16,7 @@
                     <form method="POST" action="{{ route('confs.roles.update', $role) }}">
                         @csrf
                         @method('PUT')
-                        @include('Confs.partials.form-rol', [
+                        @include('confs.partials.form-rol', [
                             'btnText' => 'Actualizar',
                             'btnIcon' => 'bi bi-arrow-clockwise',
                         ])

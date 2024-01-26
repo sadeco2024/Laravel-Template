@@ -103,7 +103,7 @@
         </div>
         {{-- Nav:TabContent:: Relaciones  --}}
         <div class="tab-content mt-2">
-            @include('Confs.partials.menu-tab-content')
+            @include('confs.partials.menu-tab-content')
         </div>
     {{-- </div> --}}
 
