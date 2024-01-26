@@ -29,10 +29,9 @@
   })
 
   if (!AllHref.includes(location.href)) {
-    // !dropdown menus nav:  se quita, porque daba conflicto con el menu de dashboards
-    // document.querySelector(".dashboard-dropdown").parentElement.querySelector('.header-dashboards-button').innerHTML = ` Dashboard
-    //     <i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
-    //     `
+    document.querySelector(".dashboard-dropdown").parentElement.querySelector('.header-dashboards-button').innerHTML = ` Dashboard
+        <i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+        `
   }
   /* header dashboards dropdown */
 

@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 @section('title', config('app.name') . ' - Catálogo de productos')
 @section('vite-js')
-    @vite(['resources/js/auth-app.js'])
+
 @endsection
 @section('title-view', 'Artículos')
 @section('content')
@@ -14,8 +14,6 @@
 
     <div class="row">
         {{-- Barra de información --}}
-
-
         <div class="col-xl-12">
             <div class="card custom-card">
                 <div class="card-body d-flex align-items-baseline align-items-start flex-wrap">

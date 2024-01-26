@@ -1,11 +1,10 @@
-import "../assets/css/icons.css";
-import "../assets/libs/node-waves/waves.min.css";
-import "../assets/libs/simplebar/simplebar.min.css";
-import "../assets/libs/flatpickr/flatpickr.min.css";
-import "../assets/libs/@simonwep/pickr/themes/nano.min.css";
-import "../assets/libs/choices.js/public/assets/styles/choices.min.css";
-import "../css/app.css";
-
+// import "../assets/css/icons.css";
+// import "../assets/libs/node-waves/waves.min.css";
+// import "../assets/libs/simplebar/simplebar.min.css";
+// import "../assets/libs/flatpickr/flatpickr.min.css";
+// import "../assets/libs/@simonwep/pickr/themes/nano.min.css";
+// import "../assets/libs/choices.js/public/assets/styles/choices.min.css";
+// import "../css/app.css";
 
 
 //** Oculta el loader */
@@ -62,6 +61,7 @@ document.querySelectorAll("input.upper").forEach((element) => {
 //** Botones de submit */
 document.querySelectorAll('[type="submit"]').forEach((element) => {
     element.addEventListener("click", () => {
+        // Prevenimos y guardamos la información del botón.
         element.prevendDefault;
         element.data = {
             btnhtml: element.innerHTML,
@@ -69,14 +69,12 @@ document.querySelectorAll('[type="submit"]').forEach((element) => {
         element.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Guardando...`;
         element.disabled = true;
 
+        // Se localiza el form, y se validan tipos de formularios para modales.
         const form =document.getElementById(element.getAttribute("form"))
         if(form && !form.classList.contains('form-modal'))
-            
           form.submit();
         else {
-          console.log(form)
-          console.log(form.action);
-
+          // .form-modal:  Envía el formulario por ajax.
           $.ajax({
             url: form.action,
             type: form.method,
@@ -91,7 +89,6 @@ document.querySelectorAll('[type="submit"]').forEach((element) => {
                 element.remove();
               });                
               if (response.errors) {
-
                 const errors = response.errors;
                 for (const field in errors) {
                      const errorMessage = errors[field][0];
@@ -107,7 +104,7 @@ document.querySelectorAll('[type="submit"]').forEach((element) => {
                 if (form.classList.contains('form-modal')) {
                   $('#modal').modal('hide');
                   $('#modal').on('hidden.bs.modal', function (e) {
-                    // location.reload();
+                    
                   })
                 }
                 else {

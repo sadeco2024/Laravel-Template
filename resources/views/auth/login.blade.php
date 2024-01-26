@@ -1,12 +1,9 @@
 @extends('layouts.guest')
+
 @section('body-class')
-    class="authentication-background"
+class="authentication-background"
 @endsection
-
-@section('vite-js')
-    @vite(['resources/js/guest.js'])
-@endsection
-
+    
 @section('content')
     <div class="container">
         <div class="row justify-content-center align-items-center authentication authentication-basic h-100">
@@ -17,7 +14,7 @@
                             @csrf
                             <div class="mb-3 d-flex justify-content-center">
                                 <img style="width: 80px; height: 80px;"
-                                    src="{{ url('resources/assets/images/brand-logos/logo-70.png') }}" alt="img" />
+                                    src="{{ asset('/images/logo.png') }}" alt="img" />
                             </div>
                             <p class="h5 mb-2 text-center">{{ config('app.name') }}</p>
                             <p class="mb-4 text-muted op-9 fw-normal text-center">{{ __('Welcome!') }}</p>
@@ -33,8 +30,8 @@
 
                                 {{-- Contraseña --}}
                                 <div class="col-xl-12 mb-2">
-                                    {{-- Olvidada --}}
                                     @if (Route::has('password.request'))
+                                    {{-- Olvidada --}}
                                         <label for="password" class="form-label text-default d-block">{{ __('Password') }}
                                             <a href="{{ route('password.request') }}"
                                                 class="float-end text-primary">{{ __('Forgot Your Password?') }}
@@ -54,7 +51,6 @@
                                     </div>
                                     <div class="mt-3">
                                         <div class="form-check">
-                                            {{--  class="form-check-label text-muted fw-normal" --}}
                                             <label >
                                                 <input class="form-check-input " type="checkbox"  name="remember" value=""/>
                                                 {{ __('Remember me') }}
@@ -75,6 +71,7 @@
         </div>
     </div>
 @endsection
+
 @section('js')
-    <script src="{{ Vite::asset('resources/assets/js/show-password.js') }}"></script>
+    <script src="{{ Vite::asset('resources/theme/js/show-password.js') }}"></script>
 @endsection

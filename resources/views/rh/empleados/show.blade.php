@@ -1,8 +1,6 @@
 @extends('layouts.auth')
 @section('title', config('app.name') . ' - Perfil del empleado')
-@section('vite-js')
-    @vite(['resources/js/auth-app.js'])
-@endsection
+
 @section('title-view', 'Perfil del empleado')
 @section('content')
 
@@ -26,7 +24,7 @@
                             <div class="d-flex align-items-center gap-2 mb-4">
                                 <div class="lh-1">
                                     <span class="avatar avatar-xxl avatar-rounded online me-3">
-                                        <img src="{{ Vite::asset('resources/assets/images/faces/default.png') }}"
+                                        <img src="{{ asset('/assets/images/faces/default.png') }}"
                                             alt="">
                                     </span>
                                 </div>

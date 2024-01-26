@@ -1,15 +1,12 @@
 @extends('layouts.guest')
 
-@section('bodyclass')
-    class="coming-soon-main"
+@section('body-class')
+class="coming-soon-main"
 @endsection
 
-@section('vite-js')
-    @vite(['resources/js/guest.js'])
-@endsection
 
 @section('content')
-<div class="coming-soon-main">
+
     <div class="row authentication coming-soon justify-content-center g-0 my-auto">
         <div class="col-xxl-8 col-xl-8 col-lg-8 col-12 my-auto">
             <div class="authentication-cover">
@@ -18,7 +15,7 @@
                         <div class="col-xxl-6 col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12 mb-md-0 mb-5">
                             <div class="mb-2">
                                 <figure class="img-fluid bg-transparent">
-                                    <img src="{{ Vite::asset('resources/assets/images/brand-logos/logo-70.png') }}"
+                                        <img src="{{ asset('/images/logo.png') }}"
                                         alt="" class="authentication-brand img-fluid rounded-pill">
 
                                 </figure>
@@ -41,15 +38,8 @@
             </div>
         </div>
     </div>
-</div>
-
-@include('layouts.partials.footer')
-@endsection
 
 
 
 
-
-@section('js')
-    <script src="{{ Vite::asset('resources/assets/js/coming-soon.js') }}"></script>
 @endsection

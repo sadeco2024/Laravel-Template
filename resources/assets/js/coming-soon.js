@@ -14,7 +14,7 @@ function updateTimer() {
     m = mins - hours * 60;
     s = secs - mins * 60;
 
-    document.getElementById("timer")
+    document.getElementById("timer")?
         .innerHTML =
         '<div><div class=""><p class="mb-1 fs-12">Días</p><h4 class="mb-0 avatar d-block avatar-rounded bg-primary-transparent avatar-xxl mt-2">' + d + '</h4></div></div>' +
         '<div><div class=""><p class="mb-1 fs-12">Horas</p><h4 class="avatar d-block avatar-rounded bg-primary-transparent avatar-xxl mb-0 mt-2">' + h + '</h4></div></div>' +

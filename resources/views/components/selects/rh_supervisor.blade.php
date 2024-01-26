@@ -6,7 +6,7 @@
         <div class="input-group-text">
             <i class="{{ $icono}}"></i>
         </div>
-        <select class="form-select" id="{{$name}}" name="{{ $name }}" required>
+        <select class="form-select" id="{{$name}}" name="{{ $name }}" >
             
             <option value="" @if (!old($name)) selected @endif>- Selecciona - </option>
             @foreach ($empleados as $empleado)

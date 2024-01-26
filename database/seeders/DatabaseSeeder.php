@@ -45,6 +45,6 @@ class DatabaseSeeder extends Seeder
         //* Los datos de prueba.
         $this->call([ PruebasSeeder::class ]);  
 
-        $user->assignRole('Super Admin');
+        $user->assignRole('supadmin');
     }
 }

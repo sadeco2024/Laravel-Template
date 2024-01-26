@@ -100,8 +100,8 @@ class MenusSeeder extends Seeder
 
         Menu::create([
             'nombre' => 'ERP',
-            'icono' => 'bi bi-building',
-            'slug' => 'erp',            
+            'slug' => 'erp',
+            'icono' => 'bi bi-building',            
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'menu'])->id,
             'cg_modulo_id' => 3,
         ]);
@@ -113,7 +113,15 @@ class MenusSeeder extends Seeder
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
             'cg_modulo_id' => 3,
             'padre_cg_menu_id'=>Menu::where('slug', 'erp')->first()->id
-        ]);        
+        ]);       
+        Menu::create([
+            'nombre' => 'Inventario',
+            'icono' => 'bi bi-archive-fill',
+            'slug' => 'inventario',            
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
+            'cg_modulo_id' => 3,
+            'padre_cg_menu_id'=>Menu::where('slug', 'erp')->first()->id
+        ]);                
 
         //** Configuraciones */
         Menu::create([
@@ -131,7 +139,8 @@ class MenusSeeder extends Seeder
             'slug' => 'roles',            
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
             'cg_modulo_id' => 1,
-            'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id
+            'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id,
+            'auth_permisos' => 'confs.role.menu'
         ]);               
 
         Menu::create([
@@ -140,7 +149,9 @@ class MenusSeeder extends Seeder
             'slug' => 'menus',            
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
             'cg_modulo_id' => 1,
-            'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id
+            'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id,
+            'auth_roles' => 'supadmin',
+
         ]);       
         
 
@@ -151,24 +162,24 @@ class MenusSeeder extends Seeder
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'interno'])->id,
             'cg_modulo_id' => 1,
             'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id,
-            'enabled' => false,
+            'enabled' => true,
         ]);            
 
         // ?TELCEL        
         Menu::create([
             'nombre' => 'Telcel',
             'icono' => 'bi bi-align-top',
-            'slug' => 'tlc',            
+            'slug' => 'telcel',            
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'menu'])->id,
-            'cg_modulo_id' => 34
+            'cg_modulo_id' => 4
         ]);
         Menu::create([
             'nombre' => 'Canales',
             'icono' => 'bi bi-shield-exclamation',
-            'slug' => 'menus',            
+            'slug' => 'canales',            
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
-            'cg_modulo_id' => 1,
-            'padre_cg_menu_id'=>Menu::where('slug', 'confs')->first()->id
+            'cg_modulo_id' => 4,
+            'padre_cg_menu_id'=>Menu::where('slug', 'telcel')->first()->id
         ]);    
 
     }

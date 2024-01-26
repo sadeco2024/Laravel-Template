@@ -29,13 +29,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('comming-soon');
-    // return view('welcome');
 });
 
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard',['title'=>'Dashboard']);
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
 
@@ -57,6 +52,7 @@ Route::middleware('auth')->group(function () {
 
     //** Rutas de ERP */
     Route::resource('erp/articulos', ArticuloController::class)->names('erp.articulos');
+    Route::resource('erp/inventario', ArticuloController::class)->names('erp.inventario');
 
 
     //** Rutas de Telcel */

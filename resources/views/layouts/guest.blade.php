@@ -15,15 +15,19 @@
     <meta name="Author" content="Hermilo A. Sánchez de Córdova">
     <meta name="keywords" content="Telcel,Gestor,Comisiones,Información,Intranet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- Favicon -->
-        
-    <link rel="icon" href="{{ url('resources\assets\images\brand-logos\toggle-logo.png') }}"
-        type="image/x-icon">
+    <link rel="icon" href="{{ asset('/images/toggle-logo.png') }}" type="image/x-icon">
 
+    {{-- @Vite - Start::Css --}}
+    {{-- <link rel="stylesheet" href="{{Vite::asset('/resources/css/guest.css')}}"> --}}
+
+    @vite(['resources/css/guest.css'])
+    {{-- @Vite End::css --}}
+
+    {{-- @Vite - Start::CssOtros --}}
     @yield('vite-js')
-    
-
-
+    {{-- @Vite End::CssOtros --}}
 </head>
 
 <body @yield('body-class')>
@@ -32,13 +36,15 @@
     @yield('content')
     {{-- Content - End --}}
 
+    {{-- Footer - Start --}}
+    @include('layouts.partials.footer')
+    {{-- Footer - End --}}
 
+    {{-- @Vite Start:Js --}}
+    @vite(['resources/js/guest.js'])
+    {{-- @Vite End:Js --}}
 
-
-    <!-- Internal Coming Soon JS -->
-    @yield('js','')    
-    
-
+    @yield('js', '')
 
 </body>
 

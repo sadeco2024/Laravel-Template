@@ -1,8 +1,6 @@
 @extends('layouts.auth')
 @section('title', config('app.name') . ' - Lista de empleados')
-@section('vite-js')
-    @vite(['resources/js/auth-app.js'])
-@endsection
+
 @section('title-view', 'Lista de empleados')
 @section('content')
 
@@ -186,7 +184,7 @@
                             return `
                                 <div class="d-flex">
                                     <picture class="avatar avatar-lg bg-primary-transparent me-2">
-                                            <img src="{{ Vite::asset('resources/assets/images/faces/default.png') }}"
+                                            <img src="{{ asset('/assets/images/faces/default.png') }}"
                                             alt="">
                                     </picture>
                                     <div class="ms-2">
