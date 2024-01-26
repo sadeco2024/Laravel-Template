@@ -28,14 +28,21 @@
                             </td>
                             <td>
                                 <div class="hstack gap-2 fs-15">
-                                    <a href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-info-light rounded-pill">
-                                        <i class="ri-eye-line"></i>
+                                    <a class="modal-effect btn btn-info-light btn-sm" title="Editar"
+                                        data-bs-effect="effect-slide-in-right" data-bs-toggle="modal" href="#modalMenu"
+                                        data-url="{{ route('confs.menus.edit', ['menu' => $menu['id']]) }}"
+                                        data-title="Editar menu">
+                                        <i class="bi bi-pencil-fill"></i>
                                     </a>
-                                    <a href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-danger-light rounded-pill">
-                                        <i class="ri-delete-bin-line"></i>
-                                    </a>
+
+                                    {{-- <form action="{{ route('confs.menus.destroy', $menu['id']) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title="Inhabilitar"
+                                            class="btn btn-icon btn-sm btn-danger-light ">
+                                            <i class="bi bi-ban"></i>
+                                        </button>
+                                    </form> --}}
                                 </div>
                             </td>
                         </tr>
@@ -72,14 +79,23 @@
                             <td>{{ $menu['slug'] }}</td>
                             <td>
                                 <div class="hstack gap-2 fs-15">
-                                    <a href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-info-light rounded-pill">
-                                        <i class="ri-eye-line"></i>
+
+                                    <a class="modal-effect btn btn-info-light btn-sm "
+                                        data-bs-effect="effect-slide-in-right" data-bs-toggle="modal" href="#modalMenu"
+                                        data-url="{{ route('confs.menus.edit', ['menu' => $menu['id']]) }}"
+                                        data-title="Editar menu">
+                                        <i class="bi bi-pencil-fill"></i>
                                     </a>
-                                    <a href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-danger-light rounded-pill">
-                                        <i class="ri-delete-bin-line"></i>
-                                    </a>
+                          
+                                    {{-- <form action="{{ route('confs.menus.destroy', $menu['id']) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" title="Inhabilitar"
+                                            class="btn btn-icon btn-sm btn-danger-light ">
+                                            <i class="bi bi-ban"></i>
+                                        </button>
+                                    </form> --}}
+                  
                                 </div>
                             </td>
                         </tr>
@@ -142,14 +158,17 @@
                             </td>
                             <td>
                                 <div class="hstack gap-2 fs-15">
-                                    <a href="javascript:void(0);"
-                                        class="btn btn-icon btn-sm btn-info-light rounded-pill">
-                                        <i class="ri-eye-line"></i>
+                                    <a 
+                                        class="modal-effect btn btn-info-light btn-sm "
+                                        data-bs-effect="effect-slide-in-right" data-bs-toggle="modal" href="#modalMenu"
+                                        data-url="{{ route('confs.menus.edit', ['menu' => $submenu['id']]) }}"
+                                        data-title="Editar menu">
+                                        <i class="bi bi-pencil-fill"></i>
                                     </a>
-                                    <a href="javascript:void(0);"
+                                    {{-- <a href="javascript:void(0);"
                                         class="btn btn-icon btn-sm btn-danger-light rounded-pill">
                                         <i class="ri-delete-bin-line"></i>
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </td>
                         </tr>

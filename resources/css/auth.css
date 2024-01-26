@@ -1,0 +1,11 @@
+@import url('../theme/libs/bootstrap/css/bootstrap.min.css');
+
+@import url('../theme/scss/styles.css');
+@import url('../theme//scss/icons.css');
+
+@import url("../theme/libs/node-waves/waves.min.css");
+@import "../theme/libs/simplebar/simplebar.min.css";
+@import "../theme/libs/flatpickr/flatpickr.min.css";
+@import "../theme/libs/@simonwep/pickr/themes/nano.min.css";
+@import "../theme/libs/choices.js/public/assets/styles/choices.min.css";
+@import "../css/app.css";

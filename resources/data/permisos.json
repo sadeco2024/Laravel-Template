@@ -1,1 +1,31 @@
-[{"id":1,"name":"confs.menu.view","nombre":"Ver menu configuraciones","descripcion":"Permite ver el men\u00fa de configuraciones del sistema.","cg_modulo_id":1},{"id":2,"name":"confs.role.add","nombre":"Agregar rol","descripcion":"Permite agregar un nuevo rol","cg_modulo_id":1},{"id":3,"name":"confs.sadmin.permisos.add","nombre":"Agregar Permiso","descripcion":"Permite agregar un nuevo permiso","cg_modulo_id":1},{"id":4,"name":"confs.role.delete","nombre":"Eliminar rol","descripcion":"Permite eliminar un rol","cg_modulo_id":1},{"id":5,"name":"rh.empleados.view","nombre":"Ver empleados","descripcion":"Permite ver la lista de empleados","cg_modulo_id":2},{"id":6,"name":"erp.articulos","nombre":"Ver articulos","descripcion":"Permite ver los art\u00edculos","cg_modulo_id":3},{"id":7,"name":"confs.sadmin.menus.view","nombre":"Ver menus","descripcion":"Permite ver los men\u00fas del sistema","cg_modulo_id":1},{"id":8,"name":"confs.rol.edit","nombre":"Editar rol","descripcion":"Permite editar los permisos de un rol","cg_modulo_id":1},{"id":9,"name":"confs.sadmin.menu.add","nombre":"Agregar menus","descripcion":"Permite agregar men\u00fas al sistema.","cg_modulo_id":1}]
+[
+    {
+        "id": 1,
+        "name": "confs.role.menu",
+        "nombre": "Permite ver el menú de roles",
+        "descripcion": "Permite agregar un nuevo rol",
+        "cg_modulo_id": 1
+    },
+    {
+        "id": 2,
+        "name": "confs.role.add",
+        "nombre": "Agregar rol",
+        "descripcion": "Permite agregar un rol",
+        "cg_modulo_id": 1
+    },    
+    {
+        "id": 3,
+        "name": "confs.sadmin.permisos.add",
+        "nombre": "Agregar Permiso",
+        "descripcion": "Permite agregar un nuevo permiso",
+        "cg_modulo_id": 1
+    },
+    {
+        "id": 4,
+        "name": "confs.role.delete",
+        "nombre": "Eliminar rol",
+        "descripcion": "Permite eliminar un rol",
+        "cg_modulo_id": 1
+    }
+   
+]

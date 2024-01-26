@@ -1,7 +1,7 @@
 <!-- Inicio del switcher -->
 <div class="offcanvas offcanvas-end" tabindex="-1" id="switcher-canvas" aria-labelledby="offcanvasRightLabel">
     <!-- Cabecera del switcher -->
-    <div class="offcanvas-header border-bottom">
+    <div class="offcanvas-header border-bottom d-flex">
         <h5 class="offcanvas-title text-default" id="offcanvasRightLabel">{{ __('Configs') }}</h5>
         <!-- Botón para cerrar el switcher -->
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>

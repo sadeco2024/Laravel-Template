@@ -27,8 +27,7 @@ class PruebasSeeder extends Seeder
     {
 
         Rfc::factory()->count(15)->create();
-        Telefono::factory()->count(20)->create();
-        // Nombre::factory()->count(50)->create();
+        // Telefono::factory()->count(20)->create();
         Ciudad::factory()->count(15)->create();
         Sucursal::factory()->count(10)->create();
 

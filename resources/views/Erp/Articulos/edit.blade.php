@@ -1,5 +1,5 @@
 
-<form name="formMenusAdd" class="form-modal" id="fomArticuloAdd" action="{{ route('erp.articulos.update',$articulo) }}" method="post"
+<form name="formMenusAdd" class="form-modal" id="fomArticuloAdd" action="{{ route('erp.articulos.update',$menu) }}" method="post"
     enctype="multipart/form-data">
     @csrf
     @method('PUT')

@@ -29,6 +29,7 @@ class EmpleadoFactory extends Factory
 
         //** El "user_id", se genera desde el seed que carga el factory porque deben ser únicos. */
         $user = User::factory()->create();
+        $user->assignRole('empleado');
         return [
             'user_id' => $user->id,
             'nombre_id' => Nombre::factory()->create()->id,

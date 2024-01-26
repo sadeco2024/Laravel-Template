@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light"
-    data-menu-styles="light" data-toggled="close" data-loader="true">
+<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="ligth" data-header-styles="ligth"
+    data-menu-styles="ligth" data-toggled="close" data-loader="true">
 
 <head>
 
@@ -16,35 +16,35 @@
     <meta name="Author" content="Hermilo A. Sánchez de Córdova">
     <meta name="keywords" content="Telcel,Gestor,Comisiones,Información,Intranet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
 
     <!-- Favicon -->
-    <link rel="icon" href="{{ url('resources/assets/images/brand-logos/toggle-logo.png') }}"
-        type="image/x-icon">
+    <link rel="icon" href="{{ asset('../images/toggle-logo.png') }}"type="image/x-icon">
 
-        {{-- <script rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css"></script> --}}
-        
-    <link rel="stylesheet" href="{{ Vite::asset('resources/assets/libs/bootstrap/css/bootstrap.min.css') }}" />
-    
-   
-    
-    <link rel="stylesheet" href="{{ Vite::asset('resources/assets/css/styles.css') }}" />
-    <script src="{{ Vite::asset('resources/assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
-    <script src="{{ Vite::asset('resources/assets/js/main.js') }}"></script>
+    <script src="{{ asset('../assets/libs/choices.js/public/assets/scripts/choices.min.js') }}"></script>
+    <script src="{{ asset('../assets/js/main.js') }}"></script>
 
 
-    @yield('css', '')
+    {{-- @Vite - Start::Css --}}
+    @vite(['resources/css/auth.css'])
+    {{-- @Vite End::css --}}
 
-    @yield('vite-js')
-    {{-- @routes --}}
-    {{-- @inertiaHead --}}
+    {{-- @Vite - Start::CssOtros --}}
+    @yield('vite-css')
+    {{-- @Vite End::CssOtros --}}
+
 </head>
 
 <body>
-    {{-- @inertia --}}
+
+
+    <!-- Start Switcher -->
+    @include('layouts.partials.switcher')
+    <!-- End Switcher -->
+
     <!-- Loader -->
     <div id="loader" class="show">
-        <img src="{{ url('resources/assets/images/media/loader.svg') }}" alt="loader" />
+        <img src="{{ asset('../images/loader.svg') }}" alt="loader" />
     </div>
     <!-- Loader -->
 
@@ -57,7 +57,9 @@
                 <div class="header-content-left">
                     <!-- Start::header-element ::LOGOS -->
                     <div class="header-element">
+
                         @include('layouts.partials.logosbrand', ['class' => 'horizontal-logo'])
+
                     </div>
                     <!-- Start::header-element ::HAMBURGUER-->
                     <div class="header-element mx-lg-0 mx-2">
@@ -65,6 +67,18 @@
                             class="sidemenu-toggle header-link animated-arrow hor-toggle horizontal-navtoggle"
                             data-bs-toggle="sidebar" href="javascript:void(0);"><span></span></a>
                     </div>
+                    <!-- Start::header-element -->
+                    {{-- d-md-block --}}
+                    <div class="header-element header-search d-none  ">
+                        <!-- Start::header-link -->
+                        <input type="text" class="header-search-bar form-control border-0 bg-body"
+                            placeholder="Search for Results...">
+                        <a href="javascript:void(0);" class="header-search-icon border-0">
+                            <i class="bi bi-search"></i>
+                        </a>
+                        <!-- End::header-link -->
+                    </div>
+                    <!-- End::header-element -->
                     <!-- Start::header-element ::MODAL BUTTONS -->
                     <div class="header-element ms-2 my-auto">
                         <!-- Start::header-link -->
@@ -108,17 +122,18 @@
                         <!-- End::header-link -->
                     </li>
                     <!-- Start::header-element ::USUARIO-->
-                    {{-- TODO: Ver perfil --}}
+                    {{-- TODO: Ver perfil, Avatars, Editar --}}
                     <li class="header-element">
                         <!-- Start::header-link|dropdown-toggle -->
                         <a href="javascript:void(0);" class="header-link dropdown-toggle" id="mainHeaderProfile"
                             data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                             <div class="d-flex align-items-center">
                                 <div class="me-sm-2 me-0">
-                                    <img src="{{ url('resources/assets/images/faces/8.jpg') }}" alt="img"
+
+                                    <img src="{{ asset('../images/1.jpg') }}" alt="img"
                                         class="avatar avatar-sm avatar-rounded" />
                                 </div>
-                                <div class="d-lg-block d-none lh-1">
+                                <div class="d-lg-block d-none lh-1 text-dark">
                                     <span class="fw-medium lh-1">{{ auth()->user()->name }}</span>
                                 </div>
                             </div>
@@ -160,6 +175,118 @@
                         </a>
                         <!-- End::header-link|switcher-icon -->
                     </li>
+
+                    {{-- PROXIMAMENTE --}}
+                    <!-- Start::header-element -->
+                    <li class="header-element country-selector d-none">
+                        <!-- Start::header-link|dropdown-toggle -->
+                 
+                    </li>
+                    <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+                    <li class="header-element cart-dropdown d-none">
+                        <!-- Start::header-link|dropdown-toggle -->
+                        <a href="javascript:void(0);" class="header-link dropdown-toggle"
+                            data-bs-auto-close="outside" data-bs-toggle="dropdown">
+                            <i class="bi bi-cart2 header-link-icon"></i>
+                            <span class="badge bg-primary rounded-pill header-icon-badge"
+                                id="cart-icon-badge">5</span>
+                        </a>
+                        <!-- End::header-link|dropdown-toggle -->
+                        <!-- Start::main-header-dropdown -->
+                        <div class="main-header-dropdown dropdown-menu dropdown-menu-end"
+                            data-popper-placement="none">
+                            <div class="p-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="mb-0 fs-16">Cart Items<span
+                                            class="badge bg-success-transparent ms-1 fs-12 rounded-circle"
+                                            id="cart-data">5</span></p>
+                                    <span><span class="text-muted me-1">Total:</span><span
+                                            class="text-primary fw-medium">$14,289</span></span>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <ul class="list-unstyled mb-0" id="header-cart-items-scroll">
+                        
+                            </ul>
+                        
+                        </div>
+                        <!-- End::main-header-dropdown -->
+                    </li>
+                    <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+                    {{-- d-xl-block --}}
+                    <li class="header-element notifications-dropdown d-none ">
+                        <!-- Start::header-link|dropdown-toggle -->
+                        <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
+                            <i class="bi bi-bell header-link-icon"></i>
+                            <span class="header-icon-pulse bg-secondary rounded pulse pulse-secondary"></span>
+                        </a>
+                        <!-- End::header-link|dropdown-toggle -->
+                        <!-- Start::main-header-dropdown -->
+                        <div class="main-header-dropdown dropdown-menu dropdown-menu-end"
+                            data-popper-placement="none">
+                            <div class="p-3">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <p class="mb-0 fs-16">Notifications</p>
+                                    <span class="badge bg-secondary-transparent" id="notifiation-data">5 Unread</span>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <ul class="list-unstyled mb-0" id="header-notification-scroll">
+                   
+                            </ul>
+                
+                        </div>
+                        <!-- End::main-header-dropdown -->
+                    </li>
+                    <!-- End::header-element -->
+
+                    <!-- Start::header-element -->
+                    {{-- d-lg-block --}}
+                    <div class="header-element ms-3 d-none my-auto">
+                        <!-- Start::dashboards list -->
+                        <div class="dropdown my-auto">
+                            <a href="javascript:void(0);"
+                                class="btn bg-body header-dashboards-button text-start d-flex align-items-center justify-content-between"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            </a>
+                            <ul class="dropdown-menu dashboard-dropdown" role="menu">
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index.html">Sales
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-1.html">Analytics
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-2.html">Ecommerce
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-3.html">CRM
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-4.html">HRM
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-5.html">NFT
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-6.html">Crypto
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-7.html">Jobs
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-8.html">Projects
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-9.html">Courses
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-10.html">Stocks
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-11.html">Personal
+                                        Dashboard</a></li>
+                                <li><a class="dropdown-item dashboards-dropdown-item" href="index-12.html">Customer
+                                        Dashboard</a></li>
+                            </ul>
+                        </div>
+                        <!-- End::dashboards list -->
+                    </div>
+                    <!-- End::header-element -->                    
+                    {{-- TERMINA -PROXIMAMENTE --}}
                 </ul>
             </div>
         </header>
@@ -185,6 +312,59 @@
                         {{--  //* SECCIÓN DEL MENÚ. */ --}}
                         @include('layouts.partials.dash-menus')
                         {{--  //* TERMINA SECCIÓN DEL MENU */ --}}
+                        <!-- Start::slide -->
+                        <li class="slide has-sub d-none">
+                            <a href="javascript:void(0);" class="side-menu__item">
+                                <i class="bi bi-house side-menu__icon"></i>
+                                <span class="side-menu__label">Dashboards</span>
+                                <i class="fe fe-chevron-right side-menu__angle"></i>
+                            </a>
+                            <ul class="slide-menu child1">
+                                <li class="slide side-menu__label1">
+                                    <a href="javascript:void(0)">Dashboards</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index.html" class="side-menu__item">Sales</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-1.html" class="side-menu__item">Analytics</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-2.html" class="side-menu__item">Ecommerce</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-3.html" class="side-menu__item">Crm</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-4.html" class="side-menu__item">HRM</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-5.html" class="side-menu__item">NFT</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-6.html" class="side-menu__item">Crypto</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-7.html" class="side-menu__item">Jobs</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-8.html" class="side-menu__item">Projects</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-9.html" class="side-menu__item">Courses</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-10.html" class="side-menu__item">Stocks</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-11.html" class="side-menu__item">Personal</a>
+                                </li>
+                                <li class="slide">
+                                    <a href="index-12.html" class="side-menu__item">Customer</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End::slide -->
                     </ul>
                     <div class="slide-right" id="slide-right">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24"
@@ -202,6 +382,7 @@
         <!-- Start::app-content -->
         <div class="main-content app-content">
             <div class="container-fluid">
+                <!-- Page Header -->
                 <div
                     class="my-3 page-header-breadcrumb d-flex align-items-center justify-content-between flex-wrap gap-2">
                     <h1 class="page-title fw-medium fs-18 mb-2">
@@ -214,16 +395,17 @@
                         </nav>
                     </div>
                 </div>
+                <!-- Page Header Close -->
+                <div class="row">
+                    @if (session('success'))
+                        <x-alert-top tipo="success">
+                            {{ session('success') }}
+                        </x-alert-top>
+                    @endif
 
-                @if (session('success'))
-                    <x-alert-top tipo="success">
-                        {{ session('success') }}
-                    </x-alert-top>
-                @endif
-
-                {{-- yield: Concent --}}
-                @yield('content')
-
+                    {{-- yield: Concent --}}
+                    @yield('content')
+                </div>
             </div>
         </div>
         <!-- End::app-content -->
@@ -258,9 +440,6 @@
         </div>
     </div>
 
-    <!-- Start Switcher -->
-    @include('layouts.partials.switcher')
-    <!-- End Switcher -->
 
 
     <!-- Scroll To Top -->
@@ -271,21 +450,37 @@
     <!-- Scroll To Top -->
 
 
-    {{-- Scripts iniciales --}}
-    <script src='{{ Vite::asset('resources/assets/libs/@popperjs/core/umd/popper.min.js') }}'></script>
-    <script src='{{ Vite::asset('resources/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}'></script>
-    <script src='{{ Vite::asset('resources/assets/js/defaultmenu.min.js') }}'></script>
-    <script src='{{ Vite::asset('resources/assets/libs/node-waves/waves.min.js') }}'></script>
-    <script src='{{ Vite::asset('resources/assets/js/sticky.js') }}'></script>
-    <script src='{{ Vite::asset('resources/assets/libs/simplebar/simplebar.min.js') }}'></script>
-    <script src='{{ Vite::asset('resources/assets/js/simplebar.js') }}'></script>
-    <script src='{{ Vite::asset('resources/assets/libs/@simonwep/pickr/pickr.es5.min.js') }}'></script>
-    <script src='{{ Vite::asset('resources/assets/js/custom-switcher.min.js') }}'></script>
+    <!-- Popper JS -->
+    <script src="{{ asset('/assets/libs/@popperjs/core/umd/popper.min.js') }}"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="{{ asset('/assets/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Defaultmenu JS -->
+    <script src="{{ asset('/assets/js/defaultmenu.min.js') }}"></script>
+
+    <!-- Node Waves JS-->
+    <script src="{{ asset('/assets/libs/node-waves/waves.min.js') }}"></script>
+
+    <!-- Sticky JS -->
+    <script src="{{ asset('/assets/js/sticky.js') }}"></script>
+
+    <!-- Simplebar JS -->
+    <script src="{{ asset('/assets/libs/simplebar/simplebar.min.js') }}"></script>
+    <script src="{{ asset('/assets/js/simplebar.js') }}"></script>
+
+    <!-- Color Picker JS -->
+    <script src="{{ asset('/assets/libs/@simonwep/pickr/pickr.es5.min.js') }}"></script>
+
+    <!-- Custom-Switcher JS -->
+    <script src="{{ asset('/assets/js/custom-switcher.min.js') }}"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ asset('/assets/js/custom.js') }}"></script>
+
 
     @yield('js')
 
-    {{-- Se pone hasta el final, despues de usar los js que necesitemos en cada página. --}}
-    <script src='{{ Vite::asset('resources/assets/js/custom.js') }}'></script>
 
     @yield('script')
 

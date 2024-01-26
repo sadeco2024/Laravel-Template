@@ -15,9 +15,9 @@ class RolesSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create(['name' => 'Super Admin', 'descripcion' => 'FULL ACCESS']);
-        Role::create(['name' => 'Socio', 'descripcion' => 'Socio o dueño de la Empresa']);
-        Role::create(['name' => 'Empleado General', 'descripcion' => 'Empleado general de la Empresa']);
+        Role::create(['name'=>'supadmin','nombre' => 'Super Admin', 'descripcion' => 'FULL ACCESS']);
+        Role::create(['name'=>'socio','nombre' => 'Socio', 'descripcion' => 'Socio o dueño de la Empresa']);
+        Role::create(['name'=>'empleado','nombre' => 'Empleado General', 'descripcion' => 'Empleado general de la Empresa']);
 
 
         //** */ Se cargan los permisos.
@@ -30,45 +30,8 @@ class RolesSeeder extends Seeder
                 'descripcion' => $permiso['descripcion'],
                 'cg_modulo_id' => $permiso['cg_modulo_id'],
                 'nombre'=> $permiso['nombre']
-            ])->syncRoles(['Super Admin', 'Socio']);            
+            ])->syncRoles(['supadmin', 'socio']);            
         }        
-
-        // Permission::create([
-        //     'name' => 'confs',
-        //     'descripcion' => 'Menú de configuraciones del sistema.',
-        //     'cg_modulo_id' => 1
-        // ])->syncRoles(['Super Admin', 'Socio']);
-
-        // Permission::create([
-        //     'name' => 'confs.rol.empleados',
-        //     'descripcion' => 'Permite ver los empleados asignados al rol.',
-        //     'cg_modulo_id' => 1
-        // ])->syncRoles(['Super Admin', 'Socio']);
-
-        // Permission::create([
-        //     'name' => 'confs.rol.permisos',
-        //     'descripcion' => 'Permite ver los permisos asignados al rol.',
-        //     'cg_modulo_id' => 1
-        // ])->syncRoles(['Super Admin', 'Socio']);
-
-        // Permission::create([
-        //     'name' => 'confs.sadmin.permisos.add',
-        //     'descripcion' => 'Agregar nuevo permiso al sistema.',
-        //     'cg_modulo_id' => 1
-        // ])->syncRoles(['Super Admin', 'Socio']);
-
-        // Permission::create([
-        //     'name' => 'rh.empleados',
-        //     'descripcion' => 'Ver la lista de empleados.',
-        //     'cg_modulo_id' => 2
-        // ])->syncRoles(['Super Admin', 'Socio']);     
-        
-        // Permission::create([
-        //     'name' => 'erp.articulos',
-        //     'descripcion' => 'Ver la lista de artículos.',
-        //     'cg_modulo_id' => 3
-        // ])->syncRoles(['Super Admin', 'Socio']);          
-
-        
+       
     }
 }

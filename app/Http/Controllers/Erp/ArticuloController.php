@@ -20,7 +20,7 @@ class ArticuloController extends Controller
         $data = Articulo::with('categoria.lineas')->paginate(20);
         // return $data;
 
-        return view('erp.articulos.index', ['title' => 'Articulos']);
+        return view('erp.articulos.index', ['title' => 'Articulos'])->with(['success'=>'El modal de artículos está en desarrollo y no se puede usar por el momento.']);
     }
 
     public function search(Request $request)

@@ -1,5 +1,4 @@
-@props(['conceptos', 'name'=>'tipo_concepto_id'])
-
+@props(['conceptos', 'name'=>'tipo_concepto_id', 'selected'=>''])
 <div class="form-group mb-2">
     <label for="form-text mb-0" class="form-label fs-14 text-dark">Tipo</label>
     <div class="input-group">
@@ -7,9 +6,8 @@
             <i class="bi bi-check2-square"></i>
         </div>
         <select class="form-select habilita" name="{{ $name }}">
-            {{-- @dump($conceptos) --}}
             @foreach ($conceptos as $concepto)
-                <option @if (old($name) == $concepto->id) selected @endif value="{{ $concepto->id }}">
+                <option @if ($selected == $concepto->id) selected @endif value="{{ $concepto->id }}">
                     {{ $concepto->concepto }}</option>
             @endforeach
         </select>
