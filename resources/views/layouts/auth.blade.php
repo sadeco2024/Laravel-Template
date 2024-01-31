@@ -180,7 +180,7 @@
                     <!-- Start::header-element -->
                     <li class="header-element country-selector d-none">
                         <!-- Start::header-link|dropdown-toggle -->
-                 
+
                     </li>
                     <!-- End::header-element -->
 
@@ -208,9 +208,9 @@
                             </div>
                             <div class="dropdown-divider"></div>
                             <ul class="list-unstyled mb-0" id="header-cart-items-scroll">
-                        
+
                             </ul>
-                        
+
                         </div>
                         <!-- End::main-header-dropdown -->
                     </li>
@@ -237,9 +237,9 @@
                             </div>
                             <div class="dropdown-divider"></div>
                             <ul class="list-unstyled mb-0" id="header-notification-scroll">
-                   
+
                             </ul>
-                
+
                         </div>
                         <!-- End::main-header-dropdown -->
                     </li>
@@ -285,7 +285,7 @@
                         </div>
                         <!-- End::dashboards list -->
                     </div>
-                    <!-- End::header-element -->                    
+                    <!-- End::header-element -->
                     {{-- TERMINA -PROXIMAMENTE --}}
                 </ul>
             </div>
@@ -438,6 +438,22 @@
                 </div>
             </div>
         </div>
+
+        {{-- Toast --}}
+        <div id="toast-alerts" class="toast colored-toast bg-success" role="alert"
+            aria-live="assertive" aria-atomic="true">
+            {{--  bg-secondary text-fixed-white --}}
+            <div class="toast-header">
+                <img class="bd-placeholder-img rounded me-2" src="../assets/images/brand-logos/logo.png"
+                    alt="...">
+                <strong class="me-auto">Sadeco</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Registro actualizado
+            </div>
+        </div>
+
     </div>
 
 
@@ -484,7 +500,7 @@
 
     @yield('script')
 
-
+    @vite(['resources/js/auth.js'])
 
 </body>
 {{-- <script type="text/javascript">

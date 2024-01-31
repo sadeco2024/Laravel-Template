@@ -11,7 +11,7 @@
 
         <div class="nav flex-column nav-pills mt-3 me-3 tab-style-7 w-100 p-2 border border-dashed rounded"
             id="v-pills-tab" role="tablist" aria-orientation="vertical">
-
+            <!-- nav::modulos -->
             @foreach ($modulos as $modulo)
                 <button class="nav-link text-start {{ $modulo->id > 1 ? '' : 'show active' }}"data-bs-toggle="pill"
                     data-bs-target="#modulo-{{ $modulo->slug }}" type="button" role="tab"
@@ -22,26 +22,37 @@
             @endforeach
         </div>
     </div>
-    {{-- nav contents --}}
+    {{-- nav::contents --}}
 
     {{-- Guardar y agregar permiso --}}
+
     <div class="col-12 col-xxl-8 col-xl-8 ">
         <div class="d-flex justify-content-between">
-            <button class="btn btn-primary btn-sm mb-3" type="submit">
+            <button class="btn btn-primary btn-sm mb-3 save" type="submit">
                 <i class="{{ $btnIcon }}"></i>
                 {{ $btnText }}
             </button>
 
             @can('confs.sadmin.permisos.add')
-            
-                <a class="modal-effect btn btn-success-transparent btn-sm d-grid mb-3 {{request()->is('confs/roles/create') ? 'd-none' : '' }}"
-                    data-bs-effect="effect-slide-in-right" data-bs-toggle="modal" href="#modaldemo8">
+                <x-buttons.modal-crud class="btn btn-success-transparent btn-sm d-grid mb-3 {{ request()->is('confs/roles/create') ? 'd-none' : '' }}"
+                    href="#modalPermisos" :url="route('confs.roles.permissions.create')" :title="'Nuevo permiso'" :param="'{{ $role->id }}'">
+
                     <span>
                         <i class="bi bi-plus"></i>
                         Agregar permiso
                     </span>
-                </a>
-            
+                </x-buttons.modal-crud>
+                {{-- <a  class="modal-effect btn btn-success-transparent btn-sm d-grid mb-3 {{ request()->is('confs/roles/create') ? 'd-none' : '' }}"
+                    data-bs-effect="effect-slide-in-right" 
+                    data-bs-toggle="modal" 
+                    href="#modalPermisos" 
+                    
+                    >
+                    <span>
+                        <i class="bi bi-plus"></i>
+                        Agregar permiso
+                    </span>
+                </a> --}}
             @endcan
         </div>
 
@@ -54,23 +65,53 @@
                         <ul class="list-group list-group-flush  ">
                             @foreach ($permissions as $permission)
                                 @if ($permission->cg_modulo_id == $modulo->id)
-                                    <li class="list-group-item">
-                                        <input class="form-check-input me-1" type="checkbox"
-                                            id="permission-{{ $permission->id }}" name="permissions[]"
-                                            value="{{ $permission->id }}" aria-label="..."
-                                            @if (isset($rolPermisos)) @foreach ($rolPermisos as $rolPermiso)
-                                                @if ($rolPermiso->id == $permission->id)
-                                                    checked @endif
-                                            @endforeach
+
+                                    <li class="list-group-item ps-0">
+                                        <div class="form-check form-check-lg d-flex align-items-center ">
+                                            <input class="form-check-input form-check-input-lg me-1" type="checkbox"
+                                                id="permission-{{ $permission->id }}" name="permissions[]"
+                                                value="{{ $permission->id }}" aria-label="..."
+                                                @if (isset($rolPermisos)) @foreach ($rolPermisos as $rolPermiso)
+                                                    @if ($rolPermiso->id == $permission->id)
+                                                        checked @endif
+                                                @endforeach
                                 @endif
                                 >
+                                <div class="ms-2 py-1 d-flex flex-column align-items-start"
+                                    for="permission-{{ $permission->id }}">
+                                    <span class="fw-bold">{{ $permission->nombre }}</span>
+                                    <span class="text-muted">
+                                        <small>
+                                            {{ $permission->descripcion }}
+                                        </small>
+                                    </span>
+                                    @role('supadmin')
+                                        <div class="d-flex align-items-center">
 
-                                </label>
-                                <label class="form-check-label stretched-link" for="permission-{{ $permission->id }}">
-                                    {{ $permission->descripcion }}
-                                </label>
-                                </li>
-                            @endif
+                                            <x-badge class="bg-outline-warning rounded-pill" :text="$permission->name" />
+
+                                            <x-buttons.modal-crud
+                                                class="btn btn-sm "
+                                                href="#modalPermisos"
+                                                :url="route('confs.roles.permissions.edit', $permission->id)" 
+                                                :title="'Editar permiso'"
+                                                :param="$role->id"
+                                            >
+                                                
+
+                                                <span>
+                                                    <i class="bi bi-pencil text-warning"></i>
+                                                    
+                                                </span>
+                                            </x-buttons.modal-crud>
+                                        </div>
+                                    @endrole
+
+                                </div>
+                    </div>
+
+                    </li>
+            @endif
             @endforeach
             </ul>
         </div>
@@ -92,6 +133,4 @@
         <x-input-error-line :messages="$errors->get('descripcion')" class="my-2" />
     </div>
 </div>
-
-
 </div>

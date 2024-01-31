@@ -34,9 +34,12 @@ class PruebasSeeder extends Seeder
         // Se crea el del perfil de administrador
         // ? Fijate que está dentro del array, por lo que si se quita, va a tener problemas.
         Empleado::factory()->create(['user_id' => 1, 'puesto_rh_extra_id' => Rhextra::firstOrCreate(['concepto' => 'puesto', 'descripcion' => 'director general'])->id,'sucursal_id'=>1]);
+         Empleado::factory()->count(50)->create();
 
-        Empleado::factory()->count(50)->create();
-
+        Empleado::all()->each(function ($empleado) {
+            $empleado->user->assignRole('empleado');
+        });
+        
         //** ERP */
         $lineas = array(
             "Bebidas" => ["Refrescos", "Aguas y jugos", "Cervezas", "Vinos", "Tés"],

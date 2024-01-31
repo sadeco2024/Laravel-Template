@@ -9,3 +9,10 @@
 @import "../theme/libs/@simonwep/pickr/themes/nano.min.css";
 @import "../theme/libs/choices.js/public/assets/styles/choices.min.css";
 @import "../css/app.css";
+
+@import url("../theme/libs/prismjs/themes/prism-coy.min.css");
+
+
+.popover {
+    z-index: 1060;
+}

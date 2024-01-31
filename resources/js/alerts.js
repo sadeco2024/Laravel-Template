@@ -1,29 +1,51 @@
+
+
 //** Cualquier componente que requiera confirmación dentro de un form. */
-document.getElementById('delete-confirm-form').onclick = function(e) {
-    e.preventDefault();
-    Form = e.target.closest('form');
-    Swal.fire({
-        title: '¿Esta usted seguro?',
-        text: "Esta acción no se puede deshacer",
-        icon: 'warning',
-        showCancelButton: true,
-        cancelButtonText: 'Cancelar',
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Eliminar rol'
-    }).then((result) => {
-        if (result.isConfirmed) {
-            Swal.fire(
-                'Eliminado!',
-                'El rol ha sido eliminado.',
-                'success'
-            )
-            Form.submit();
-        }
-    })
-}
+document.getElementById("delete-confirm-form")?.forEach((element) => {
+    element.addEventListener("click", (e) => {
+        e.preventDefault();
+        Form = e.target.closest("form");
+        Swal.fire({
+            title: "¿Esta usted seguro?",
+            text: "Esta acción no se puede deshacer",
+            icon: "warning",
+            showCancelButton: true,
+            cancelButtonText: "Cancelar",
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Eliminar rol",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Eliminado!", "El rol ha sido eliminado.", "success");
+                Form.submit();
+            }
+        });
+    });
+});
 
-
+// document.getElementById('delete-confirm-form').onclick = function(e) {
+//     e.preventDefault();
+//     Form = e.target.closest('form');
+//     Swal.fire({
+//         title: '¿Esta usted seguro?',
+//         text: "Esta acción no se puede deshacer",
+//         icon: 'warning',
+//         showCancelButton: true,
+//         cancelButtonText: 'Cancelar',
+//         confirmButtonColor: '#3085d6',
+//         cancelButtonColor: '#d33',
+//         confirmButtonText: 'Eliminar rol'
+//     }).then((result) => {
+//         if (result.isConfirmed) {
+//             Swal.fire(
+//                 'Eliminado!',
+//                 'El rol ha sido eliminado.',
+//                 'success'
+//             )
+//             Form.submit();
+//         }
+//     })
+// }
 
 function alertSuccess(message) {
     Swal.fire({
@@ -59,3 +81,18 @@ function alertConfirm(message) {
         }
     });
 }
+
+
+//** DATEPICKER - Rango de fechas */
+document.querySelectorAll(".daterange").forEach((element) => {
+    try {
+        flatpickr(element, {
+            mode: "range",
+            dateFormat: "d-m-Y",
+            'locale': 'es',
+        });
+    } catch {
+        throw "Error al cargar el datepicker";
+    }
+});
+

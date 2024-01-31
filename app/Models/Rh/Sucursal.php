@@ -2,9 +2,11 @@
 
 namespace App\Models\Rh;
 
+use App\Models\Telcel\Canal;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use SebastianBergmann\CodeUnitReverseLookup\Wizard;
 
 class Sucursal extends Model
 {
@@ -34,9 +36,11 @@ class Sucursal extends Model
         );
     }        
 
-    public function scopeSucursal() {
-        
-    }
+    // protected $with =[
+    //     ''
+    // ];
+
+
 
     public function scopeSucursales($query)
     {
@@ -73,7 +77,10 @@ class Sucursal extends Model
     {
         return $this->hasMany('App\Models\Rh\Empleado', 'sucursal_id');
     }
-
+    public function getCuentaEmpleadosAttribute()
+    {
+        return $this->empleados()->count();
+    }
     public function gerenteEmpleadoId()
     {
         return $this->belongsTo('App\Models\Rh\Empleado', 'gerente_empleado_id');        
@@ -104,6 +111,10 @@ class Sucursal extends Model
 
     // protected $with = ['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId','correo','comentario'];
     
+    public function tlcCanales()
+    {
+        return $this->hasMany(Canal::class, 'sucursal_id');
+    }    
 
     protected $hidden = [
         'tipo_concepto_id',

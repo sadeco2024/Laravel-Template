@@ -1,7 +1,6 @@
 {
-
   "resources/css/auth.css": {
-    "file": "assets/auth-Z6PDhzHy.css",
+    "file": "assets/auth-eHXbn3Kk.css",
     "isEntry": true,
     "src": "resources/css/auth.css"
   },
@@ -9,15 +8,14 @@
     "file": "assets/guest-FIpNk2qv.css",
     "isEntry": true,
     "src": "resources/css/guest.css"
-
   },
   "resources/js/alerts.js": {
-    "file": "assets/alerts-y6IuNF1h.js",
+    "file": "assets/alerts-pWx_jgCf.js",
     "isEntry": true,
     "src": "resources/js/alerts.js"
   },
   "resources/js/auth.js": {
-    "file": "assets/auth-w40geAFS.js",
+    "file": "assets/auth-1IjpewHT.js",
     "isEntry": true,
     "src": "resources/js/auth.js"
   },
@@ -26,15 +24,30 @@
     "isEntry": true,
     "src": "resources/js/coming-soon.js"
   },
+  "resources/js/datatables.js": {
+    "file": "assets/datatables-rW3G044K.js",
+    "isEntry": true,
+    "src": "resources/js/datatables.js"
+  },
+  "resources/js/funciones.js": {
+    "file": "assets/funciones-JxBPz0Bc.js",
+    "isEntry": true,
+    "src": "resources/js/funciones.js"
+  },
   "resources/js/guest.js": {
     "file": "assets/guest-Ux9Gah67.js",
     "isEntry": true,
     "src": "resources/js/guest.js"
   },
   "resources/js/modales.js": {
-    "file": "assets/modales-V0bGDCib.js",
+    "file": "assets/modales-79gEz16f.js",
     "isEntry": true,
     "src": "resources/js/modales.js"
+  },
+  "resources/js/sucursales.js": {
+    "file": "assets/sucursales-_4D0PBG3.js",
+    "isEntry": true,
+    "src": "resources/js/sucursales.js"
   },
   "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.eot": {
     "file": "assets/remixicon-q5KekA7g.eot",
@@ -96,11 +109,9 @@
     "file": "assets/feather-webfont-hsAjXEqz.ttf",
     "src": "resources/theme/icon-fonts/feather/fonts/feather/feather-webfont.ttf"
   },
-
   "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.eot": {
     "file": "assets/la-brands-400-CzeAjJRo.eot",
     "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.eot"
-
   },
   "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.svg": {
     "file": "assets/la-brands-400-MLFCN1Cf.svg",
@@ -141,7 +152,6 @@
   "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.eot": {
     "file": "assets/la-solid-900-5Jl-BtsW.eot",
     "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.eot"
-
   },
   "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.svg": {
     "file": "assets/la-solid-900-HbZTzFm_.svg",
@@ -242,7 +252,6 @@
   "resources/theme/images/menu-bg-images/transparent.png": {
     "file": "assets/transparent-RbNa0E3N.png",
     "src": "resources/theme/images/menu-bg-images/transparent.png"
-
   },
   "resources/theme/js/show-password.js": {
     "file": "assets/show-password-w40geAFS.js",

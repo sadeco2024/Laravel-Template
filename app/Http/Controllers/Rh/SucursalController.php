@@ -24,6 +24,15 @@ class SucursalController extends Controller
      * Display a listing of the resource.
      */
 
+     public function __construct()
+     {
+        // $this->middleware(['permission:confs.role.menu|confs.role.edit|confs.role.add'], ['only' => ['index']]);
+         $this->middleware('permission:rh.sucursal.menu|rh.sucursal.add|rh.sucursal.edit')->only('index');
+         $this->middleware('permission:rh.sucursal.add')->only('create','store');
+        $this->middleware('permission:rh.sucursal.edit')->only('edit','update');
+        $this->middleware('permission:rh.sucursal.delete')->only('destroy');
+     }
+
      public function index()
     {
         
@@ -113,7 +122,9 @@ class SucursalController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $sucursal = Sucursal::with(['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId'])->where('id',$id)->first();
+        // return $sucursal;
+        return view('rh.sucursales.show',['sucursal'=>$sucursal]);
     }
 
     /**

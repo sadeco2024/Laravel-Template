@@ -61,6 +61,17 @@ return new class extends Migration
 
             $table->timestamps();
         });
+
+        Schema::create('articulos_discretos', function (Blueprint $table) {
+            $table->id();
+            $table->string('serie', 25)->unique();
+            $table->integer('long')->nullable()->comment('Longitud para verificar una serie larga'); 
+            $table->string('tipo', 1)->default('S')->comment('S: Serie, L: Lote');
+
+            $table->foreignId('articulo_id')->nullable()->constrained('articulos');
+            $table->timestamps();
+        });
+
     }
 
     /**
@@ -68,6 +79,8 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('articulos_discretos');
+
         Schema::dropIfExists('claves_articulos');
         Schema::dropIfExists('articulos');
 
