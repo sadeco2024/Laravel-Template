@@ -67,6 +67,10 @@ Breadcrumbs::for('rh.sucursales.edit', function (BreadcrumbTrail $trail, $sucurs
     $trail->parent('rh.sucursales.index');
     $trail->push('Editar rol', route('rh.sucursales.edit',$sucursal));
 });
+Breadcrumbs::for('rh.sucursales.show', function (BreadcrumbTrail $trail, $sucursal):void  {
+    $trail->parent('rh.sucursales.index');
+    $trail->push('Información', route('rh.sucursales.show',$sucursal));
+});
 
 //** RH - Empleados */
 Breadcrumbs::for('rh.empleados.index', function (BreadcrumbTrail $trail):void  {
@@ -102,7 +106,11 @@ Breadcrumbs::for('telcel.canales.index', function (BreadcrumbTrail $trail) {
 });
 
 
-
+//** Telcel - Canales */
+Breadcrumbs::for('telcel.activaciones.index', function (BreadcrumbTrail $trail) {
+    // $trail->parent('erp');
+    $trail->push('Activaciones', route('telcel.activaciones.index'));
+});
 
 
 // Breadcrumbs::for('confs.roles.show', function (BreadcrumbTrail $trail) {

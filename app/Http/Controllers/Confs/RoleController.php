@@ -4,19 +4,29 @@ namespace App\Http\Controllers\Confs;
 
 use App\Http\Controllers\Controller;
 use App\Models\Configuraciones\Modulo;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
+
+
 class RoleController extends Controller
 {
+
+    public function __construct()
+{
+    $this->middleware(['permission:confs.role.menu|confs.role.edit|confs.role.add'], ['only' => ['index']]);
+    $this->middleware(['permission:confs.role.add'], ['only' => ['create']]);
+    $this->middleware(['permission:confs.role.delete'], ['only' => ['destroy']]);
+    
+}
     
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+
         $roles =Role::all() ;
         return view('confs.roles.index', compact('roles'));
     }
@@ -26,6 +36,8 @@ class RoleController extends Controller
      */
     public function create()
     {
+
+
         $modulos = Modulo::all();
         $permissions = Permission::all();
         return view('confs.roles.create',compact('modulos','permissions'));
@@ -68,6 +80,11 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+        if (!auth()->user()->hasAnyPermission(['confs.role.edit'])) {
+            abort(403, 'No autorizado');
+        }
+
+
         $modulos = Modulo::all();
         $permissions = Permission::all();
         $rolPermisos = $role->permissions;        
@@ -89,14 +106,12 @@ class RoleController extends Controller
 
         return redirect()->route('confs.roles.index',$role)->with('success','Rol actualizado correctamente');
     }
-
- 
-
     /**
      * Remove the specified resource from storage.
-     */
+    */
     public function destroy(Role $role)
     {
+
         $role->delete();
         return redirect()->route('confs.roles.index'); //->with('success','Rol eliminado correctamente');
     }

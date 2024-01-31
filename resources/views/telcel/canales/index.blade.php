@@ -16,7 +16,7 @@
             <div class="card custom-card">
                 <div class="card-body d-flex align-items-baseline align-items-start flex-wrap">
 
-                    <x-inputs.search-table :name="'src_producto'" />
+                    
                     <div class="flex-fill">
 
                         {{-- <span class="mb-0 fs-14 text-muted">Empleados</span> --}}
@@ -26,14 +26,15 @@
 
                     </div>
                     <div class="align-baseline  justify-content-start ">
-                        <a class="modal-effect btn btn-success-light btn-sm " data-bs-effect="effect-slide-in-right"
+                        {{-- <a class="modal-effect btn btn-success-light btn-sm " data-bs-effect="effect-slide-in-right"
                             data-bs-toggle="modal" href="#">
                             <i class="bi bi-plus"></i>
                             Agregar canal
-                        </a>
+                        </a> --}}
 
-                        <button id="btnActualizaCanales" class="btn btn-sm btn-outline-dark ms-2">
-                            <i class="bi bi-arrow-clockwise fs-11" title="Actualizar canales"></i>
+                        <button id="btnActualizaCanales" class="btn btn-sm btn-outline-primary ms-2 save-link"
+                            data-link="{{ route('telcel.canales.refresh') }}" title="Actualizar canales">
+                            <i class="bi bi-arrow-clockwise fs-11" ></i>
                         </button>
                     </div>
                 </div>
@@ -43,56 +44,101 @@
 
 
     <div class="row">
-        <div class="col-xxl-12">
+        <div class="col-xl-12">
+            <div class="card custom-card">
+                <div class="card-header justify-content-between">
+                    <x-inputs.search-table :name="'src_telcel_canal'" />
+                    <div id="btnTelcelCanales" class="">
+                        {{-- {{ $canales->links() }} --}}
+                    </div>
+                </div>                
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="tblTelcelCanales" class="table table-borderless table-hover table-selected">
+                            <thead class="text-info text-center" >
+                                <tr >
+                                    <th>Nombre</th>
+                                    <th>Clave</th>
+                                    <th>Acox</th>
+                                    <th>Tipo</th>
+                                    <th>Sucursal</th>
+                                    <th>
+                                        <i class="bi bi-people-fill text-info fs-16"></i>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($canales as $canal)
+                                    <tr>
+                                        <td>{{ $canal->nombre }}</td>
+                                        <td>{{ $canal->clave }}</td>
+                                        <td>{{ $canal->acox }}</td>
+                                        <td>{{ $canal->concepto->concepto ?? '' }}</td>
+                                        <td>{{ $canal->sucursal->nombre }}</td>
+                                        <td>{{ $canal->sucursal->empleados->count() }}</td>
+                                        <td class="text-center">
+                                            <x-buttons.modal-crud
+                                                class="btn btn-sm btn-outline-warning"
+                                                href="#modalCanales"
+                                                :url="route('telcel.canales.edit', $canal->id)"
+                                                :title="'Editar canal'"
+                                            >
+                                                <i class="bi bi-gear"></i>
+                                            </x-buttons.modal-crud>
+                                            
+                                        </a>
+                                        </td>
+        
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                
+                    </div>
 
+                </div>
+           
+            </div>
 
-            <div class="table-responsive">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <td>Canal</td>
-                            <td>Clave</td>
-                            <td>Id</td>
-                            <td>Tipo</td>
-                            <td>Sucursal</td>
-                            <td>Usuarios</td>
-                            <td></td>
-                        </tr>
-                    </thead>
+        </div>
+    </div>
 
-
-                </table>
+    <!-- Modal::Agregar Permiso -->
+    <div class="modal fade sd-modalForm" id="modalCanales" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+            <div class="modal-content modal-content-demo">
+                <div class="modal-header">
+                    <h6 class="modal-title">Nuevo canal</h6>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {{-- //** La clase: "sd-modalForm" - hace carga el form-menu (create, edit) --}}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" form="frmCanalesAdd" type="submit">Guardar</button>
+                    <button class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                </div>
             </div>
         </div>
     </div>
 
+
 @endsection
 
 @section('js')
-    <x-scripts.jquery>
-        <script>
-            $(document).ready(function() {
-                $('#btnActualizaCanales').click(function() {
-                    $.ajax({
-                        url: "{{ route('telcel.canales.refresh') }}",
-                        
-                        type: 'GET',
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": "{{ csrf_token() }}",
-                        },
-                        // data: {
-                        //     '_token': "{{ csrf_token() }}"
-                        // },
-                        // dataType: 'json',
-                        success: function(data) {
-                            console.log(data);
-                        }
-                    });
-                });
-            });
-        </script>
-    </x-scripts.jquery>
 
+<x-scripts.jquery :sweetAlert="true" :tables="true"/>
+<script>
+    $(document).ready(function() {
+        // $('#tblTelcelCanales').DataTable();
+    });
+</script>
+
+<script>
+    // var table = $('#tblTelcelCanales').DataTable();
+
+</script>
 
 @endsection

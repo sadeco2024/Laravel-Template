@@ -31,8 +31,8 @@ class EmpleadoController extends Controller
         $puestos = Rhextra::where('concepto', 'puesto')->withCount('empleadosPorPuesto')->get();
         $empleados = Empleado::with(['user', 'nombre', 'telefono', 'telefonoCorporativo', 'sucursal.estatus', 'estatus', 'rfc']);
         $sucursales = Sucursal::all();
-
-        // return $empleados;
+        
+        //  return json_encode($empleados->get());
 
         return view('rh.empleados.index', compact('empleados', 'sucursales', 'puestos'));
     }
@@ -169,6 +169,7 @@ class EmpleadoController extends Controller
 
         // Se valida que no exista el curp en la tabla de empleados.
         $curp = Curp::firstOrCreate(['curp' => $request->curp]);
+
         $empleadoExistente = Empleado::whereHas('nombre', function ($query) use ($curp) {
             $query->where('curp_id', $curp->id);
         })->first();
@@ -184,6 +185,9 @@ class EmpleadoController extends Controller
             'password' => Hash::make('SADECO2024')
         ]);
 
+        // $nombre = Nombre::firstOrCreate($request->all());
+        // $nombre = Nombre::createEmpleado($request);
+        
         $nombre = Nombre::firstOrCreate([
             'nombre' => trim($request->primer_nombre) . ' ' . trim($request->paterno) . ' ' . trim($request->materno),
             'primer_nombre' => trim($request->primer_nombre),
@@ -292,10 +296,12 @@ class EmpleadoController extends Controller
             'fecha_nacimiento' => 'date',
             'genero' => 'required',
             'telefono' => 'required|max:10|min:10',
-            'correo' => [
-                'required',
-                Rule::unique('users', 'email')->ignore($empleado->user_id),
-            ],
+            'correo'=> 'required|unique:users,email,'.$empleado->user_id.',id',
+            // 'correo' => [
+            //     'required',
+            //     Rule::unique('users', 'email')->ignore($empleado->user_id),
+            //     Rule::unique('users', 'email')->ignore($empleado->correo_id),
+            // ],
             'telefono_corporativo' => 'nullable:max:10|min:10',
             'correo_corporativo' => 'nullable|email',
             'curp' => 'required|regex:/^[A-Z]{4}\d{6}[HM][A-Z]{5}\d{2}$/',

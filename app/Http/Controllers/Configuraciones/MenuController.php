@@ -61,11 +61,13 @@ class MenuController extends Controller
                 'errors' => $errors
             ]);
         }
-
+        
         $comentario = Comentario::create([
             'comentario' => $request->comentario,
         ]);
 
+        $request->merge(['enabled' => $request->input('enabled') ? 1 : 0]);
+        
         $menu = Menu::create($request->all());
         $menu->comentario_id = $comentario->id;
         $menu->save();
@@ -107,11 +109,12 @@ class MenuController extends Controller
         //** Se valida como ajax. */
 
         //** Se valida como AJAX */
+        
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|unique:cg_menus,nombre,' . $id . '|max:50',
             'slug' => 'required|unique:cg_menus,slug,' . $id . '|max:70',
             'orden' => 'min:1',
-            'cg_modulo_id' => 'required:array|min:1',
+            'cg_modulo_id' => 'required:numeric|min:1',
             'padre_cg_menu_id' => [
                 'required',
                 function ($attribute, $value, $fail) use ($request) {
@@ -130,6 +133,7 @@ class MenuController extends Controller
         }
 
         $request->merge(['enabled' => $request->input('enabled') ? 1 : 0]);
+        
         $menu = Menu::find($id);
         $idComentario = null;
         if ($request->comentario) {

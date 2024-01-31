@@ -182,5 +182,14 @@ class MenusSeeder extends Seeder
             'padre_cg_menu_id'=>Menu::where('slug', 'telcel')->first()->id
         ]);    
 
+        Menu::create([
+            'nombre' => 'Activaciones',
+            'icono' => 'bi bi-archive-fill',
+            'slug' => 'activaciones',            
+            'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'crud'])->id,
+            'cg_modulo_id' => 4,
+            'padre_cg_menu_id'=>Menu::where('slug', 'telcel')->first()->id
+        ]);            
+
     }
 }

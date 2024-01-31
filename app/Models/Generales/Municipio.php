@@ -20,7 +20,6 @@ class Municipio extends Model
 
     protected $hidden = [
         'ciudad_id',
-        // 'estado_id',        
         'created_at',
         'updated_at'
     ];

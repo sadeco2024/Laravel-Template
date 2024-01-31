@@ -10,6 +10,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Rh\EmpleadoController;
 use App\Http\Controllers\Rh\SucursalController;
 use App\Http\Controllers\RhExtraController;
+use App\Http\Controllers\Telcel\ActivacionController;
 use App\Http\Controllers\Telcel\CanalController;
 use App\Models\Configuraciones\Menu;
 use App\Models\Rh\Empleado;
@@ -55,10 +56,20 @@ Route::middleware('auth')->group(function () {
     Route::resource('erp/inventario', ArticuloController::class)->names('erp.inventario');
 
 
-    //** Rutas de Telcel */
+    //** Rutas de Telcel::Canales */
     // Route::resource('telcel/canales', CanalController::class)->names('telcel.canales');
-    Route::resource('telcel/canales', CanalController::class)->only(['index', 'show', 'store', 'update', 'destroy'])->names('telcel.canales');
+    Route::resource('telcel/canales', CanalController::class)->only(['index', 'show', 'store', 'update', 'destroy','edit'])->names('telcel.canales');
     Route::get('telcel/refresh/canales', [CanalController::class,'actualiza'])->name('telcel.canales.refresh');
+    Route::get('telcel/setquestion/canales/{canal}', [CanalController::class,'setQuestion'])->name('telcel.canales.setquestion');
+    Route::get('telcel/sincrcox/canales/{canal}', [CanalController::class,'getVendedores'])->name('telcel.canales.sincrcox');
+    Route::get('telcel/reset/canales/{canal}', [CanalController::class,'resetAcox'])->name('telcel.canales.reset');
+    Route::get('telcel/reset/canal/vendedor/{vendedor}', [CanalController::class,'resetRcox'])->name('telcel.canales.reset.rcox');
+    
+    //** Rutas Telcel::Prepago */
+    Route::resource('telcel/activaciones',ActivacionController::class)->names('telcel.activaciones');
+    Route::post('telcel/activaciones/download', [ActivacionController::class, 'download'])->name('telcel.activaciones.download');
+
+    
 
 
     //* Rutas de Generales

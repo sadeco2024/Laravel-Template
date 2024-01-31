@@ -13,10 +13,12 @@
                             {{ $sucursales->count() }}
                         </span></span>
                 </div>
-                <a href="{{ route('rh.sucursales.create') }}" type="button" class="btn btn-sm btn-success-transparent">
-                    <i class="bi bi-plus"></i>
-                    Agregar Sucursal
-                </a>
+                @can('rh.sucursal.add')
+                    <a href="{{ route('rh.sucursales.create') }}" type="button" class="btn btn-sm btn-success-transparent">
+                        <i class="bi bi-plus"></i>
+                        Agregar Sucursal
+                    </a>
+                @endcan
 
             </div>
         </div>
@@ -110,36 +112,53 @@
                             @endswitch
 
                         </div>
-                        {{-- <div class="mt-sm-0 mt-2"> --}}
-                        <div class="dropdown">
-                            <a href="javascript:void(0);" class="p-2 fs-12 text-muted" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Detalles
-                                <i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu" style="">
-                                <li><a class="dropdown-item" href="javascript:void(0);">
-                                        <i class="ri-eye-line align-middle me-1"></i>
-                                        Información
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('rh.sucursales.edit', $sucursal) }}">
-                                        <i class="ri-pencil-line align-middle me-1"></i>
-                                        Editar
-                                    </a>
-                                </li>
-                                @if ($sucursal->id !== 1)
-                                    <li><hr class="dropdown-divider"></li>
-                                    <li>
-                                        <a class="dropdown-item" href="javascript:void(0);">
-                                            <i class="ri-delete-bin-line align-middle me-1"></i>
-                                            Eliminar
-                                        </a>
-                                    </li>
-                                @endif
-                            </ul>
-                        </div>
+                        
+                        @canany(['rh.sucursal.show','rh.sucursal.edit','rh.sucursal.destroy'])
+                            {{-- <a href="{{ route('rh.sucursales.show', $sucursal) }}" class="btn btn-sm btn-info-ghost">
+                                <i class="bi bi-eye"></i>
+                                Ver
+                            </a> --}}
+                            <div class="dropdown">
+                                <a href="javascript:void(0);" class="p-2 fs-12 text-muted" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    Detalles
+                                    <i class="ri-arrow-down-s-line align-middle ms-1 d-inline-block"></i>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" style="">
+                                    @can('rh.sucursal.show')
+                                        <li><a class="dropdown-item"  href="{{ route('rh.sucursales.show', $sucursal) }}">
+                                                <i class="ri-eye-line align-middle me-1"></i>
+                                                Información
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('rh.sucursal.edit')
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('rh.sucursales.edit', $sucursal) }}">
+                                                <i class="ri-pencil-line align-middle me-1"></i>
+                                                Editar
+                                            </a>
+                                        </li>
+                                    @endcan
+                                    @can('rh.sucursal.destroy')
+                                        {{-- El almacén no puede ser eliminado. --}}
+                                        @if ($sucursal->id !== 1)
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="javascript:void(0);">
+                                                    <i class="ri-delete-bin-line align-middle me-1"></i>
+                                                    Eliminar
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endcan
+                                </ul>
+                            </div>
+                        @endcanany
+
+                        
 
                         {{-- <button class="btn btn-sm btn-info-ghost">Editar >></button> --}}
                         {{-- </div> --}}

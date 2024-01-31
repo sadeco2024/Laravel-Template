@@ -28,17 +28,16 @@ class EmpleadoFactory extends Factory
     {
 
         //** El "user_id", se genera desde el seed que carga el factory porque deben ser únicos. */
-        $user = User::factory()->create();
-        $user->assignRole('empleado');
+        // $user = User::factory()->create();
+        
         return [
-            'user_id' => $user->id,
+            'user_id' => User::factory()->create()->id,
             'nombre_id' => Nombre::factory()->create()->id,
-            
             'fecha_nacimiento' => $this->faker->date(),
             'fecha_ingreso' => $this->faker->date(),
             'genero' => $this->faker->randomElement(['F','M','GF','NB','I','O']),
             'telefono_id' => Telefono::factory()->create()->id,
-            'correo_id' => Correo::firstOrCreate(['correo'=>$user->email])->id,
+            'correo_id' => Correo::firstOrCreate(['correo'=> User::latest()->first()->email,])->id,
             'corpo_telefono_id' => Telefono::factory()->create()->id,
             'corpo_correo_id' => Correo::create(['correo'=>$this->faker->unique()->safeEmail])->id,
             'no_empleado' => $this->faker->numberBetween(1000, 9999),            

@@ -6,7 +6,7 @@
 
 
 
-
+    @can('rh.sucursal.destroy')
     <div class="row mb-3 ">
         <div class="col d-flex">
             <button id="delete-confirm-form" class="btn btn-sm btn-danger-transparent btn-wave waves-effect waves-light ms-auto" type="button">
@@ -16,6 +16,7 @@
 
         </div>
     </div>
+    @endcan
 
     {{-- @dump($sucursal) --}}
     <div class="card custom-card">

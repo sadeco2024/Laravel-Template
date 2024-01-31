@@ -15,6 +15,7 @@ use App\Models\Generales\Telefono;
 use App\Models\Rh\Puesto;
 use App\Models\Rh\Rhextra;
 use App\Models\Rh\Sucursal;
+use App\Models\Telcel\Canal;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
@@ -59,13 +60,6 @@ class InitialSeeder extends Seeder
         ]);
 
 
-        //* Se generan los puestos iniciales.
-        // $puestos = ["director general", "empleado general"];
-        // foreach ($puestos as $puesto) {
-        //     Puesto::create([
-        //         'puesto' => $puesto,
-        //     ]);
-        // }
 
         //* SE GENERAL EL ALMACEN GENERAL.
         Sucursal::create([
@@ -89,10 +83,6 @@ class InitialSeeder extends Seeder
                 'ubicacion' => '21.0245,-89.6165',
             ])->id,
             'correo_id' => Correo::firstOrCreate(['correo' => 'sadecoqr@gmail.com'])->id,
-            // 'ubicacion' => json_encode([
-            //     'latitud' => '21.0245',
-            //     'longitud' => '-89.6165',
-            // ]),
             'estatus_id' => Estatus::firstOrCreate(['estatus' => 'Abierta'])->id,
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'Almacén'])->id
         ]);
@@ -109,6 +99,10 @@ class InitialSeeder extends Seeder
                 'estatus' => $estatus,
             ]);
         }
+
+
+        //** Se debe generar el canal principal */
+        Canal::create(['nombre' => 'DISTRICEL', 'clave' => 'RPHAESC', 'acox' => 'acox17274', 'contrasena' => 'acox99170', 'activa' => true, 'sucursal_id' => 1, 'estatus_id' => 1]);
 
         //** Se generan los RH-EXTRAS */        
         $rhextras = [

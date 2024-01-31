@@ -16,8 +16,10 @@ return new class extends Migration
             $table->string('estado', 50)->unique()->nullable(false);
             $table->string('clave', 5)->unique()->nullable(true);
             $table->string('abreviatura', 5)->unique()->nullable(true);
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
+            $table->timestamps();
+            
+            // $table->timestamp('created_at')->useCurrent();
+            // $table->timestamp('updated_at')->nullable()->useCurrentOnUpdate();
 
         });
     }

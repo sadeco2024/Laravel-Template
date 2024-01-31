@@ -4,30 +4,29 @@
 @section('title-view', 'Perfil del empleado')
 @section('content')
 
-    <div class="row mb-2">
-        <div class="col-12 d-flex justify-content-end">
+
+        <div class="col-12 d-flex justify-content-end mb-2">
             <a class="btn btn-primary-transparent btn-sm btn-icon-start btn-wave"
                 href="{{ route('rh.empleados.edit', $empleado) }}">
                 <i class="ri-pencil-line align-middle"></i>
                 Editar perfil
-
             </a>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-xl-8">
+
+        <div class="col-xl-8 order-1">
             <div class="card custom-card">
                 <div class="card-body">
-                    <div class="d-sm-flex flex-wrap align-items-top gap-5 p-2 border-bottom-0">
+                    <div class="d-sm-flex flex-wrap align-items-top gap-5 gap-md-3 p-2 border-bottom-0">
                         <div>
-                            <div class="d-flex align-items-center gap-2 mb-4">
-                                <div class="lh-1">
+                            <div class="d-flex align-items-center gap-2 gap-md-0 mb-4">
+                                {{-- Avatar --}}
+                                <div class="lh-1 d-none d-md-block">
                                     <span class="avatar avatar-xxl avatar-rounded online me-3">
-                                        <img src="{{ asset('/assets/images/faces/default.png') }}"
-                                            alt="">
+                                        <img src="{{ asset('/assets/images/faces/default.png') }}" alt="">
                                     </span>
                                 </div>
+                                {{-- RH - Empleado --}}
                                 <div class="flex-fill main-profile-info">
                                     <div class="d-flex align-items-center justify-content-between mb-1">
                                         <h6 class="fw-medium mb-1">{{ $empleado->nombre->nombre }}</h6>
@@ -57,45 +56,28 @@
                             </div>
                          
                         </div>
-                        {{-- <div class="professional-bio">
-                            <div class="mb-4">
-                                <p class="fs-15 mb-3 fw-medium">Información personal :</p>
-                                <p class="fs-12 text-muted op-7 mb-0">
-                                    I am <b class="text-default">Toni Stark,</b> here by conclude that,i am the founder and
-                                    managing director of the prestigeous company name laugh at all and acts as the cheif
-                                    executieve officer of the company.
-                                </p>
-                            </div>
-                            <div class="mb-0">
-                                <p class="fs-15 mb-2 fw-medium">Links :</p>
-                                <div class="mb-0">
-                                    <p class="mb-0">
-                                        <a href="https://themeforest.net/user/spruko/portfolio" target="_blank"
-                                            class="text-primary"><u>https://themeforest.net/user/spruko/portfolio</u></a>
-                                    </p>
-                                </div>
-                            </div>
-                        </div> --}}
                         {{-- Contacto --}}
                         <div>
-                            <p class="fs-15 mb-3 me-4 fw-medium">Información de contacto :</p>
+                            <p class="fs-15 mb-2 me-4 fw-medium">Información de contacto :</p>
                             <div class="text-muted">
-                                <p class="mb-4">
+                                
+                                <p class="mb-1 mb-md-3 mb-lg-4">
                                     <span class="avatar avatar-sm avatar-rounded me-2 bg-light border text-muted">
                                         <i class="ri-mail-line align-middle fs-14"></i>
                                     </span>
                                     {{ $empleado->correo->correo }}
                                 </p>
-                                <p class="mb-4">
+                                <p class="mb-1 mb-md-3 mb-lg-4">
                                     <span class="avatar avatar-sm avatar-rounded me-2 bg-light border text-muted">
                                         <i class="ri-phone-line align-middle fs-14"></i>
                                     </span>
                                     {{ $empleado->telefonoCorporativo->telefono ?? $empleado->telefono->telefono }}
                                 </p>
-                                <p class="mb-0">
+                                <p class="mb-1 mb-md-3 mb-lg-4">
                                     <span class="avatar avatar-sm avatar-rounded me-2 bg-light border text-muted">
                                         <i class="ri-map-pin-line align-middle fs-14"></i>
                                     </span>
+                                    
                                     {{ $empleado->direccion->calle }} {{ $empleado->direccion->numero_exterior }}
                                     {{ $empleado->direccion->numero_interior }}
                                 </p>
@@ -103,7 +85,7 @@
                         </div>
                         <div class="skills-section">
                             <p class="fs-15 mb-2 me-4 fw-medium">Accesos :</p>
-                            <div class="d-flex align-items-center gap-1 flex-wrap mb-3">
+                            <div class="d-flex align-items-center gap-1 flex-wrap flex-md-nowrap mb-3">
                                 <a href="javascript:void(0);">
                                     <span class="badge bg-light border text-muted fw-medium">Empleado General</span>
                                 </a>
@@ -129,45 +111,25 @@
                                     <span class="badge bg-light border text-muted fw-medium">JavaScript</span>
                                 </a> --}}
                             </div>
-                            <div class="d-flex align-items-center gap-1 flex-wrap">
+                            <div class="d-flex align-items-center gap-1">
                                 <span class="avatar avatar-sm avatar-rounded me-1 bg-light border text-muted">
                                     <i class="ri-shield-user-line align-middle fs-14 text-success" title="Jefe inmediato"></i>
                                 </span>                                
-                                <span class="flex-wrap">
-                                    Jorge Sánchez<br>
-                                    <span class="text-muted fs-12">
+                                <span class="d-flex flex-column">
+                                    <span>
+                                        Jorge Sánchez
+                                    </span>
+                                    <span class="text-muted fs-12 ">
                                         jasanchez@sadeco.mx    </span>
                                 </span>
-                                {{-- <h6 class="fw-medium fs-13 mb-0">Jefe directo :</h6>
-                                <span class="fw-medium text-black">
-                                    <i class="ri-shield-user-line"></i>
-                                    
-                                </span> --}}
-                                {{-- <div class="btn-list mb-0">
-                                    <button class="btn btn-sm btn-icon btn-primary-light btn-wave waves-effect waves-light">
-                                        <i class="ri-facebook-line fw-medium"></i>
-                                    </button>
-                                    <button
-                                        class="btn btn-sm btn-icon btn-secondary-light btn-wave waves-effect waves-light">
-                                        <i class="ri-twitter-line fw-medium"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-icon btn-warning-light btn-wave waves-effect waves-light">
-                                        <i class="ri-instagram-line fw-medium"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-icon btn-success-light btn-wave waves-effect waves-light">
-                                        <i class="ri-github-line fw-medium"></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-icon btn-danger-light btn-wave waves-effect waves-light">
-                                        <i class="ri-youtube-line fw-medium"></i>
-                                    </button>
-                                </div> --}}
+          
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-xxl-4">
+        <div class="col-xl-4 col-md-6  order-3">
             {{-- Información de la sucursal --}}
             <div class="card custom-card">
                 <div class="card-header">
@@ -291,7 +253,7 @@
             </div>  --}}
         </div>
 
-        <div class="col-xxl-3">
+        <div class="col-xl-4 col-md-6 order-2">
             <div class="card custom-card">
                 <div class="card-header">
                     <div class="card-title">
@@ -354,7 +316,7 @@
             </div>
         </div>
         {{-- tabs --}}
-        <div class="col-xxl-9 col-xl-12">
+        <div class="col-xl-8 col-md-12 order-4">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="card custom-card">
@@ -424,7 +386,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
 
 
 @endsection
