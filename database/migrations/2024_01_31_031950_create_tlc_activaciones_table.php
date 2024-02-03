@@ -26,8 +26,8 @@ return new class extends Migration
             $table->index(['preactivacion', 'telefono_id'])->unique();
 
             $table->foreignId('telefono_id')->constrained('telefonos');
-            $table->foreignId('imei_discreto_id')->constrained('articulos_discretos');
-            $table->foreignId('iccid_discreto_id')->constrained('articulos_discretos');
+            $table->foreignId('imei_discreto_id')->nullable()->constrained('articulos_discretos');
+            $table->foreignId('iccid_discreto_id')->nullable()->constrained('articulos_discretos');
             $table->foreignId('tipo_concepto_id')->constrained('conceptos');
             $table->foreignId('tlc_canal_id')->constrained('tlc_canales');
             $table->foreignId('tlc_canal_vendedor_id')->constrained('tlc_canales_vendedores');

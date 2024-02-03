@@ -26,7 +26,6 @@
 
     <div class="row">
         @foreach ($roles as $role)
-            @if ($role->id > 1)
                 <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6">
                     <div class="card custom-card">
 
@@ -56,7 +55,6 @@
                         </div>
                     </div>
                 </div>
-            @endif
         @endforeach
 
     </div>

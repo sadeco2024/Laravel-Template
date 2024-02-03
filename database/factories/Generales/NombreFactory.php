@@ -20,36 +20,48 @@ class NombreFactory extends Factory
 
 
         // Crear array de 20 nombres latinos
-        
         $nombres = [
             "Juan", "María", "Pedro", "Ana", "Luis", "Laura", "Carlos", "Sofía", "Miguel", "Isabella",
-            "José", "Valentina", "Antonio", "Camila", "Francisco", "Lucía", "Javier", "Valeria", "Diego", "Emma"
+            "José", "Valentina", "Antonio", "Camila", "Francisco", "Lucía", "Javier", "Valeria", "Diego", "Emma",
+            "Andrés", "Renata", "Ricardo", "Daniela", "Hugo", "Mariana", "Jorge", "Isabel", "Roberto", "Carolina"
         ];
+
         // Crear array de segundos nombres
         $segundos = [
-            "Alejandro", "Gabriela", "Daniel","", "Fernanda", "Andrés", "Valentina", "Sebastián", "Paula", "Emilio", "Renata",
-            "Ricardo", "Daniela", "Hugo","", "Mariana", "Jorge", "Isabel", "Roberto", "Carolina", "Eduardo", "Natalia"
-        ];        
+            "Alejandro", "Gabriela","", "Daniel", "", "Fernanda", "Valentina", "Sebastián", "Paula", "Emilio", "Natalia",
+            "Hugo", "Mariana", "Jorge", "Isabel", "Roberto", "Carolina", "Eduardo", "Renata", "Ricardo", "Daniela","",
+            "Gustavo", "Adriana", "Arturo", "Catalina", "Federico", "Beatriz", "Guillermo", "Patricia", "Ignacio", "Olivia", "Vladimir", ""
+        ];
 
         // Crear array de apellido paterno
         $paterno = [
             "González", "Rodríguez", "López", "Martínez", "Pérez", "Gómez", "Hernández", "Sánchez", "Fernández", "Torres",
-            "Ramírez", "Flores", "Rivera", "Vargas", "Cruz", "Reyes", "Morales", "Ortega", "Castillo", "Romero"
+            "Ramírez", "Flores", "Rivera", "Vargas", "Cruz", "Reyes", "Morales", "Ortega", "Castillo", "Romero",
+            "Álvarez", "Mendoza", "Chávez", "Rojas", "Medina", "Silva", "Ríos", "Navarro", "Cortés", "Acosta"
         ];
+
         // Crear array de apellido materno
         $materno = [
             "García", "Hernández", "González", "López", "Martínez", "Pérez", "Rodríguez", "Sánchez", "Torres", "Vargas",
-            "Flores", "Cruz", "Reyes", "Morales", "Ortega", "Castillo", "Romero", "Fernández", "Ramírez", "Rivera"
+            "Flores", "Cruz", "Reyes", "Morales", "Ortega", "Castillo", "Romero", "Fernández", "Ramírez", "Rivera",
+            "Álvarez", "Mendoza", "Chávez", "Rojas", "Medina", "Silva", "Ríos", "Navarro", "Cortés", "Acosta","","Sánchez"
         ];
 
-        // $curps = Curp::all()->pluck('id')->toArray();
+
+        $idxNombre = rand(0, count($nombres) - 1); 
+        $idxSegundo = rand(0, count($segundos) - 1); 
+        $idxPaterno = rand(0, count($paterno) - 1); 
+        $idxMaterno = rand(0, count($materno) - 1); 
+
+        
 
         return [
-            'nombre' => $nombres[array_rand($nombres)] . ' '. $paterno[array_rand($paterno)] . ' ' . $materno[array_rand($materno)],
-            'primer_nombre' => $nombres[array_rand($nombres)],
-            'segundo_nombre' =>  $segundos[array_rand($segundos)],
-            'paterno' => $paterno[array_rand($paterno)],
-            'materno' => $materno[array_rand($materno)],
+            // 'nombre' => $nombres[array_rand($nombres)] . ' '. $paterno[array_rand($paterno)] . ' ' . $materno[array_rand($materno)],
+            'nombre' => $nombres[$idxNombre] . ' '. $paterno[$idxPaterno] . ' ' . $materno[$idxMaterno],
+            'primer_nombre' => $nombres[$idxNombre],
+            'segundo_nombre' =>  $segundos[$idxSegundo],
+            'paterno' => $paterno[$idxPaterno],
+            'materno' => $materno[$idxMaterno],
             'curp_id' => Curp::factory()->create()->id,
             
         ];

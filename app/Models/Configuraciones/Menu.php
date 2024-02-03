@@ -49,6 +49,7 @@ class Menu extends Model
     {
         return $this->belongsTo('App\Models\Generales\Concepto', 'tipo_concepto_id');
     }
+
     
     public function modulo()
     {
@@ -60,19 +61,25 @@ class Menu extends Model
         return $this->belongsTo('App\Models\Generales\Comentario', 'comentario_id');
     }
 
-    public static function menus()
+    public function submenus()
     {
-        $menus = new Menu();
-        $data = $menus->optionsMenu();
-        $menuAll = [];
-        foreach ($data as $line) {
-            $item = [array_merge($line, ['submenu' => $menus->getChildren($data, $line)])];
-            $menuAll = array_merge($menuAll, $item);
-        }
-        return $menus->menuAll = $menuAll;
+        return $this->hasMany('App\Models\Configuraciones\Menu', 'padre_cg_menu_id');
+                        // ->join('conceptos', 'cg_menus.tipo_concepto_id', '=', 'conceptos.id');
     }
 
+    public static function menus()
+    {
 
+        $menus = Menu::where('padre_cg_menu_id', 0)
+            ->with(['submenus','concepto','modulo'])
+            ->orderby('orden')
+            ->get();
+        return $menus;
+
+
+    }
+
+    // protected $with = ['concepto'];
 
     protected $hidden = [
         'created_at',

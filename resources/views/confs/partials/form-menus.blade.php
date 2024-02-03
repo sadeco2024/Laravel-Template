@@ -1,5 +1,5 @@
 <div class="form-row">
-    {{-- @dump($menu) --}}
+    
     <div class="col-12">
         <x-inputs.name :name="'nombre'" value="{{ old('nombre', $menu->nombre ?? '') }}" />
         <x-inputs.slug :name="'slug'" value="{{ old('slug', $menu->slug ?? '') }}" />

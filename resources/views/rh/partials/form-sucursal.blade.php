@@ -71,7 +71,7 @@
     <hr class="col-xxl-12 mt-0" />
 
     <div class="col-md-12 d-flex justify-content-end justify-content-xl-start">
-        <button class="btn btn-primary me-2" type="submit">
+        <button class="btn btn-primary btn-submit me-2" type="submit">
             {{ $btnText }}
         </button>
         <a href="{{ route('rh.sucursales.index') }}" class="btn btn-light">Cancelar</a>

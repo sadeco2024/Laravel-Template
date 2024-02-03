@@ -37,7 +37,8 @@ trait SendBrowser
                 if (isset($methodoption)) {
                     // Se busca de algún modo el form.
                     if (strstr($methodoption, "=")) {
-                        $opt = explode("=", $methodoption);
+                        // $opt = explode("=", $methodoption);
+                        $opt = preg_split("/=/", $methodoption);
                         $form = $documento->filterXpath('//form[contains(@' . $opt[0] . ',"' . $opt[1] . '")]')->form(); #cambio
                         $url = $form->getUri(); #cambio - Se obtiene la url para hacerlo correcto.
                         $form = $form->getvalues(); #cambio
@@ -289,6 +290,10 @@ trait SendBrowser
     private function handleErrors($doc)
     {
         $this->resp["code"] = $this->browser->getResponse()->getStatusCode();
+
+        if (strpos($doc->html(), 'FUERA DE SERVICIO') !== false) {
+            $this->setError(1, 'La página está fuera de servicio.');
+        }
 
 
         //** REDIRECTS */

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Configuraciones;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\MenuRequest;
 use App\Models\Configuraciones\Menu;
 use App\Models\Configuraciones\Modulo;
 use App\Models\Generales\Comentario;
@@ -20,9 +21,10 @@ class MenuController extends Controller
     public function index()
     {
         $modulos = Modulo::all();
-        $menus = Menu::with(['concepto', 'modulo'])->get();
+        $menus = Menu::with(['submenus','concepto','modulo'])
+        ->orderby('orden')
+        ->get();                    
         $conceptos = Menu::get()->unique('concepto')->values()->pluck('concepto');
-        //  return $menus;
 
         return view('confs.menus.index', compact('modulos', 'menus', 'conceptos'));
     }
@@ -31,8 +33,9 @@ class MenuController extends Controller
     {
         $modulos = Modulo::all();
         $conceptos = Menu::get()->unique('concepto')->values()->pluck('concepto');
+        $menus = Menu::where('padre_cg_menu_id', 0)->get();
 
-        return view('confs.menus.create', compact('modulos', 'conceptos'))->render();
+        return view('confs.menus.create', compact('modulos', 'conceptos','menus'))->render();
     }
 
     // TODO: Cambiar las reglas a un Request.
@@ -89,13 +92,12 @@ class MenuController extends Controller
 
     public function edit(string $id) {
 
-        // $menu = Menu::find($id);
         $modulos = Modulo::all();
+        $menus = Menu::where('padre_cg_menu_id', 0)->get();        
         $menu = Menu::with(['concepto', 'modulo','comentario'])->find($id);
-        // return $menu;
         $conceptos = Menu::get()->unique('concepto')->values()->pluck('concepto');        
 
-        return view('confs.menus.edit',["menu"=>$menu, "modulos"=>$modulos, "conceptos"=>$conceptos]);
+        return view('confs.menus.edit',["menu"=>$menu,"menus"=>$menus, "modulos"=>$modulos, "conceptos"=>$conceptos]);
     }
 
     public function roles()
@@ -124,7 +126,7 @@ class MenuController extends Controller
                 },
             ]
         ]);
-    
+ 
         if ($validator->fails()) {
             $errors = new \Illuminate\Support\MessageBag($validator->errors()->getMessages()); // Convierte los errores a MessageBag
             return response()->json([
@@ -156,19 +158,17 @@ class MenuController extends Controller
         return response()->json([
             'redirect' => route('confs.menus.index')
         ]);
-
-        // return redirect()->route('confs.menus.index')->with('success', 'Menú actualizado correctamente');
     }
 
-    public function rolesPermisos($id)
-    {
-        // return $id;
-        // dd($id);
-        $modulos = Modulo::all();
-        $role = ModelsRole::findById($id);
-        $permisos = $role->permissions;
-        return view('confs.rolespermisos', compact('role', 'permisos', 'modulos'));
-    }
+    // public function rolesPermisos($id)
+    // {
+    //     // return $id;
+    //     // dd($id);
+    //     $modulos = Modulo::all();
+    //     $role = ModelsRole::findById($id);
+    //     $permisos = $role->permissions;
+    //     return view('confs.rolespermisos', compact('role', 'permisos', 'modulos'));
+    // }
 
     public function destroy($id) {
         // $menu = Menu::find($id);

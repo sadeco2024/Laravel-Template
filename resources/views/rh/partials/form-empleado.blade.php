@@ -1,8 +1,6 @@
-
-
 @php
     $formGet = $empleado ?? (old() ?? null);
-    
+
 @endphp
 <div class="row">
     {{-- Información personal --}}
@@ -59,9 +57,9 @@
                     value="{{ old('telefono_corporativo', $formGet->telefonoCorporativo->telefono ?? '') }}" />
             </div>
             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 mb-2">
-                <x-inputs.correo :text="'Correo corporativo'"  :name="'correo_corporativo'"
-                value="{{ old('correo_corporativo', $formGet->correoCorporativo->correo ?? '') }}" />
-                
+                <x-inputs.correo :text="'Correo corporativo'" :name="'correo_corporativo'"
+                    value="{{ old('correo_corporativo', $formGet->correoCorporativo->correo ?? '') }}" />
+
             </div>
             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 mb-2">
                 <x-inputs.name :text="'CURP'" :name="'curp'" :icon="'ri-file-paper-line'" class="upper"
@@ -70,7 +68,7 @@
             <div class="col-xxl-6 col-xl-6 col-lg-6 col-md-6 mb-2">
                 <x-inputs.name :text="'RFC'" :name="'rfc'" :icon="'bi bi-card-checklist'" class="upper"
                     value="{{ old('rfc', $formGet->rfc->rfc ?? '') }}" />
-            </div>            
+            </div>
         </div>
     </div>
     {{-- Recursos Humanos --}}
@@ -115,10 +113,22 @@
                 <x-inputs.importe :text="'Cuenta bancaria'" :name="'cuenta_banco'" :icon="'bi bi-cash-stack'"
                     value="{{ old('cuenta_banco', $formGet->cuenta_banco ?? '') }}" />
             </div>
+
+            @if (Str::contains(url()->current(), 'edit'))
+                <div class="col-xxl-6 col-md-6">
+                    <x-inputs.tipo-radio :text="'Estatus'" :tipos="['Activo', 'Suspendido', 'Baja']" :color="['success', 'warning', 'danger']" :name="'estatus'"
+                        checked="{{ old('estatus', $formGet->estatus->estatus ?? 'Activo') }}" />
+                </div>
+            @endif
+
+
             <div class="col-xxl-12 col-xl-12 col-lg-12 col-md-12 mb-2">
                 <x-inputs.descripcion-textarea :name="'observaciones'" :text="'Observaciones'" class="noenter"
                     value="{{ old('observaciones', $formGet->observaciones ?? '') }}" />
             </div>
+
+
+
         </div>
     </div>
 </div>

@@ -75,10 +75,11 @@ var options = {
 //   colors:['#041e85', '#d1be0f', '#f5b14c','#f08bdf'],
   labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
 };
-if (document.querySelector("#grafica-activaciones-mensuales")) {
-   var chart = new ApexCharts(document.querySelector("#grafica-activaciones-mensuales"), options);
-  chart.render();
-}
+// if (document.querySelector("#grafica-activaciones-mensuales")) {
+//   console.log(document.querySelector("#grafica-activaciones-mensuales").dataset.data)
+//    var chart = new ApexCharts(document.querySelector("#grafica-activaciones-mensuales"), options);
+//   chart.render();
+// }
 
 
 /* Leads By Source Chart */

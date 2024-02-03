@@ -1,6 +1,6 @@
 {
   "resources/css/auth.css": {
-    "file": "assets/auth-eHXbn3Kk.css",
+    "file": "assets/auth-QQC6E47k.css",
     "isEntry": true,
     "src": "resources/css/auth.css"
   },
@@ -10,12 +10,12 @@
     "src": "resources/css/guest.css"
   },
   "resources/js/alerts.js": {
-    "file": "assets/alerts-pWx_jgCf.js",
+    "file": "assets/alerts-CH8n13sw.js",
     "isEntry": true,
     "src": "resources/js/alerts.js"
   },
   "resources/js/auth.js": {
-    "file": "assets/auth-1IjpewHT.js",
+    "file": "assets/auth-YjZgozKb.js",
     "isEntry": true,
     "src": "resources/js/auth.js"
   },
@@ -25,7 +25,7 @@
     "src": "resources/js/coming-soon.js"
   },
   "resources/js/datatables.js": {
-    "file": "assets/datatables-rW3G044K.js",
+    "file": "assets/datatables-LMxEjRHl.js",
     "isEntry": true,
     "src": "resources/js/datatables.js"
   },
@@ -34,18 +34,23 @@
     "isEntry": true,
     "src": "resources/js/funciones.js"
   },
+  "resources/js/graficas.js": {
+    "file": "assets/graficas-McyGSyC9.js",
+    "isEntry": true,
+    "src": "resources/js/graficas.js"
+  },
   "resources/js/guest.js": {
     "file": "assets/guest-Ux9Gah67.js",
     "isEntry": true,
     "src": "resources/js/guest.js"
   },
   "resources/js/modales.js": {
-    "file": "assets/modales-79gEz16f.js",
+    "file": "assets/modales-z0DW1wKq.js",
     "isEntry": true,
     "src": "resources/js/modales.js"
   },
   "resources/js/sucursales.js": {
-    "file": "assets/sucursales-_4D0PBG3.js",
+    "file": "assets/sucursales-Ae3UWYt-.js",
     "isEntry": true,
     "src": "resources/js/sucursales.js"
   },

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Rh;
 
 use App\Http\Controllers\Controller;
+use App\Models\Configuraciones\Menu;
 use App\Models\Generales\Ciudad;
 use App\Models\Generales\Correo;
 use App\Models\Generales\Curp;
@@ -29,86 +30,50 @@ class EmpleadoController extends Controller
     public function index()
     {
         $puestos = Rhextra::where('concepto', 'puesto')->withCount('empleadosPorPuesto')->get();
-        $empleados = Empleado::with(['user', 'nombre', 'telefono', 'telefonoCorporativo', 'sucursal.estatus', 'estatus', 'rfc']);
-        $sucursales = Sucursal::all();
-        
-        //  return json_encode($empleados->get());
+        $empleados = Empleado::empleados()->get();
+        $sucursales = Sucursal::sucursales()->withCount('empleados')->get();
 
         return view('rh.empleados.index', compact('empleados', 'sucursales', 'puestos'));
     }
 
-    public function tablaEmpleados(Request $request)
-    {
-
-        $draw = $request->input('draw');
-        $start = $request->input('start');
-        $length = $request->input('length');
-        $search = $request->input('search.value');
-
-        $query = Empleado::with(['user', 'nombre', 'telefono', 'telefonoCorporativo', 'sucursal.estatus', 'estatus', 'rfc']);
-
-        if ($search) {
-            $query = $query->where('nombre', 'like', '%' . $search . '%')
-                ->orWhere('apellido', 'like', '%' . $search . '%');
-        }
-
-        $filtered_rows = $query->count();
-        $empleados = $query->offset($start)
-            ->limit($length)
-            ->get();
-
-        $total = Empleado::count();
-
-
-        $data = array(
-            'draw' => intval($draw),
-            'recordsTotal' => $total,
-            'recordsFiltered' => $filtered_rows,
-            'data' => $empleados,
-        );
-
-        return response()->json($data);
-    }
-
-
-    // public function tableEmpleados(Request $request)
+    // public function tablaEmpleados(Request $request)
     // {
 
+    //     return  Empleado::with(['user', 'nombre', 'telefono', 'telefonoCorporativo', 'sucursal.estatus', 'estatus', 'rfc'])->get();
 
-    //     // return Empleado::with(['user','nombre','telefono','telefonoCorporativo','sucursal.estatus','estatus','rfc']);
 
     //     $draw = $request->input('draw');
     //     $start = $request->input('start');
     //     $length = $request->input('length');
     //     $search = $request->input('search.value');
-    //     $empleados = Empleado::with(['user','nombre','telefono','telefonoCorporativo','sucursal.estatus','estatus','rfc']); 
+
+    //     $query = Empleado::with(['user', 'nombre', 'telefono', 'telefonoCorporativo', 'sucursal.estatus', 'estatus', 'rfc']);
+
+    //     if ($search) {
+    //         $query = $query->where('nombre', 'like', '%' . $search . '%')
+    //             ->orWhere('apellido', 'like', '%' . $search . '%');
+    //     }
+
+    //     $filtered_rows = $query->count();
+    //     $empleados = $query->offset($start)
+    //         ->limit($length)
+    //         ->get();
 
     //     $total = Empleado::count();
 
-    //     if($search){
-    //         $empleados = Empleado::with(['user','nombre','telefono','telefonoCorporativo','sucursal.estatus','estatus','rfc'])->where('nombre', 'like', '%'.$search.'%')
-    //                         ->orWhere('apellido', 'like', '%'.$search.'%')
-    //                         ->paginate($length);
-    //     } else {
-    //         $empleados = Empleado::with(['user','nombre','telefono','telefonoCorporativo','sucursal.estatus','estatus','rfc'])
-    //                         // ->get();
-    //                         // ->orderBy('nombre')
-    //                         ->paginate($length);
-    //     }
-    //     // dd($empleados->items());
-    //     $filtered_rows = $empleados->total();
 
     //     $data = array(
     //         'draw' => intval($draw),
     //         'recordsTotal' => $total,
     //         'recordsFiltered' => $filtered_rows,
-    //         'data' => $empleados->items(),
+    //         'data' => $empleados,
     //     );
 
-    //     return $data;
+    //     return response()->json($data);
     // }
 
-    /**
+
+        /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -131,7 +96,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-
+        
         $messages = [
             'primer_nombre.required' => 'El campo nombre es obligatorio.',
             'paterno.required' => 'El campo apellido paterno es obligatorio.',
@@ -167,6 +132,9 @@ class EmpleadoController extends Controller
             'sucursal_id' => 'required|exists:sucursales,id',
         ], $messages);
 
+
+        
+
         // Se valida que no exista el curp en la tabla de empleados.
         $curp = Curp::firstOrCreate(['curp' => $request->curp]);
 
@@ -197,6 +165,9 @@ class EmpleadoController extends Controller
             'curp_id' => $curp->id,
         ]);
 
+        $ciudad = Ciudad::firstOrCreate($request->only(['municipio_id','estado_id','ciudad']));
+        $referencia = $request->referencia ? Referencia::create(['referencia' => $request->referencia])->id : null;
+
         $direccion = Direccion::firstOrCreate([
             'calle' => $request->calle,
             'numero_exterior' => $request->numero_exterior,
@@ -204,22 +175,15 @@ class EmpleadoController extends Controller
             'colonia' => $request->colonia,
             'codigo_postal' => $request->codigo_postal,
             'ubicacion' => $request->ubicacion,
-            'ciudad_id' => Ciudad::firstOrCreate(
-                [
-                    'ciudad' => $request->ciudad,
-                    'municipio_id' => $request->municipio_id,
-                    'estado_id' => $request->estado_id
-                ]
-            )->id,
+            'ciudad_id' => $ciudad->id,
             'municipio_id' => $request->municipio_id,
             'estado_id' => $request->estado_id,
-            'referencia_id' => ($request->referencia ? Referencia::create(['referencia' => $request->referencia])->id : null),
+            'referencia_id' => $referencia, //Obtenida
         ]);
+
         $telefono = Telefono::firstOrCreate(['telefono' => $request->telefono]);
         $correo = Correo::firstOrCreate(['correo' => $request->correo]);
-        // $corpoTelefono = ($request->telefono_corporativo ? Telefono::firstOrCreate(['telefono' => $request->telefono_corporativo]) : null);
-        // $corpoCorreo = ($request->correo_corporativo ? Correo::firstOrCreate(['correo' => $request->correo_corporativo]) : null);
-
+        
         $empleadoData = $request->all();
         $empleadoData['user_id'] = $user->id;
         $empleadoData['nombre_id'] = $nombre->id;
@@ -231,9 +195,9 @@ class EmpleadoController extends Controller
 
         $empleadoData['rfc_id'] = $request->rfc ? Rfc::firstOrCreate(['rfc' => $request->rfc])->id : null;
         $empleadoData['estatus_id'] = Estatus::firstOrCreate(['estatus' => 'nuevo'])->id;
-
+        
         $empleado = Empleado::create($empleadoData);
-
+        
         return redirect()->route('rh.empleados.show',$empleado)->with('success', 'Empleado creado exitosamente.');
         
         
@@ -245,8 +209,8 @@ class EmpleadoController extends Controller
     public function show(Empleado $empleado)
     {
 
-        $empleado = Empleado::with(['sucursal', 'direccion', 'estatus', 'rfc'])->findOrFail($empleado->id);
-        // return $empleado;
+        $empleados = Empleado::find($empleado->id)->with(['sucursal', 'direccion', 'estatus', 'rfc']);
+
         return view('rh.empleados.show',compact('empleado'));
     }
 
@@ -255,12 +219,12 @@ class EmpleadoController extends Controller
      */
     public function edit(string $id)
     {
-        $empleado = Empleado::with(['sucursal.estatus', 'direccion', 'estatus', 'rfc'])->findOrFail($id);
-        // return $empleado;
+        $empleado = Empleado::with(['rfc','sucursal','nombre','estatus','direccion'])->find($id);
         $estados = Estado::noRandom()->get();
         $sucursales = Sucursal::orderBy('nombre')->get();
         $extras = Rhextra::orderBy('concepto')->orderBy('descripcion')->get();
 
+        // Se crea el array de extras.
         foreach ($extras as $rhextra) {
             $rhextras[$rhextra->concepto][] = [
                 'id' => $rhextra->id,
@@ -277,6 +241,7 @@ class EmpleadoController extends Controller
     public function update(Request $request, string $id)
     {
         $empleado = Empleado::findOrFail($id);
+        
         $messages = [
             'primer_nombre.required' => 'El campo nombre es obligatorio.',
             'paterno.required' => 'El campo apellido paterno es obligatorio.',
@@ -288,6 +253,7 @@ class EmpleadoController extends Controller
             'curp.regex' => 'El campo CURP debe ser una CURP válida.',
             'rfc.regex' => 'El campo RFC debe ser un RFC válido.',
             'correo.unique' => 'El correo para generar el usuario, ya existe.',
+            'estatus.required' => 'El campo estatus es obligatorio.',
         ];
 
         $request->validate([
@@ -296,12 +262,7 @@ class EmpleadoController extends Controller
             'fecha_nacimiento' => 'date',
             'genero' => 'required',
             'telefono' => 'required|max:10|min:10',
-            'correo'=> 'required|unique:users,email,'.$empleado->user_id.',id',
-            // 'correo' => [
-            //     'required',
-            //     Rule::unique('users', 'email')->ignore($empleado->user_id),
-            //     Rule::unique('users', 'email')->ignore($empleado->correo_id),
-            // ],
+            'correo'=> 'required|unique:users,id,'.$empleado->user_id,
             'telefono_corporativo' => 'nullable:max:10|min:10',
             'correo_corporativo' => 'nullable|email',
             'curp' => 'required|regex:/^[A-Z]{4}\d{6}[HM][A-Z]{5}\d{2}$/',
@@ -315,6 +276,7 @@ class EmpleadoController extends Controller
             'estado_id' => 'required|exists:estados,id',
             'fecha_ingreso' => 'date',
             'sucursal_id' => 'required|exists:sucursales,id',
+            'estatus'=> 'required',
         ], $messages);
 
 
@@ -373,6 +335,7 @@ class EmpleadoController extends Controller
 
         $telefono = Telefono::firstOrCreate(['telefono' => $request->telefono]);
         $correo = Correo::firstOrCreate(['correo' => $request->correo]);
+        $estatus = Estatus::firstOrCreate(['estatus' => $request->estatus]);
 
         $empleadoData = $request->all();
         $empleadoData['nombre_id'] = $nombre->id;
@@ -381,15 +344,14 @@ class EmpleadoController extends Controller
         $empleadoData['correo_id'] = $correo->id;
         $empleadoData['corpo_telefono_id'] = ($request->telefono_corporativo ? Telefono::firstOrCreate(['telefono' => $request->telefono_corporativo])->id : null);
         $empleadoData['corpo_correo_id'] = $request->correo_corporativo ? Correo::firstOrCreate(['correo' => $request->correo_corporativo])->id : null;
+        $empleadoData['estatus_id'] = $estatus->id;
 
         $empleadoData['rfc_id'] = $request->rfc ? Rfc::firstOrCreate(['rfc' => $request->rfc])->id : null;
 
-        // TODO: El estatus debe poder cambiar.
-        $empleadoData['estatus_id'] = Estatus::firstOrCreate(['estatus' => 'nuevo'])->id;
-
+        
         $empleado->update($empleadoData);
 
-        //, $empleado->id
+        
         return redirect()->route('rh.empleados.index')->with('success', 'Empleado actualizado exitosamente.');
     }
 

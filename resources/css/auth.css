@@ -13,6 +13,18 @@
 @import url("../theme/libs/prismjs/themes/prism-coy.min.css");
 
 
-.popover {
-    z-index: 1060;
+.cursor-helper {
+    cursor: help;
 }
+.cursor-pointer {
+    cursor: pointer;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
+

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Generales\Nombre;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -23,8 +24,11 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+
+        // ** Creamos el nombre, para guardar la relación con empleados en el factory de empleados. */
+        $nombre = Nombre::factory()->create();
         return [
-            'name' => fake()->name(),
+            'name' => $nombre->nombre,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),

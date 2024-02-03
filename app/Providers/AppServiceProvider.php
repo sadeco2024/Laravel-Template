@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
          */
         Paginator::useBootstrap();
 
-        view()->composer('*', function ($view) {
+        view()->composer(["layouts.partials.dash-menus"], function ($view) {
             $view->with('menus', \App\Models\Configuraciones\Menu::menus());
         });
     }

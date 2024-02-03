@@ -10,7 +10,7 @@ document.querySelectorAll(".sd-modalForm").forEach((element) => {
         const url = button.getAttribute("data-url");
         const title = button.getAttribute("data-title");
         const hidden = button.getAttribute("data-param");
-
+        // console.log(url,title,hidden)
         const modal = this;
         mtitle.textContent = title;
         mbody.innerHTML = "";
@@ -19,12 +19,14 @@ document.querySelectorAll(".sd-modalForm").forEach((element) => {
             .then((html) => {
                 mbody.innerHTML = html;
                 const form = mbody.querySelector("form");
+                // console.log(html,form);
                 // Se agrega el campo oculto si lo tuviera
                 const hiddenField = document.createElement("input");
                 // Se le puede agregar un parámetro para la ruta
                 hiddenField.type = "hidden";
                 hiddenField.name = "param";
                 hiddenField.value = hidden;
+                if (!form)  throw new Error("Error: Falta el <form> en la vista");
                 form.appendChild(hiddenField);
 
                 form.addEventListener("submit", function (event) {
@@ -43,25 +45,106 @@ document.querySelectorAll(".sd-modalForm").forEach((element) => {
                     })
                         .then((response) => response.json())
                         .then((data) => {
+                            console.log(data)
                             limpiarErrores();
+                            if (data.table && typeof data.table === "object") {
+                                console.log(data.table,typeof data.table);
+                                for (let key in data.table) {
+
+                                    // let value = data.table[key];
+                                    let tablaRender = document.getElementById(key);
+                                    console.log('render',tablaRender)
+                                    // Obtén una referencia al elemento tbody dentro de la tabla
+                                    let tbody = tablaRender.getElementsByTagName('tbody')[0];
+                                    // Limpia el contenido del tbody
+                                    tbody.innerHTML = '';
+                                    // Se agregan las filas
+                                    
+                                    
+                                    if (Array.isArray(data.table[key])) {
+                                        data.table[key].forEach((element) => {
+                                            let row = tbody.insertRow();
+                                            console.log('row:',row)
+                                            for (let prop in element) {
+                                                let cell = row.insertCell();
+                                                cell.innerHTML = element[prop];
+                                            }
+                                        });
+                                    } else if (typeof data.table[key] === 'object') {
+                                        // El valor es un objeto, lo convertimos a un array
+                                        console.log(Object.values(data.table[key]))
+                                        data.table[key] = Object.values(data.table[key]);
+                                        let row = tbody.insertRow();
+                                        data.table[key].forEach((element) => {
+                                            
+                                            console.log('row:',row)
+                                            let cell = row.insertCell();
+                                            cell.innerHTML = element;
+
+                                            // for (let prop in element) {
+                                            //     console.log(prop)
+                                            //     let cell = row.insertCell();
+                                            //     cell.innerHTML = element[prop];
+                                            // }
+                                        });
+                                    }
+                                    else {
+                                       console.log('type:',typeof data.table)
+                                    }
+                
+                                }
+                            }  
+
+                            if (data.alert) {
+                                // Si se requiere un alerta nada más.
+                                
+                                try {
+                                    Swal.fire({
+                                        position: "center",
+                                        icon: (data.status>0 ? "error" : "success"),
+                                        title: data.msg ?? (data.status ? "Operación NO realizada." : "Operación realizada con éxito."),
+                                        showConfirmButton: false,
+                                        timer: 1500,
+                                    });
+
+
+                                } catch (error) {
+                                    throw new Error(
+                                        "Error: Falta librería SweetAlerts2"
+                                    );
+                                }
+                                button.innerHTML = button.data.btnhtml;
+                                button.disabled = false;
+                            }                             
+
                             if (data.redirect) {
                                 if (data.alert) {
                                     // Si se requiere un alerta nada más.
-                                    try {
-                                        Swal.fire({
-                                            position: "center",
-                                            icon: "success",
-                                            title: data.alert,
-                                            showConfirmButton: false,
-                                            timer: 1500,
-                                        });
-                                    } catch (error) {
-                                        throw new Error(
-                                            "Error: Falta librería SweetAlerts2"
-                                        );
-                                    }
-                                    button.innerHTML = button.data.btnhtml;
-                                    button.disabled = false;
+                                    
+                                    // try {
+                                        // Swal.fire({
+                                        //     position: "center",
+                                        //     icon: "success",
+                                        //     title: data.alert,
+                                        //     showConfirmButton: false,
+                                        //     timer: 1500,
+                                        // });
+                                        // Swal.fire({
+                                        //     position: "center",
+                                        //     icon: (data.status>0 ? "error" : "success"),
+                                        //     title: data.msg ?? (data.status ? "Operación NO realizada." : "Operación realizada con éxito."),
+                                        //     showConfirmButton: false,
+                                        //     timer: 1500,
+                                        // });
+
+
+                                    // } catch (error) {
+                                    //     throw new Error(
+                                    //         "Error: Falta librería SweetAlerts2"
+                                    //     );
+                                    // }
+                                    // button.innerHTML = button.data.btnhtml;
+                                    // button.disabled = false;
                                 } else window.location.href = data.redirect;
                             } else {
                                 button.innerHTML = button.data.btnhtml;
@@ -104,6 +187,7 @@ document.querySelectorAll(".sd-modalForm").forEach((element) => {
     });
 });
 
+// ?Función que limpia los errores de los modales CRUD
 function limpiarErrores() {
     document.querySelectorAll("small.invalid").forEach((element) => {
         element.remove();
@@ -132,19 +216,24 @@ document.querySelectorAll(".save").forEach((element) => {
             .then((response) => response.json())
             .then((data) => {
                 element.innerHTML = element.data.btnhtml;
-                element.disabled = false;                
+                element.disabled = false;
                 try {
-                    console.log(data.status)
+                    console.log(data.status);
                     Swal.fire({
                         position: "center",
-                        icon: (data.status>0 ? "error" : "success"),
-                        title: data.msg !== '' ? data.msg : (data.status > 0 ? "Operación NO realizada." : "Operación realizada con éxito."),
+                        icon: data.status > 0 ? "error" : "success",
+                        title:
+                            data.msg !== ""
+                                ? data.msg
+                                : data.status > 0
+                                ? "Operación NO realizada."
+                                : "Operación realizada con éxito.",
                         showConfirmButton: false,
                         timer: 1500,
                     });
                 } catch (error) {
                     // throw new Error("Error: Falta librería SweetAlerts2");
-                    throw new Error("Mensaje: "+error.message);
+                    throw new Error("Mensaje: " + error.message);
                 }
             })
             .catch((error) => {
@@ -175,7 +264,7 @@ document.querySelectorAll(".save-link").forEach((element) => {
                 try {
                     Swal.fire({
                         position: "center",
-                        icon: (data.status>0 ? "error" : "success"),
+                        icon: data.status > 0 ? "error" : "success",
                         title:
                             data.msg ??
                             (data.status

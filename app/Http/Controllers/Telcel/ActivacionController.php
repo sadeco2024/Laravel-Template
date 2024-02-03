@@ -20,21 +20,36 @@ use League\Csv\Reader;
 class ActivacionController extends Controller
 {
 
-    protected $scrap;
+    // protected $scrap;
     
 
-    public function __construct(Telcel $browser)
-    {
-        $this->scrap = $browser;
+    // public function __construct(Telcel $browser)
+    // {
+    //     $this->scrap = $browser;
         
-    }    
+    // }    
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('telcel.activaciones.index');
+
+        $activaciones = Activacion::mensual();
+        $compara = Activacion::mescompara();
+        // return ($activaciones);
+        return view('telcel.activaciones.index', compact('activaciones','compara'));
+    }
+
+    public function grafica() {
+        $activaciones = Activacion::mensual();
+        return $activaciones;
+        return view('telcel.activaciones.grafica', compact('activaciones'));
+    }
+
+    public function compara() {
+        $activaciones = Activacion::mescompara();
+        return $activaciones;        
     }
 
 
@@ -128,30 +143,7 @@ class ActivacionController extends Controller
         
     }
 
-    public function readCSV($file)
-    {
-        // $file = 'activaciones_01012024_al_10012024_acox17274.csv';
-        $path = storage_path('app/' . $file);
 
-        if (Storage::exists($file)) {
-            $csv = Reader::createFromPath($path, 'r');
-            $csv->setHeaderOffset(0); // La primera fila es el encabezado
-
-            $records = $csv->getRecords(); // Obtener todos los registros
-
-            $data = [];
-            foreach ($records as $record) {
-                $data[] = $record;
-            }
-            
-            return $data;
-        } else {
-            // El archivo no existe en el almacenamiento
-            return [];
-        }
-
-        return [];
-    }    
 
     /**
      * Show the form for creating a new resource.

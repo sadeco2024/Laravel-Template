@@ -4,6 +4,7 @@
 @section('title-view', 'Editar empleado')
 @section('content')
 
+{{-- @dd($empleado) --}}
 
 <div class="card custom-card">
     <form action="{{ route('rh.empleados.update', $empleado->id) }}" method="POST">
@@ -19,11 +20,11 @@
         
     </div>
     <div class="card-footer">
-        <button class="btn btn-primary me-2" type="submit">
+        <button class="btn btn-primary btn-submit me-2" type="submit" >
             Actualizar
         </button>
         
-        <a href="{{ route('rh.empleados.index') }}" class="btn btn-light">Regresar</a>
+        <a href="{{ route('rh.empleados.index') }}" class="btn btn-light">Cancelar</a>
     </div>
 </form>
 </div>

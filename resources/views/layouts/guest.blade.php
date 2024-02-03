@@ -22,10 +22,10 @@
 
     {{-- @Vite - Start::Css --}}
 
-    <link rel="stylesheet" href="{{ Vite::asset('resources/css/guest.css') }}">
+    {{-- <link rel="stylesheet" href="{{ Vite::asset('resources/css/guest.css') }}"> --}}
 
 
-    {{-- @vite(['resources/css/guest.css']) --}}
+    @vite(['resources/css/guest.css'])
     {{-- @Vite End::css --}}
 
     {{-- @Vite - Start::CssOtros --}}
@@ -45,8 +45,8 @@
     {{-- Footer - End --}}
 
     {{-- @Vite Start:Js --}}
-    <script src="{{ Vite::asset('resources/js/guest.js')}}"></script>
-    {{-- @vite(['resources/js/guest.js']) --}}
+    {{-- <script src="{{ Vite::asset('resources/js/guest.js')}}"></script> --}}
+    @vite(['resources/js/guest.js'])
     {{-- @Vite End:Js --}}
 
     @yield('js', '')

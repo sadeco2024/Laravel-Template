@@ -10,7 +10,8 @@
         <select class="form-select" name="{{ $name }}">
             <option value="0" @if((int)$selected ==0 ) selected @endif> - Seleccionar -</option>
             @foreach ($menus as $menu)
-                @if ($menu['concepto'] == 'menu')
+            {{-- @dump($menu) --}}
+                @if ($menu->concepto->concepto == 'menu')
                     <option @if ((int)$selected == $menu['id']) selected @endif value="{{ $menu['id'] }}">
                         {{ $menu['nombre'] }}</option>
                 @endif

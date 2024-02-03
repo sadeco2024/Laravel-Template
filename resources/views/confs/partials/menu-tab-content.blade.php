@@ -13,8 +13,9 @@
                 </tr>
             </thead>
             <tbody>
+
                 @foreach ($menus as $menu)
-                    @if ($menu['concepto'] == 'dash')
+                    @if ($menu->concepto->concepto == 'dash')
                         <tr>
                             <td width="10px">
                                 <i class=" fs-5 text-secondary {{ $menu['icono'] }}"></i>
@@ -23,7 +24,7 @@
                             <td>{{ $menu['slug'] }}</td>
                             <td>
                                 <x-badges.modulo>
-                                    {{ $menu['modulo'] }}
+                                    {{ $menu->modulo->nombre }}
                                 </x-badges.modulo>
                             </td>
                             <td>
@@ -68,11 +69,11 @@
             <tbody>
                 @foreach ($menus as $menu)
                     {{-- @dump($menu,$menu["concepto"]); --}}
-                    @if ($menu['concepto'] == 'interno')
+                    @if ($menu->concepto->concepto == 'interno')
                         <tr>
                             <td>
                                 <x-badges.modulo class="text-danger">
-                                    {{ $menu['modulo'] }}
+                                    {{ $menu->modulo->nombre }}
                                 </x-badges.modulo>
                             </td>
                             <td>{{ $menu['nombre'] }}</td>
@@ -122,7 +123,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($menu['submenu'] as $submenu)
+                    @foreach ($menu->submenus as $submenu)
+                        @if($submenu->concepto->concepto !== 'interno')
                         <tr>
                             <td width="10px">{{ $submenu['id'] }}</td>
 
@@ -140,19 +142,24 @@
                                 </span>
                             </td>
                             <td>
-                                @switch($submenu["concepto"])
+                                @switch($submenu->concepto->concepto)
                                     @case('vista')
                                         <span class="text-secondary">
-                                            {{ $submenu['concepto'] }}
+                                            {{ $submenu->concepto->concepto }}
                                         </span>
                                     @break
 
                                     @case('crud')
                                         <span class="text-warning">
-                                            {{ $submenu['concepto'] }}
+                                            {{ $submenu->concepto->concepto }}
                                         </span>
                                     @break
 
+                                    @case('interno')
+                                        <span class="text-danger">
+                                            {{ $submenu->concepto->concepto }}
+                                        </span>
+                                    @break
                                     @default
                                 @endswitch
                             </td>
@@ -172,6 +179,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>
