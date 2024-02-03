@@ -19,32 +19,7 @@ class Empleado extends Model
 {
     use HasFactory;
 
-    // protected $table = 'empleados';
-
-    // protected $fillable = [
-    //     'user_id',
-    //     'nombre_id',
-    //     'fecha_nacimiento',
-    //     'fecha_ingreso',
-    //     'genero',
-    //     'telefono_id',
-    //     'correo_id',
-    //     'corpo_telefono_id',
-    //     'corpo_correo_id',
-    //     'rfc_id',
-    //     'sucursal_id',
-    //     'no_empleado',
-    //     'direccion_id',
-    //     'estatus_id',
-    //     'enabled',
-    //     'area_rh_extra_id',
-    //     'puesto_rh_extra_id',
-    //     'departamento_rh_extra_id',
-    //     'tipo_contrato_rh_extra_id',
-    //     'sueldo',
-    //     'cuenta_banco',
-    //     'observaciones',
-    // ];
+    protected $table = 'empleados';
 
     protected $guarded = [
         'id',
@@ -72,19 +47,18 @@ class Empleado extends Model
         'direccion_id'
     ];
 
-    protected $with = [
-        'user',
-        'nombre',
-        'telefono',
-        'correo',
-        'telefonoCorporativo',
-        'correoCorporativo',
-        'puesto',
-        'departamento',
-        'area',
-        'tipoContrato',
 
-    ];
+    public function scopeEmpleados($query)
+    {
+        return $query->leftJoin('users', 'user_id', 'users.id')
+            ->leftJoin('nombres', 'empleados.nombre_id', 'nombres.id')
+            ->leftJoin('telefonos', 'empleados.telefono_id', 'telefonos.id')
+            ->leftJoin('correos', 'empleados.correo_id', 'correos.id')
+            ->leftJoin('sucursales','empleados.sucursal_id','sucursales.id')
+            ->leftJoin('rh_extras as puestos', 'empleados.puesto_rh_extra_id', 'puestos.id')
+            ->leftJoin('estatuses', 'empleados.estatus_id', 'estatuses.id')
+            ->selectRaw('empleados.id,nombres.nombre as empleado,correos.correo, puestos.descripcion as puesto,sucursales.nombre as sucursal, estatuses.estatus, telefonos.telefono');
+    }
 
 
     public function user()

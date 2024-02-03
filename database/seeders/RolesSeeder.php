@@ -31,7 +31,7 @@ class RolesSeeder extends Seeder
                 'cg_modulo_id' => $permiso['cg_modulo_id'],
                 'nombre'=> $permiso['nombre']
             ])->syncRoles(['supadmin', 'socio']);            
-        }        
+        } 
        
     }
 }

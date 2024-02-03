@@ -27,7 +27,7 @@ class RoleController extends Controller
     public function index()
     {
 
-        $roles =Role::all() ;
+        $roles =Role::where('roles.id','>',1)->get() ;
         return view('confs.roles.index', compact('roles'));
     }
 
@@ -36,8 +36,6 @@ class RoleController extends Controller
      */
     public function create()
     {
-
-
         $modulos = Modulo::all();
         $permissions = Permission::all();
         return view('confs.roles.create',compact('modulos','permissions'));
@@ -48,12 +46,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
-            'name' => 'required|unique:roles,name|max:50',
+            'nombre' => 'required|unique:roles,nombre|max:50',
             'descripcion' => 'required',
         ]);
-
-        $role = Role::create($request->only('name','descripcion'));
+        
+        $name = preg_replace('/[^a-z0-9]+/', '',strtolower(trim($request->nombre)));
+        $role = Role::create($request->only('nombre','descripcion') + ['name' => $name]);
+        // $role = Role::create($request->only('name','descripcion'));
         $role->permissions()->sync($request->permissions);
         return redirect()->route('confs.roles.edit',$role)->with('success','Rol creado correctamente');
     }
@@ -64,15 +65,7 @@ class RoleController extends Controller
     public function show(Role $role)
     {
         
-        // //Crea un array con los empleados que tienen el role 'Super Admin'
-        // $empleados = User::whereHas('roles', function ($query) {
-        //     $query->where('name','Super Admin' );
-        // })->get();
 
-        
-        // // $empleados = User::has('roles')->get();
-        
-        // return view('confs.roles.show',compact('empleados'));
     }
 
     /**
@@ -80,13 +73,16 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        if (!auth()->user()->hasAnyPermission(['confs.role.edit'])) {
-            abort(403, 'No autorizado');
+
+        if ($role->id == 1) {
+            if (!auth()->user()->hasRole('supadmin')) {
+                abort(403, 'No autorizado');
+            }
         }
-
-
+            
         $modulos = Modulo::all();
         $permissions = Permission::all();
+        // return $permissions;
         $rolPermisos = $role->permissions;        
         return view('confs.roles.edit', compact('role','permissions','modulos','rolPermisos'));
     }
@@ -97,11 +93,10 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $request->validate([
-            'name' => 'required',
             'descripcion' => 'required',
         ]);        
-
-        $role->update($request->only('name','descripcion'));
+        
+        $role->update($request->only('nombre','descripcion'));
         $role->permissions()->sync($request->permissions);
 
         return redirect()->route('confs.roles.index',$role)->with('success','Rol actualizado correctamente');

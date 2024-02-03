@@ -10,6 +10,7 @@ use DateTime;
 use DOMDocument;
 use DOMXPath;
 use Exception;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\BrowserKit\HttpBrowser;
 use Symfony\Component\HttpClient\HttpClient;
@@ -293,7 +294,7 @@ class Telcel
         return $this->resp;
     }
 
-    public function getActivaciones()
+    public function getActivaciones($tipo = 1, $fecha = "2024-01-01", $fecha2 = "2024-01-05")
     {
         /*
             $opcs =[
@@ -302,8 +303,12 @@ class Telcel
             "fecha2"=>"02052023",
             ];        
         */
-        $fecha = '01012024';
-        $fecha2 = '10012024';
+        // dd($tipo,$fecha,$fecha2);
+        $fecha = Date::createFromFormat('Y-m-d', $fecha)->format('dmY');
+        $fecha2 = Date::createFromFormat('Y-m-d', $fecha2)->format('dmY');
+        
+
+
         if (!$this->validaSesion()) return $this->resp;
 
         $opcs = [
@@ -318,7 +323,7 @@ class Telcel
             "methodoption" => "Consultar",
             "array" => [
                 "inputDist" => $this->clave,
-                "tipofecha" => "1",
+                "tipofecha" => $tipo,
                 "fecha" => $fecha,
                 "fecha2" => $fecha2
             ],

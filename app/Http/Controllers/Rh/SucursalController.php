@@ -36,10 +36,12 @@ class SucursalController extends Controller
      public function index()
     {
         
-        $sucursales = Sucursal::with(['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId'])->get();
+        // $sucursales = Sucursal::with(['telefono','direccion','estatus','empleados','tipo','gerenteEmpleadoId'])->get();
         //TODO: Mandarle toda la lista de empleados, para que por el puesto, rellene los selects
         // $empleados = Empleado::all();
         // return $empleados;
+        $sucursales = Sucursal::sucursales()->withCount('empleados')->get();
+        // return $sucursales;
 
         return view('rh.sucursales.index',['sucursales'=>$sucursales]);
     }
@@ -114,7 +116,7 @@ class SucursalController extends Controller
             'encargado_empleado_id'=>$request->encargado_empleado_id,
         ]);
 
-        return redirect()->route('rh.sucursales.edit',$sucursal->id)->with('success','Sucursal creada correctamente');
+        return redirect()->route('rh.sucursales.index')->with('success','Sucursal creada correctamente');
     }
 
     /**

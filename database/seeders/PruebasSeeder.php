@@ -33,13 +33,14 @@ class PruebasSeeder extends Seeder
 
         // Se crea el del perfil de administrador
         // ? Fijate que está dentro del array, por lo que si se quita, va a tener problemas.
-        Empleado::factory()->create(['user_id' => 1, 'puesto_rh_extra_id' => Rhextra::firstOrCreate(['concepto' => 'puesto', 'descripcion' => 'director general'])->id,'sucursal_id'=>1]);
-         Empleado::factory()->count(50)->create();
+        // Empleado::factory()->create(['user_id' => 1, 'puesto_rh_extra_id' => Rhextra::firstOrCreate(['concepto' => 'puesto', 'descripcion' => 'director general'])->id, 'sucursal_id' => 1]);
+        
+        Empleado::factory()->count(50)->create();
 
         Empleado::all()->each(function ($empleado) {
             $empleado->user->assignRole('empleado');
         });
-        
+
         //** ERP */
         $lineas = array(
             "Bebidas" => ["Refrescos", "Aguas y jugos", "Cervezas", "Vinos", "Tés"],
@@ -59,7 +60,7 @@ class PruebasSeeder extends Seeder
             "Artículos de Papel" => ["Servilletas", "Papel higiénico", "Toallas de papel", "Pañuelos", "Manteles"],
         );
 
-     
+
 
         $articulos = [
             "Galletas Integrales", "Leche Deslactosada", "Jamón Ahumado", "Refresco de Naranja", "Manzanas Frescas",
@@ -139,12 +140,12 @@ class PruebasSeeder extends Seeder
             "bx bx-restaurant-alt", "bx bx-sausage-alt", "bx bx-smile-alt", "bx bx-soda", "bx bx-watermelon-alt",
             "bx bx-wine-alt", "bx bx-bowl", "bx bx-eggplant", "bx bx-bread", "bx bx-cheese-alt",
             "bx bx-cherry-alt", "bx bx-cup", "bx bx-donut", "bx bx-food-basket", "bx bx-milkshake",
-        ];        
+        ];
 
 
         foreach ($lineas as $index => $row) {
             $linea = Linea::firstOrCreate([
-                'linea' => $index, 
+                'linea' => $index,
                 'estatus_id' => Estatus::firstOrCreate(['estatus' => 'activo'])->id,
                 'icono' => $iconos[array_rand($iconos)],
             ]);
@@ -153,11 +154,11 @@ class PruebasSeeder extends Seeder
                 $categoria = Categoria::firstOrCreate(['categoria' => $categoria, 'estatus_id' => Estatus::firstOrCreate(['estatus' => 'activo'])->id]);
                 $categoria->lineas()->attach($linea->id);
                 // Se crean los artículos con sus lineas
-                for($i=0;$i<rand(1,7);$i++) {
+                for ($i = 0; $i < rand(1, 7); $i++) {
                     $articulo = $articulos[array_rand($articulos)];
-                    $articulo = Articulo::firstOrCreate(['nombre' => $articulo, 'categoria_linea_id' => $categoria->id, 'estatus_id' => Estatus::firstOrCreate(['estatus' => 'activo'])->id]);                    
+                    $articulo = Articulo::firstOrCreate(['nombre' => $articulo, 'categoria_linea_id' => $categoria->id, 'estatus_id' => Estatus::firstOrCreate(['estatus' => 'activo'])->id]);
                 }
             }
-        }        
+        }
     }
 }

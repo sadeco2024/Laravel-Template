@@ -12,6 +12,7 @@ use App\Http\Controllers\Rh\SucursalController;
 use App\Http\Controllers\RhExtraController;
 use App\Http\Controllers\Telcel\ActivacionController;
 use App\Http\Controllers\Telcel\CanalController;
+use App\Http\Controllers\Telcel\DescargaActivacionesController;
 use App\Models\Configuraciones\Menu;
 use App\Models\Rh\Empleado;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,12 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', function () {
+
+
+
+
+
+
         return view('dashboard');
     })->name('dashboard');
 
@@ -66,8 +73,12 @@ Route::middleware('auth')->group(function () {
     Route::get('telcel/reset/canal/vendedor/{vendedor}', [CanalController::class,'resetRcox'])->name('telcel.canales.reset.rcox');
     
     //** Rutas Telcel::Prepago */
-    Route::resource('telcel/activaciones',ActivacionController::class)->names('telcel.activaciones');
-    Route::post('telcel/activaciones/download', [ActivacionController::class, 'download'])->name('telcel.activaciones.download');
+    Route::resource('telcel/activaciones',ActivacionController::class)->only(['index', 'show', 'store', 'update', 'destroy','edit'])->names('telcel.activaciones');
+    Route::post('telcel/activaciones/grafica',[ActivacionController::class,'grafica'])->name('telcel.activaciones.grafica');
+    Route::post('telcel/activaciones/compara',[ActivacionController::class,'compara'])->name('telcel.activaciones.compara');
+    
+
+    Route::resource('telcel/activaciones/download', DescargaActivacionesController::class)->names('telcel.activaciones.download');
 
     
 

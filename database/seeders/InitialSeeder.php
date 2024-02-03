@@ -86,6 +86,8 @@ class InitialSeeder extends Seeder
             'estatus_id' => Estatus::firstOrCreate(['estatus' => 'Abierta'])->id,
             'tipo_concepto_id' => Concepto::firstOrCreate(['concepto' => 'Almacén'])->id
         ]);
+
+
         // Se crea el concepto de Tienda.
         Concepto::create([
             'concepto' => 'Tienda',
@@ -102,7 +104,7 @@ class InitialSeeder extends Seeder
 
 
         //** Se debe generar el canal principal */
-        Canal::create(['nombre' => 'DISTRICEL', 'clave' => 'RPHAESC', 'acox' => 'acox17274', 'contrasena' => 'acox99170', 'activa' => true, 'sucursal_id' => 1, 'estatus_id' => 1]);
+        Canal::create(['nombre' => 'DISTRICEL', 'clave' => 'RPHAESC', 'acox' => 'acox17274', 'contrasena' => 'acox88682', 'activa' => true, 'sucursal_id' => 1, 'estatus_id' => 1]);
 
         //** Se generan los RH-EXTRAS */        
         $rhextras = [

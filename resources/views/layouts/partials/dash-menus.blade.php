@@ -1,10 +1,20 @@
+@php
+    // Se obtiene el rol del usuario autenticado
+    $roles = auth()
+        ->user()
+        ->roles->pluck('name')
+        ->toArray();
+
+@endphp
+
 @foreach ($menus as $menu)
-    @if ($menu['concepto'] == 'dash')
+    @if ($menu->concepto->concepto == 'dash')
+    
         <li class="slide  
             {{ request()->is("$menu[slug]*") ? 'active' : '' }} 
         ">
-            <a href="{{ route($menu['slug']) }}"
-                class="side-menu__item  {{ request()->is("$menu[slug]*") ? 'active' : '' }}">
+            <a href="{{ route($menu->slug) }}"
+                class="side-menu__item  {{ request()->is("$menu->slug*") ? 'active' : '' }}">
                 <i class="side-menu__icon {{ $menu['icono'] }}"></i>
                 <span class="side-menu__label">
                     {{ $menu['nombre'] }}
@@ -13,8 +23,10 @@
         </li>
     @endif
 
-    @if ($menu['concepto'] == 'menu')
-        <li class="slide  {{ request()->is("$menu[slug]*") ? 'active' : '' }} has-sub ">
+
+    @if ($menu->concepto->concepto == 'menu')
+    
+        <li class="slide  {{ request()->is("$menu->slug*") ? 'active' : '' }} has-sub ">
             <a class="side-menu__item  {{ request()->is("$menu[slug]*") ? 'active' : '' }}">
                 <i class="side-menu__icon {{ $menu['icono'] }}"></i>
                 <span class="side-menu__label">
@@ -28,34 +40,33 @@
                     <a href="javascript:void(0);"> {{ $menu['nombre'] }}</a>
                 </li>
 
-                @foreach ($menu['submenu'] as $submenu)
+                @foreach ($menu->submenus as $submenu)
+                
                     @php
-                        $arrayAuth = explode('|', $submenu['auth_roles']);
-                        $roles = auth()->user()->roles->pluck('name')->toArray();
-
-                        $intersect = array_intersect($arrayAuth,$roles);
+                        $arrayAuth = $submenu['auth_roles'] ? explode('|', $submenu['auth_roles']) : [];
+                        $intersect = array_intersect($arrayAuth, $roles);
                     @endphp
 
 
-    <!-- El usuario tiene el rol de admin -->
+                    <!-- El usuario tiene el rol de admin -->
 
                     @if (!is_null($submenu['auth_roles']))
                         @role($submenu['auth_roles'])
-                        <li class="slide {{ request()->is("$submenu[slug]*") ? 'active' : '' }}">
-                            @if ($submenu['concepto'] != 'interno')
-                                <a href="{{ route($menu['slug'] . '.' . $submenu['slug'] . ($submenu['concepto'] == 'crud' ? '.index' : '')) }}"
-                                    class="side-menu__item {{ request()->is("$menu[slug]/$submenu[slug]*") ? 'active' : '' }}">
-                                    <i class="side-menu__icon {{ $submenu['icono'] }}"></i>
-                                    {{ $submenu['nombre'] }}
-                                </a>
-                            @endif
-                        </li>
+                            <li class="slide {{ request()->is("$submenu[slug]*") ? 'active' : '' }}">
+                                @if ($submenu['concepto'] != 'interno')
+                                    <a href="{{ route($menu['slug'] . '.' . $submenu['slug'] . ($submenu->concepto->concepto == 'crud' ? '.index' : '')) }}"
+                                        class="side-menu__item {{ request()->is("$menu[slug]/$submenu[slug]*") ? 'active' : '' }}">
+                                        <i class="side-menu__icon {{ $submenu['icono'] }}"></i>
+                                        {{ $submenu['nombre'] }}
+                                    </a>
+                                @endif
+                            </li>
                         @endrole
                     @elseif(!is_null($submenu['auth_permisos']))
                         @can($submenu['auth_permisos'])
                             <li class="slide {{ request()->is("$submenu[slug]*") ? 'active' : '' }}">
                                 @if ($submenu['concepto'] != 'interno')
-                                    <a href="{{ route($menu['slug'] . '.' . $submenu['slug'] . ($submenu['concepto'] == 'crud' ? '.index' : '')) }}"
+                                    <a href="{{ route($menu['slug'] . '.' . $submenu['slug'] . ($submenu->concepto->concepto == 'crud' ? '.index' : '')) }}"
                                         class="side-menu__item {{ request()->is("$menu[slug]/$submenu[slug]*") ? 'active' : '' }}">
                                         <i class="side-menu__icon {{ $submenu['icono'] }}"></i>
                                         {{ $submenu['nombre'] }}
@@ -63,10 +74,10 @@
                                 @endif
                             </li>
                         @endcan
-                    @else
+                    @elseif($submenu->concepto->concepto !== 'interno')
                         <li class="slide {{ request()->is("$submenu[slug]*") ? 'active' : '' }}">
                             @if ($submenu['concepto'] != 'interno')
-                                <a href="{{ route($menu['slug'] . '.' . $submenu['slug'] . ($submenu['concepto'] == 'crud' ? '.index' : '')) }}"
+                                <a href="{{ route($menu['slug'] . '.' . $submenu['slug'] . ($submenu->concepto->concepto == 'crud' ? '.index' : '')) }}"
                                     class="side-menu__item {{ request()->is("$menu[slug]/$submenu[slug]*") ? 'active' : '' }}">
                                     <i class="side-menu__icon {{ $submenu['icono'] }}"></i>
                                     {{ $submenu['nombre'] }}

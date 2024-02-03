@@ -58,24 +58,24 @@
 
                 {{-- Foreach::$menu:: Arbol de menus --}}
                 @foreach ($menus as $menu)
-                    @if ($menu['concepto'] == 'menu')
+                    @if ($menu->concepto->concepto == 'menu')
                         <div class="col-6 col-xxl-2 col-xl-2 col-lg-4 col-md-4 px-1">
                             <div class="card custom-card shadow-none bg-light">
                                 <div class="card-body p-0 border rounded-2">
 
-                                    <a class="nav-link " id="{{ $menu['nombre'] }}-tab" data-bs-toggle="tab"
-                                        href="#{{ $menu['nombre'] }}" role="tab" aria-controls="{{ $menu['nombre'] }}"
+                                    <a class="nav-link " id="{{ $menu->nombre }}-tab" data-bs-toggle="tab"
+                                        href="#{{ $menu->nombre }}" role="tab" aria-controls="{{ $menu->nombre }}"
                                         aria-selected="false">
                                         <div class="d-flex justify-content-between flex-wrap">
                                             <div class="file-format-icon svg-primary">
-                                                <i class="{{ $menu['icono'] }} fs-25 text-primary"></i>
+                                                <i class="{{ $menu->icono }} fs-25 text-primary"></i>
                                             </div>
                                             <div>
                                                 <span class="fw-medium fs-4 mb-1">
-                                                    {{ $menu['nombre'] }}
+                                                    {{ $menu->nombre }}
                                                 </span>
                                                 <span class="fs-10 d-block text-muted text-end">
-                                                    {{ $menu['concepto'] }}
+                                                    {{ $menu->concepto->concepto }}
                                                 </span>
                                             </div>
                                         </div>
@@ -134,12 +134,13 @@
 @endsection
 
 @section('js')
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    <x-scripts.jquery/>
+    {{-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     {{-- <script src="{{Vite::asset('resources/js/modales.js')}}"></script> --}}
 
-    <script>
+    {{-- <script>
         $(document).ready(function() {
 
             @if ($errors->any())
@@ -150,6 +151,6 @@
 
 
         });
-    </script>
+    </script>  --}}
 
 @endsection

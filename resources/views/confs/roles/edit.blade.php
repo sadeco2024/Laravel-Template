@@ -28,7 +28,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <div class="d-grid gap-2 my-2 mb-0">
-                                    <button id="delete-confirm-form" class="btn btn-sm btn-danger-transparent btn-wave"
+                                    <button id="" class="btn btn-sm btn-danger-transparent btn-wave confirm-delete"
                                         type="button">
                                         <i class="bi bi-trash"></i>
                                         Eliminar Rol

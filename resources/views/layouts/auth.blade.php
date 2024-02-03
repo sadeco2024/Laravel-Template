@@ -444,8 +444,7 @@
             aria-live="assertive" aria-atomic="true">
             {{--  bg-secondary text-fixed-white --}}
             <div class="toast-header">
-                <img class="bd-placeholder-img rounded me-2" src="../assets/images/brand-logos/logo.png"
-                    alt="...">
+                <img class="bd-placeholder-img rounded me-2" src="{{asset('assets/images/brand-logos/logo.png')}}" alt="...">
                 <strong class="me-auto">Sadeco</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -496,7 +495,6 @@
 
 
     @yield('js')
-
 
     @yield('script')
 

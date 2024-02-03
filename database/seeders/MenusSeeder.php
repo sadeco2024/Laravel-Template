@@ -45,7 +45,7 @@ class MenusSeeder extends Seeder
             [
                 'nombre' => 'Telcel',
                 'icono' => 'bi bi-align-top',
-                'slug' => 'erp'
+                'slug' => 'telcel'
             ]            
         ];
 

@@ -20,4 +20,5 @@
             @endforeach
         </div>
     </div>
+    <x-input-error-line :messages="$errors->get($name)" />
 </div>

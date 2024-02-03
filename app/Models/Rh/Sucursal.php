@@ -25,7 +25,6 @@ class Sucursal extends Model
         'correo_id',
         'comentario_id',
         'estatus_id',
-        // 'ubicacion'
     ];
 
     protected function nombre(): Attribute
@@ -35,10 +34,6 @@ class Sucursal extends Model
             set: fn (string $value) => strtolower($value)
         );
     }        
-
-    // protected $with =[
-    //     ''
-    // ];
 
 
 
@@ -53,8 +48,8 @@ class Sucursal extends Model
         ->leftJoin('referencias', 'referencia_id', 'referencias.id')
         ->leftJoin('empleados', 'sucursales.id', 'empleados.sucursal_id')
         ->leftJoin('conceptos', 'tipo_concepto_id', 'conceptos.id')
-        ->selectRaw('sucursales.id,sucursales.nombre as sucursal, conceptos.concepto as tipo ,telefonos.telefono,direcciones.calle,direcciones.numero_exterior,direcciones.numero_interior,direcciones.colonia,direcciones.codigo_postal,ciudades.ciudad,municipios.municipio,estados.estado,referencias.referencia,sucursales.ubicacion,estatuses.estatus,count(empleados.id) as empleados')
-        ->groupBy('sucursales.id','sucursales.nombre','telefonos.telefono','direcciones.calle','direcciones.numero_exterior','direcciones.numero_interior','direcciones.colonia','direcciones.codigo_postal','ciudades.ciudad','municipios.municipio','estados.estado','referencias.referencia','sucursales.ubicacion','estatuses.estatus','conceptos.concepto')
+        ->selectRaw('sucursales.id,sucursales.nombre, conceptos.concepto as tipo ,telefonos.telefono,direcciones.calle,direcciones.numero_exterior,direcciones.numero_interior,direcciones.colonia,direcciones.codigo_postal,ciudades.ciudad,municipios.municipio,estados.estado,referencias.referencia,direcciones.ubicacion,estatuses.estatus')
+        ->groupBy('sucursales.id','sucursales.nombre','telefonos.telefono','direcciones.calle','direcciones.numero_exterior','direcciones.numero_interior','direcciones.colonia','direcciones.codigo_postal','ciudades.ciudad','municipios.municipio','estados.estado','referencias.referencia','direcciones.ubicacion','estatuses.estatus','conceptos.concepto')
         ->orderBy('conceptos.id','asc')
         ->orderBy('estatuses.id','asc')
         ->orderBy('sucursales.nombre','asc');

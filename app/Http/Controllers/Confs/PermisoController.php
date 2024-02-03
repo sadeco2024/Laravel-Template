@@ -40,7 +40,8 @@ class PermisoController extends Controller
         //** Se valida como AJAX */
         $messages = [
             'pname.required' => 'El slug del permiso es requerido.',
-            'pname.unique' => 'El slug del permiso ya existe.',
+            'pname.unique' => 'El slug del permiso ya ha sido registrado.',
+            'pnombre.unique' => 'El nombre del permiso ya ha sido registrado.',
             'pdescripcion.required' => 'La descripción del permiso es requerida.',
             'pcg_modulo_id.required' => 'El módulo del permiso es requerido.',
             'pcg_modulo_id.numeric' => 'Debe seleccionar un módulo.',
@@ -52,17 +53,18 @@ class PermisoController extends Controller
             'pname' => 'required|unique:permissions,name|max:50' ,
             'pdescripcion' => 'required',
             'pcg_modulo_id' => 'required|numeric|min:1',
-            'pnombre' => 'required'   
+            'pnombre' => 'required|unique:permissions,nombre|max:100'
             
         ],$messages);
     
+        
         if ($validator->fails()) {
             $errors = new \Illuminate\Support\MessageBag($validator->errors()->getMessages()); // Convierte los errores a MessageBag
             return response()->json([
                 'errors' => $errors
             ]);
         }        
-      
+        
         Permission::create([
             'name' => $request->pname,
             'nombre' => $request->pnombre,

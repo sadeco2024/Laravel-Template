@@ -15,7 +15,8 @@ export default defineConfig({
                 'resources/js/alerts.js',
                 'resources/js/modales.js',
                 'resources/js/datatables.js',
-                'resources/js/sucursales.js'
+                'resources/js/sucursales.js',
+                'resources/js/graficas.js',
            ],
             refresh: true,
         }),

@@ -7,7 +7,7 @@
             <i class="{{ $icon }}"></i>
         </div>
         <input type="text" name="{{ $name }}" id="{{ $name }}" class="form-control importe" placeholder=""
-            value="{{ $value }}" pattern="[0-9.]" >
+            value="{{ $value }}"  >
     </div>
     <x-input-error-line :messages="$errors->get($name)" />
 </div>

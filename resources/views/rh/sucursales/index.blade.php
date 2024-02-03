@@ -32,7 +32,7 @@
                         <div class="d-sm-flex d-block align-items-center">
                             <div class="me-2">
 
-                                @switch($sucursal->tipo->concepto)
+                                @switch($sucursal->tipo)
                                     @case('Almacén')
                                         <span class="avatar avatar-lg bg-warning-transparent">
                                             <i class="bi bi-building my-1 fs-3 text-warning opacity-75"></i>
@@ -52,16 +52,16 @@
                                         {{ $sucursal->nombre }}
                                     </span>
                                 </a>
-                                @switch($sucursal->tipo->concepto)
+                                @switch($sucursal->tipo)
                                     @case('Almacén')
                                         <span class="d-block text-warning opacity-75">
-                                            {{ $sucursal->tipo->concepto }}
+                                            {{ $sucursal->tipo }}
                                         </span>
                                     @break
 
                                     @default
                                         <span class="d-block text-info">
-                                            {{ $sucursal->tipo->concepto }}
+                                            {{ $sucursal->tipo }}
                                         </span>
                                 @endswitch
 
@@ -69,7 +69,7 @@
                             <div class="text-sm-center">
                                 <span class="fs-14 fw-medium">Empleados</span>
                                 <span class="d-sm-block">
-                                    {{ $sucursal->empleados->count() }}
+                                    {{ $sucursal->empleados_count }}
                                 </span>
                             </div>
                         </div>
@@ -79,12 +79,12 @@
                             <div class="orders-delivery-address">
                                 <p class="mb-1 fw-medium">Dirección</p>
                                 <p class="text-muted mb-0">
-                                    {{ $sucursal->direccion->calle }}, #{{ $sucursal->direccion->numero_exterior }}
-                                    {{ $sucursal->direccion->numero_interior ? 'No. Int.: ' . $sucursal->direccion->numero_interior : '' }},
-                                    {{ $sucursal->direccion->colonia }},
-                                    {{ $sucursal->direccion->ciudad->ciudad }},
-                                    {{ $sucursal->direccion->estado->estado }}
-                                    C.P. {{ $sucursal->direccion->codigo_postal }}
+                                    {{ $sucursal->calle }}, #{{ $sucursal->numero_exterior }}
+                                    {{ $sucursal->numero_interior ? 'No. Int.: ' . $sucursal->numero_interior : '' }},
+                                    {{ $sucursal->colonia }},
+                                    {{ $sucursal->ciudad }},
+                                    {{ $sucursal->estado }}
+                                    C.P. {{ $sucursal->codigo_postal }}
 
 
                                 </p>
@@ -98,17 +98,17 @@
                     <div class="card-footer d-sm-flex d-block align-items-center justify-content-between">
                         <div><span class="text-muted me-2">Estatus:</span>
 
-                            @switch($sucursal->estatus->estatus)
-                                @case('Abierta')
-                                    <x-badge class="bg-success-transparent" :text="$sucursal->estatus->estatus" />
+                            @switch($sucursal->estatus)
+                                @case('abierta')
+                                    <x-badge class="bg-success-transparent" :text="$sucursal->estatus" />
                                 @break
 
-                                @case('Suspendida')
-                                    <x-badge class="bg-warning-transparent" :text="$sucursal->estatus->estatus" />
+                                @case('suspendida')
+                                    <x-badge class="bg-warning-transparent" :text="$sucursal->estatus" />
                                 @break
 
                                 @default
-                                    <x-badge class="bg-danger-transparent" :text="$sucursal->estatus->estatus" />
+                                    <x-badge class="bg-danger-transparent" :text="$sucursal->estatus" />
                             @endswitch
 
                         </div>
@@ -133,6 +133,9 @@
                                         </li>
                                     @endcan
                                     @can('rh.sucursal.edit')
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>                                    
                                         <li>
                                             <a class="dropdown-item" href="{{ route('rh.sucursales.edit', $sucursal) }}">
                                                 <i class="ri-pencil-line align-middle me-1"></i>
@@ -140,8 +143,8 @@
                                             </a>
                                         </li>
                                     @endcan
-                                    @can('rh.sucursal.destroy')
-                                        {{-- El almacén no puede ser eliminado. --}}
+                                    {{-- @can('rh.sucursal.destroy')
+                                        <!-- - El almacén no puede ser eliminado. -->
                                         @if ($sucursal->id !== 1)
                                             <li>
                                                 <hr class="dropdown-divider">
@@ -153,7 +156,7 @@
                                                 </a>
                                             </li>
                                         @endif
-                                    @endcan
+                                    @endcan --}}
                                 </ul>
                             </div>
                         @endcanany
