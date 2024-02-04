@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\telcel;
+namespace App\Models\Telcel;
 
 use App\Models\Erp\ArticuloDiscreto;
 use App\Models\Generales\Concepto;

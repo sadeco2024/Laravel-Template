@@ -7,7 +7,7 @@ use App\Models\Erp\ArticuloDiscreto;
 use App\Models\Generales\Concepto;
 use App\Models\Generales\Estatus;
 use App\Models\Generales\Telefono;
-use App\Models\telcel\Activacion;
+use App\Models\Telcel\Activacion;
 use App\Models\Telcel\Canal;
 use App\Models\Telcel\CanalVendedor;
 use App\Services\Telcel;
