@@ -22,10 +22,10 @@
 
     {{-- @Vite - Start::Css --}}
 
-    {{-- <link rel="stylesheet" href="{{ Vite::asset('resources/css/guest.css') }}"> --}}
+    <link rel="stylesheet" href="{{ Vite::asset('resources/css/guest.css') }}">
 
 
-    @vite(['resources/css/guest.css'])
+    {{-- @vite(['resources/css/guest.css']) --}}
     {{-- @Vite End::css --}}
 
     {{-- @Vite - Start::CssOtros --}}
