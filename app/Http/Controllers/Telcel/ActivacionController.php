@@ -35,20 +35,25 @@ class ActivacionController extends Controller
     public function index()
     {
 
-        $activaciones = Activacion::mensual();
-        $compara = Activacion::mescompara();
+        $activaciones = Activacion::mensual(date('Y'),'preactivacion');
+        $compara = Activacion::anualcompara();
         // return ($activaciones);
         return view('telcel.activaciones.index', compact('activaciones','compara'));
     }
 
-    public function grafica() {
-        $activaciones = Activacion::mensual();
+    public function grafica(Request $request) {
+        // dd($request->all());
+        // dd($request->input('anio'));
+        $activaciones = Activacion::mensual($request->input('anio') ?? date('Y'),$request->input('tipofecha') ?? 'preactivacion');
         return $activaciones;
         return view('telcel.activaciones.grafica', compact('activaciones'));
     }
 
-    public function compara() {
-        $activaciones = Activacion::mescompara();
+    public function compara(Request $request) {
+        // $activaciones = Activacion::mescompara();
+        // $activaciones = Activacion::anualcompara();
+        $activaciones = Activacion::CanalesAnual($request->input('anio') ?? date('Y'));
+        return $activaciones;
         return $activaciones;        
     }
 

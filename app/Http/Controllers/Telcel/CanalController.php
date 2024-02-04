@@ -40,8 +40,8 @@ class CanalController extends Controller
         
         // $canales = Canal::with(['concepto','sucursal','sucursal.empleados'])->simplePaginate(15);
         $canales = Canal::with(['concepto','sucursal','sucursal.empleados'])->get();
-         
-        return view('telcel.canales.index', compact('canales'));
+        $canalSucursal = Canal::canalTienda(); 
+        return view('telcel.canales.index', compact('canales','canalSucursal'));
     }
 
     // Actualiza la tabla de canales

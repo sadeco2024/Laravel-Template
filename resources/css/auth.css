@@ -1,16 +1,17 @@
-@import url('../theme/libs/bootstrap/css/bootstrap.min.css');
+@import url('../assets/libs/bootstrap/css/bootstrap.min.css');
 
-@import url('../theme/scss/styles.css');
-@import url('../theme//scss/icons.css');
+/* @import url('../assets/scss/styles.css'); */
+@import '../assets/css/styles.css';
+@import '../assets//css/icons.css';
 
-@import url("../theme/libs/node-waves/waves.min.css");
-@import "../theme/libs/simplebar/simplebar.min.css";
-@import "../theme/libs/flatpickr/flatpickr.min.css";
-@import "../theme/libs/@simonwep/pickr/themes/nano.min.css";
-@import "../theme/libs/choices.js/public/assets/styles/choices.min.css";
+@import url("../assets/libs/node-waves/waves.min.css");
+@import "../assets/libs/simplebar/simplebar.min.css";
+@import "../assets/libs/flatpickr/flatpickr.min.css";
+@import "../assets/libs/@simonwep/pickr/themes/nano.min.css";
+@import "../assets/libs/choices.js/public/assets/styles/choices.min.css";
 @import "../css/app.css";
 
-@import url("../theme/libs/prismjs/themes/prism-coy.min.css");
+@import url("../assets/libs/prismjs/themes/prism-coy.min.css");
 
 
 .cursor-helper {
@@ -26,5 +27,36 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0; 
 }
 
+
+
 input[type=number] { -moz-appearance:textfield; }
+/* 
+@import url("../icon-fonts/RemixIcons/fonts/remixicon.css");
+@import url("../icon-fonts/feather/feather.css");
+@import url("../icon-fonts/bootstrap-icons/icons/font/bootstrap-icons.css");
+@import url("../icon-fonts/tabler-icons/iconfont/tabler-icons.css");
+@import url("../icon-fonts/line-awesome/1.3.0/css/line-awesome.css");
+@import url("../icon-fonts/boxicons/css/boxicons.css");/*# sourceMappingURL=icons.css.map  */
+
+:root {
+/* Establece el ancho del scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Establece el color de fondo del track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Establece el color del thumb (la barra de desplazamiento) */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Cambia el color del thumb al pasar el mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+}
 

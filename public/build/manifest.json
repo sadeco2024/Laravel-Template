@@ -1,11 +1,191 @@
 {
+  "resources/assets/css/1-URF37ZRY.png": {
+    "file": "assets/1-URF37ZRY-temI4Jc4.png",
+    "src": "resources/assets/css/1-URF37ZRY.png"
+  },
+  "resources/assets/css/2-FUWPJUFU.jpg": {
+    "file": "assets/2-FUWPJUFU-r0BaUlZc.jpg",
+    "src": "resources/assets/css/2-FUWPJUFU.jpg"
+  },
+  "resources/assets/css/bg-img1-PCQKVP6T.jpg": {
+    "file": "assets/bg-img1-PCQKVP6T-7Gbb4TSG.jpg",
+    "src": "resources/assets/css/bg-img1-PCQKVP6T.jpg"
+  },
+  "resources/assets/css/bg-img2-RBC2GUH3.jpg": {
+    "file": "assets/bg-img2-RBC2GUH3-zfiibJSE.jpg",
+    "src": "resources/assets/css/bg-img2-RBC2GUH3.jpg"
+  },
+  "resources/assets/css/bg-img3-SEA5LZPE.jpg": {
+    "file": "assets/bg-img3-SEA5LZPE-HgovEIDt.jpg",
+    "src": "resources/assets/css/bg-img3-SEA5LZPE.jpg"
+  },
+  "resources/assets/css/bg-img4-D2VUUYLJ.jpg": {
+    "file": "assets/bg-img4-D2VUUYLJ-C7Qi16U_.jpg",
+    "src": "resources/assets/css/bg-img4-D2VUUYLJ.jpg"
+  },
+  "resources/assets/css/bg-img5-SCU6KCBW.jpg": {
+    "file": "assets/bg-img5-SCU6KCBW-RUO9hKDi.jpg",
+    "src": "resources/assets/css/bg-img5-SCU6KCBW.jpg"
+  },
+  "resources/assets/css/bootstrap-icons-6QOYJHKE.woff2": {
+    "file": "assets/bootstrap-icons-6QOYJHKE-HUjhkREN.woff2",
+    "src": "resources/assets/css/bootstrap-icons-6QOYJHKE.woff2"
+  },
+  "resources/assets/css/bootstrap-icons-JHE3QUSN.woff": {
+    "file": "assets/bootstrap-icons-JHE3QUSN-WE2W_JtM.woff",
+    "src": "resources/assets/css/bootstrap-icons-JHE3QUSN.woff"
+  },
+  "resources/assets/css/feather-webfont-4QUFNMOI.eot": {
+    "file": "assets/feather-webfont-4QUFNMOI-a1y3n-EN.eot",
+    "src": "resources/assets/css/feather-webfont-4QUFNMOI.eot"
+  },
+  "resources/assets/css/feather-webfont-RJOT3FRU.svg": {
+    "file": "assets/feather-webfont-RJOT3FRU-awIUAEcL.svg",
+    "src": "resources/assets/css/feather-webfont-RJOT3FRU.svg"
+  },
+  "resources/assets/css/feather-webfont-XC6AAHIC.ttf": {
+    "file": "assets/feather-webfont-XC6AAHIC-hsAjXEqz.ttf",
+    "src": "resources/assets/css/feather-webfont-XC6AAHIC.ttf"
+  },
+  "resources/assets/css/la-brands-400-CIWECNZM.woff2": {
+    "file": "assets/la-brands-400-CIWECNZM-qvkeDhBZ.woff2",
+    "src": "resources/assets/css/la-brands-400-CIWECNZM.woff2"
+  },
+  "resources/assets/css/la-brands-400-D3A7B5PJ.woff": {
+    "file": "assets/la-brands-400-D3A7B5PJ-9JcTiMAb.woff",
+    "src": "resources/assets/css/la-brands-400-D3A7B5PJ.woff"
+  },
+  "resources/assets/css/la-brands-400-INB5BQB2.ttf": {
+    "file": "assets/la-brands-400-INB5BQB2-IA4JVH1O.ttf",
+    "src": "resources/assets/css/la-brands-400-INB5BQB2.ttf"
+  },
+  "resources/assets/css/la-brands-400-JDUJSY44.eot": {
+    "file": "assets/la-brands-400-JDUJSY44-CzeAjJRo.eot",
+    "src": "resources/assets/css/la-brands-400-JDUJSY44.eot"
+  },
+  "resources/assets/css/la-brands-400-O3J3RJOS.svg": {
+    "file": "assets/la-brands-400-O3J3RJOS-MLFCN1Cf.svg",
+    "src": "resources/assets/css/la-brands-400-O3J3RJOS.svg"
+  },
+  "resources/assets/css/la-regular-400-34F2J7YZ.ttf": {
+    "file": "assets/la-regular-400-34F2J7YZ-pp1v0U6K.ttf",
+    "src": "resources/assets/css/la-regular-400-34F2J7YZ.ttf"
+  },
+  "resources/assets/css/la-regular-400-6RPJSTIW.woff": {
+    "file": "assets/la-regular-400-6RPJSTIW-HoXuR4HE.woff",
+    "src": "resources/assets/css/la-regular-400-6RPJSTIW.woff"
+  },
+  "resources/assets/css/la-regular-400-LYMOBRDA.svg": {
+    "file": "assets/la-regular-400-LYMOBRDA-ZlW9-KpQ.svg",
+    "src": "resources/assets/css/la-regular-400-LYMOBRDA.svg"
+  },
+  "resources/assets/css/la-regular-400-PNT4KM2T.eot": {
+    "file": "assets/la-regular-400-PNT4KM2T-ser5t7lv.eot",
+    "src": "resources/assets/css/la-regular-400-PNT4KM2T.eot"
+  },
+  "resources/assets/css/la-regular-400-X6VKWRSW.woff2": {
+    "file": "assets/la-regular-400-X6VKWRSW-7hTDf7ML.woff2",
+    "src": "resources/assets/css/la-regular-400-X6VKWRSW.woff2"
+  },
+  "resources/assets/css/la-solid-900-K3G53YR3.svg": {
+    "file": "assets/la-solid-900-K3G53YR3-HbZTzFm_.svg",
+    "src": "resources/assets/css/la-solid-900-K3G53YR3.svg"
+  },
+  "resources/assets/css/la-solid-900-LAWDUD4I.ttf": {
+    "file": "assets/la-solid-900-LAWDUD4I-VDlpUgUB.ttf",
+    "src": "resources/assets/css/la-solid-900-LAWDUD4I.ttf"
+  },
+  "resources/assets/css/la-solid-900-PXMBKEUD.woff": {
+    "file": "assets/la-solid-900-PXMBKEUD-kfynfrLg.woff",
+    "src": "resources/assets/css/la-solid-900-PXMBKEUD.woff"
+  },
+  "resources/assets/css/la-solid-900-QVUSAB64.eot": {
+    "file": "assets/la-solid-900-QVUSAB64-5Jl-BtsW.eot",
+    "src": "resources/assets/css/la-solid-900-QVUSAB64.eot"
+  },
+  "resources/assets/css/la-solid-900-RZOHS333.woff2": {
+    "file": "assets/la-solid-900-RZOHS333-E4zBIL90.woff2",
+    "src": "resources/assets/css/la-solid-900-RZOHS333.woff2"
+  },
+  "resources/assets/css/media-79-NUKGMCJ2.jpg": {
+    "file": "assets/media-79-NUKGMCJ2-rtG45qKn.jpg",
+    "src": "resources/assets/css/media-79-NUKGMCJ2.jpg"
+  },
+  "resources/assets/css/media-80-ZXCVUKGU.svg": {
+    "file": "assets/media-80-ZXCVUKGU-lD1ex5a7.svg",
+    "src": "resources/assets/css/media-80-ZXCVUKGU.svg"
+  },
+  "resources/assets/css/media-81-NKAUBQLH.svg": {
+    "file": "assets/media-81-NKAUBQLH-O4GHz4h2.svg",
+    "src": "resources/assets/css/media-81-NKAUBQLH.svg"
+  },
+  "resources/assets/css/media-82-2KLU5FE4.png": {
+    "file": "assets/media-82-2KLU5FE4-C-IAhcqo.png",
+    "src": "resources/assets/css/media-82-2KLU5FE4.png"
+  },
+  "resources/assets/css/pattern-1-GYMEFLYZ.svg": {
+    "file": "assets/pattern-1-GYMEFLYZ-xZ1J4Kj_.svg",
+    "src": "resources/assets/css/pattern-1-GYMEFLYZ.svg"
+  },
+  "resources/assets/css/pattern-2-EI2A5OFP.svg": {
+    "file": "assets/pattern-2-EI2A5OFP-ec241k4V.svg",
+    "src": "resources/assets/css/pattern-2-EI2A5OFP.svg"
+  },
+  "resources/assets/css/pattern-3-ZDVXMC45.svg": {
+    "file": "assets/pattern-3-ZDVXMC45-PEorgHcx.svg",
+    "src": "resources/assets/css/pattern-3-ZDVXMC45.svg"
+  },
+  "resources/assets/css/remixicon-4MJUCDGM.ttf": {
+    "file": "assets/remixicon-4MJUCDGM-LdfluHCB.ttf",
+    "src": "resources/assets/css/remixicon-4MJUCDGM.ttf"
+  },
+  "resources/assets/css/remixicon-6EX5DIDA.eot": {
+    "file": "assets/remixicon-6EX5DIDA-q5KekA7g.eot",
+    "src": "resources/assets/css/remixicon-6EX5DIDA.eot"
+  },
+  "resources/assets/css/remixicon-DYH3O25A.woff": {
+    "file": "assets/remixicon-DYH3O25A-oTNg22Ff.woff",
+    "src": "resources/assets/css/remixicon-DYH3O25A.woff"
+  },
+  "resources/assets/css/remixicon-FMXOGFBH.svg": {
+    "file": "assets/remixicon-FMXOGFBH-G4F4C1K0.svg",
+    "src": "resources/assets/css/remixicon-FMXOGFBH.svg"
+  },
+  "resources/assets/css/remixicon-KQADHDEE.woff2": {
+    "file": "assets/remixicon-KQADHDEE--pXCqt22.woff2",
+    "src": "resources/assets/css/remixicon-KQADHDEE.woff2"
+  },
+  "resources/assets/css/tabler-icons-E2OE56WE.svg": {
+    "file": "assets/tabler-icons-E2OE56WE-8fCjxxDm.svg",
+    "src": "resources/assets/css/tabler-icons-E2OE56WE.svg"
+  },
+  "resources/assets/css/tabler-icons-OVRORFYK.ttf": {
+    "file": "assets/tabler-icons-OVRORFYK-x9u5KrLm.ttf",
+    "src": "resources/assets/css/tabler-icons-OVRORFYK.ttf"
+  },
+  "resources/assets/css/tabler-icons-PUQHNPZI.eot": {
+    "file": "assets/tabler-icons-PUQHNPZI-5c9i_WwB.eot",
+    "src": "resources/assets/css/tabler-icons-PUQHNPZI.eot"
+  },
+  "resources/assets/css/tabler-icons-TY3YUCTX.woff": {
+    "file": "assets/tabler-icons-TY3YUCTX-a2udhBJT.woff",
+    "src": "resources/assets/css/tabler-icons-TY3YUCTX.woff"
+  },
+  "resources/assets/css/tabler-icons-UH3GCQ6L.woff2": {
+    "file": "assets/tabler-icons-UH3GCQ6L-h2s3WTD8.woff2",
+    "src": "resources/assets/css/tabler-icons-UH3GCQ6L.woff2"
+  },
+  "resources/assets/css/transparent-YCQASJQ4.png": {
+    "file": "assets/transparent-YCQASJQ4-RbNa0E3N.png",
+    "src": "resources/assets/css/transparent-YCQASJQ4.png"
+  },
   "resources/css/auth.css": {
-    "file": "assets/auth-QQC6E47k.css",
+    "file": "assets/auth-CYpQacad.css",
     "isEntry": true,
     "src": "resources/css/auth.css"
   },
   "resources/css/guest.css": {
-    "file": "assets/guest-FIpNk2qv.css",
+    "file": "assets/guest-oovb93vY.css",
     "isEntry": true,
     "src": "resources/css/guest.css"
   },
@@ -15,7 +195,7 @@
     "src": "resources/js/alerts.js"
   },
   "resources/js/auth.js": {
-    "file": "assets/auth-YjZgozKb.js",
+    "file": "assets/auth-kittlZwt.js",
     "isEntry": true,
     "src": "resources/js/auth.js"
   },
@@ -35,7 +215,7 @@
     "src": "resources/js/funciones.js"
   },
   "resources/js/graficas.js": {
-    "file": "assets/graficas-McyGSyC9.js",
+    "file": "assets/graficas-jWcaJClb.js",
     "isEntry": true,
     "src": "resources/js/graficas.js"
   },
@@ -53,210 +233,6 @@
     "file": "assets/sucursales-Ae3UWYt-.js",
     "isEntry": true,
     "src": "resources/js/sucursales.js"
-  },
-  "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.eot": {
-    "file": "assets/remixicon-q5KekA7g.eot",
-    "src": "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.eot"
-  },
-  "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.svg": {
-    "file": "assets/remixicon-G4F4C1K0.svg",
-    "src": "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.svg"
-  },
-  "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.ttf": {
-    "file": "assets/remixicon-LdfluHCB.ttf",
-    "src": "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.ttf"
-  },
-  "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.woff": {
-    "file": "assets/remixicon-oTNg22Ff.woff",
-    "src": "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.woff"
-  },
-  "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.woff2": {
-    "file": "assets/remixicon--pXCqt22.woff2",
-    "src": "resources/theme/icon-fonts/RemixIcons/fonts/remixicon.woff2"
-  },
-  "resources/theme/icon-fonts/bootstrap-icons/icons/font/fonts/bootstrap-icons.woff": {
-    "file": "assets/bootstrap-icons-WE2W_JtM.woff",
-    "src": "resources/theme/icon-fonts/bootstrap-icons/icons/font/fonts/bootstrap-icons.woff"
-  },
-  "resources/theme/icon-fonts/bootstrap-icons/icons/font/fonts/bootstrap-icons.woff2": {
-    "file": "assets/bootstrap-icons-HUjhkREN.woff2",
-    "src": "resources/theme/icon-fonts/bootstrap-icons/icons/font/fonts/bootstrap-icons.woff2"
-  },
-  "resources/theme/icon-fonts/boxicons/fonts/boxicons.eot": {
-    "file": "assets/boxicons-kqy74WP0.eot",
-    "src": "resources/theme/icon-fonts/boxicons/fonts/boxicons.eot"
-  },
-  "resources/theme/icon-fonts/boxicons/fonts/boxicons.svg": {
-    "file": "assets/boxicons-6e1vajd8.svg",
-    "src": "resources/theme/icon-fonts/boxicons/fonts/boxicons.svg"
-  },
-  "resources/theme/icon-fonts/boxicons/fonts/boxicons.ttf": {
-    "file": "assets/boxicons-BCEDa0o3.ttf",
-    "src": "resources/theme/icon-fonts/boxicons/fonts/boxicons.ttf"
-  },
-  "resources/theme/icon-fonts/boxicons/fonts/boxicons.woff": {
-    "file": "assets/boxicons-k1W8tldc.woff",
-    "src": "resources/theme/icon-fonts/boxicons/fonts/boxicons.woff"
-  },
-  "resources/theme/icon-fonts/boxicons/fonts/boxicons.woff2": {
-    "file": "assets/boxicons-nhhJ3MJj.woff2",
-    "src": "resources/theme/icon-fonts/boxicons/fonts/boxicons.woff2"
-  },
-  "resources/theme/icon-fonts/feather/fonts/feather/feather-webfont.eot": {
-    "file": "assets/feather-webfont-a1y3n-EN.eot",
-    "src": "resources/theme/icon-fonts/feather/fonts/feather/feather-webfont.eot"
-  },
-  "resources/theme/icon-fonts/feather/fonts/feather/feather-webfont.svg": {
-    "file": "assets/feather-webfont-awIUAEcL.svg",
-    "src": "resources/theme/icon-fonts/feather/fonts/feather/feather-webfont.svg"
-  },
-  "resources/theme/icon-fonts/feather/fonts/feather/feather-webfont.ttf": {
-    "file": "assets/feather-webfont-hsAjXEqz.ttf",
-    "src": "resources/theme/icon-fonts/feather/fonts/feather/feather-webfont.ttf"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.eot": {
-    "file": "assets/la-brands-400-CzeAjJRo.eot",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.eot"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.svg": {
-    "file": "assets/la-brands-400-MLFCN1Cf.svg",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.svg"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.ttf": {
-    "file": "assets/la-brands-400-IA4JVH1O.ttf",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.ttf"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.woff": {
-    "file": "assets/la-brands-400-9JcTiMAb.woff",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.woff"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.woff2": {
-    "file": "assets/la-brands-400-qvkeDhBZ.woff2",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-brands-400.woff2"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-regular-400.eot": {
-    "file": "assets/la-regular-400-ser5t7lv.eot",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-regular-400.eot"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-regular-400.svg": {
-    "file": "assets/la-regular-400-ZlW9-KpQ.svg",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-regular-400.svg"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-regular-400.ttf": {
-    "file": "assets/la-regular-400-pp1v0U6K.ttf",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-regular-400.ttf"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-regular-400.woff": {
-    "file": "assets/la-regular-400-HoXuR4HE.woff",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-regular-400.woff"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-regular-400.woff2": {
-    "file": "assets/la-regular-400-7hTDf7ML.woff2",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-regular-400.woff2"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.eot": {
-    "file": "assets/la-solid-900-5Jl-BtsW.eot",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.eot"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.svg": {
-    "file": "assets/la-solid-900-HbZTzFm_.svg",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.svg"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.ttf": {
-    "file": "assets/la-solid-900-VDlpUgUB.ttf",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.ttf"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.woff": {
-    "file": "assets/la-solid-900-kfynfrLg.woff",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.woff"
-  },
-  "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.woff2": {
-    "file": "assets/la-solid-900-E4zBIL90.woff2",
-    "src": "resources/theme/icon-fonts/line-awesome/1.3.0/fonts/la-solid-900.woff2"
-  },
-  "resources/theme/icon-fonts/tabler-icons/iconfont/fonts/tabler-icons.eot": {
-    "file": "assets/tabler-icons-5c9i_WwB.eot",
-    "src": "resources/theme/icon-fonts/tabler-icons/iconfont/fonts/tabler-icons.eot"
-  },
-  "resources/theme/icon-fonts/tabler-icons/iconfont/fonts/tabler-icons.svg": {
-    "file": "assets/tabler-icons-8fCjxxDm.svg",
-    "src": "resources/theme/icon-fonts/tabler-icons/iconfont/fonts/tabler-icons.svg"
-  },
-  "resources/theme/icon-fonts/tabler-icons/iconfont/fonts/tabler-icons.ttf": {
-    "file": "assets/tabler-icons-x9u5KrLm.ttf",
-    "src": "resources/theme/icon-fonts/tabler-icons/iconfont/fonts/tabler-icons.ttf"
-  },
-  "resources/theme/icon-fonts/tabler-icons/iconfont/fonts/tabler-icons.woff": {
-    "file": "assets/tabler-icons-a2udhBJT.woff",
-    "src": "resources/theme/icon-fonts/tabler-icons/iconfont/fonts/tabler-icons.woff"
-  },
-  "resources/theme/icon-fonts/tabler-icons/iconfont/fonts/tabler-icons.woff2": {
-    "file": "assets/tabler-icons-h2s3WTD8.woff2",
-    "src": "resources/theme/icon-fonts/tabler-icons/iconfont/fonts/tabler-icons.woff2"
-  },
-  "resources/theme/images/media/backgrounds/1.png": {
-    "file": "assets/1-gNOOJfrk.png",
-    "src": "resources/theme/images/media/backgrounds/1.png"
-  },
-  "resources/theme/images/media/backgrounds/2.jpg": {
-    "file": "assets/2-r0BaUlZc.jpg",
-    "src": "resources/theme/images/media/backgrounds/2.jpg"
-  },
-  "resources/theme/images/media/media-65.jpg": {
-    "file": "assets/media-65-RYM78kzg.jpg",
-    "src": "resources/theme/images/media/media-65.jpg"
-  },
-  "resources/theme/images/media/media-79.jpg": {
-    "file": "assets/media-79-rtG45qKn.jpg",
-    "src": "resources/theme/images/media/media-79.jpg"
-  },
-  "resources/theme/images/media/media-80.svg": {
-    "file": "assets/media-80-lD1ex5a7.svg",
-    "src": "resources/theme/images/media/media-80.svg"
-  },
-  "resources/theme/images/media/media-81.svg": {
-    "file": "assets/media-81-O4GHz4h2.svg",
-    "src": "resources/theme/images/media/media-81.svg"
-  },
-  "resources/theme/images/media/media-82.png": {
-    "file": "assets/media-82-C-IAhcqo.png",
-    "src": "resources/theme/images/media/media-82.png"
-  },
-  "resources/theme/images/media/svg/pattern-1.svg": {
-    "file": "assets/pattern-1-xZ1J4Kj_.svg",
-    "src": "resources/theme/images/media/svg/pattern-1.svg"
-  },
-  "resources/theme/images/media/svg/pattern-2.svg": {
-    "file": "assets/pattern-2-ec241k4V.svg",
-    "src": "resources/theme/images/media/svg/pattern-2.svg"
-  },
-  "resources/theme/images/media/svg/pattern-3.svg": {
-    "file": "assets/pattern-3-PEorgHcx.svg",
-    "src": "resources/theme/images/media/svg/pattern-3.svg"
-  },
-  "resources/theme/images/menu-bg-images/bg-img1.jpg": {
-    "file": "assets/bg-img1-7Gbb4TSG.jpg",
-    "src": "resources/theme/images/menu-bg-images/bg-img1.jpg"
-  },
-  "resources/theme/images/menu-bg-images/bg-img2.jpg": {
-    "file": "assets/bg-img2-zfiibJSE.jpg",
-    "src": "resources/theme/images/menu-bg-images/bg-img2.jpg"
-  },
-  "resources/theme/images/menu-bg-images/bg-img3.jpg": {
-    "file": "assets/bg-img3-HgovEIDt.jpg",
-    "src": "resources/theme/images/menu-bg-images/bg-img3.jpg"
-  },
-  "resources/theme/images/menu-bg-images/bg-img4.jpg": {
-    "file": "assets/bg-img4-C7Qi16U_.jpg",
-    "src": "resources/theme/images/menu-bg-images/bg-img4.jpg"
-  },
-  "resources/theme/images/menu-bg-images/bg-img5.jpg": {
-    "file": "assets/bg-img5-RUO9hKDi.jpg",
-    "src": "resources/theme/images/menu-bg-images/bg-img5.jpg"
-  },
-  "resources/theme/images/menu-bg-images/transparent.png": {
-    "file": "assets/transparent-RbNa0E3N.png",
-    "src": "resources/theme/images/menu-bg-images/transparent.png"
   },
   "resources/theme/js/show-password.js": {
     "file": "assets/show-password-w40geAFS.js",

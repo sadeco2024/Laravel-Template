@@ -295,7 +295,11 @@ trait SendBrowser
             $this->setError(1, 'La página está fuera de servicio.');
         }
 
+        if (strpos($doc->html(), 'rror validando pregunta y respuesta') !== false) {
+            $this->setError(1, 'El canal no tiene definida la pregunta secreta.');
+        }
 
+        
         //** REDIRECTS */
         if ($doc->filterXpath('//redirect')->count() > 0 && !isset($redirect)) {
             $doc = $this->browser->request('GET', $this->url . $doc->filterXpath('//redirect')->attr('url'));
