@@ -40,10 +40,6 @@ class DescargaActivacionesController extends Controller
      */
     public function create()
     {
-
-
-
-
         return view('telcel.activaciones.descarga.index')->render();
     }
 
