@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\ERP;
+namespace App\Models\Erp;
 
 use App\Models\Erp\ClaveArticulo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

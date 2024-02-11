@@ -104,7 +104,19 @@ class InitialSeeder extends Seeder
 
 
         //** Se debe generar el canal principal */
-        Canal::create(['nombre' => 'DISTRICEL', 'clave' => 'RPHAESC', 'acox' => 'acox17274', 'contrasena' => 'acox88682', 'activa' => true, 'sucursal_id' => 1, 'estatus_id' => 1]);
+        $concepto = Concepto::firstOrCreate(['concepto' => 'Distribuidor']);
+        Canal::obtenerCanal([
+            'nombre' => 'DISTRICEL',
+            'clave' => 'RPHAESC',
+            'acox' => 'acox17274',
+            'contrasena' => 'acox88682',
+            'activa' => true,
+            'sucursal_id' => 1,
+            'estatus_id' => 1,
+            'concepto_id' => $concepto->id
+        ]);
+        
+        // Canal::create(['nombre' => 'DISTRICEL', 'clave' => 'RPHAESC', 'acox' => 'acox17274', 'contrasena' => 'acox88682', 'activa' => true, 'sucursal_id' => 1, 'estatus_id' => 1]);
 
         //** Se generan los RH-EXTRAS */        
         $rhextras = [

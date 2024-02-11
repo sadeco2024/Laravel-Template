@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Erp;
 
 use App\Http\Controllers\Controller;
-use App\Models\ERP\Articulo;
+use App\Models\Erp\Articulo;
 use App\Models\Rh\Sucursal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;

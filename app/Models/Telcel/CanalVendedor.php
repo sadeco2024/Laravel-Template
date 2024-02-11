@@ -22,11 +22,30 @@ class CanalVendedor extends Model
         'updated_at',
     ];
 
+
+
+
+    public static function obtenerCanalVendedor($request)
+    {
+        return self::updateOrCreate(
+            [
+                'nombre' => preg_replace('/[^A-Za-z0-9 ]/', '', $request['nombre']),
+                'tlc_canal_id' => $request['tlc_canal_id']
+            ],
+            [
+                
+                'login' => preg_replace('/[^0-9]/', '',$request['login']) ?? '00000',
+                'logunico' => $request['logunico'] ?? '00000',
+                'contrasena' => $request['contrasena'] ?? NULL,
+                'calta' => $request['calta'] ?? NULL,
+                'fecha_alta' => $request['fecha_alta'] ?? NULL,
+                'enabled' => $request['enabled'] ?? 1,
+            ]
+        );
+    }
+
     public function canal()
     {
         return $this->belongsTo(Canal::class);
     }
-   
-
- 
 }

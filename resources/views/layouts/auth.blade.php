@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="ligth" data-header-styles="ligth"
-    data-menu-styles="ligth" data-toggled="close" data-loader="true">
-
+    <html lang="es" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="light" data-toggled="close" data-loader="true">    
 <head>
 
     <!-- Meta Data -->

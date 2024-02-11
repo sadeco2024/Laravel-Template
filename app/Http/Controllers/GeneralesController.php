@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ERP\Articulo;
+use App\Models\Erp\Articulo;
 use App\Models\Generales\Estado;
 use App\Models\Generales\Municipio;
 use App\Models\Rh\Sucursal;

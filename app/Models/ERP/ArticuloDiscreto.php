@@ -15,6 +15,16 @@ class ArticuloDiscreto extends Model
 
     protected $hidden = ['created_at', 'updated_at'];
 
+    public static function discretoId($serie, $long = null)
+    {
+        if (strpos($serie, "*") !== FALSE) {
+            return null;
+        }
+
+        // TODO: Validar que si tiene la longitud, la serie haga la comparación solo con la longitud, si tiene más caracteres, los ignora.
+        return self::firstOrCreate(['serie' => $serie, 'long' => $long])->id;
+    }
+
 
     public function articulo()
     {

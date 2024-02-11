@@ -2,7 +2,7 @@
 
 namespace App\Models\Erp;
 
-use App\Models\ERP\Articulo;
+use App\Models\Erp\Articulo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

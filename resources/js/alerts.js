@@ -1,5 +1,7 @@
 
-//** DATEPICKER - Rango de fechas */
+//** DATEPICKER   */ 
+
+//** Rango de fechas */
 document.querySelectorAll("input.daterange").forEach((element) => {
     try {
         flatpickr(element, {
@@ -8,9 +10,14 @@ document.querySelectorAll("input.daterange").forEach((element) => {
             'locale': 'es',
         });
     } catch {
-        throw "Error al cargar el datepicker";
+        throw "Error al cargar el Datepicker";
     }
 });
+
+
+
+
+//*** ALERTS */
 
 //** Cualquier componente que requiera confirmación dentro de un form. */
 document.querySelectorAll(".confirm-delete").forEach((element) => {

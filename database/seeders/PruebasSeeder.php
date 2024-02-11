@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\ERP\Articulo;
-use App\Models\ERP\Categoria;
-use App\Models\ERP\Linea;
+use App\Models\Erp\Articulo;
+use App\Models\Erp\Categoria;
+use App\Models\Erp\Linea;
 use App\Models\Generales\Ciudad;
 use App\Models\Generales\Estatus;
 use App\Models\Generales\Nombre;

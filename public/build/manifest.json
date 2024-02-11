@@ -1,4 +1,7 @@
 {
+  "_axios-zOJ20UaM.js": {
+    "file": "assets/axios-zOJ20UaM.js"
+  },
   "resources/assets/css/1-URF37ZRY.png": {
     "file": "assets/1-URF37ZRY-temI4Jc4.png",
     "src": "resources/assets/css/1-URF37ZRY.png"
@@ -179,23 +182,34 @@
     "file": "assets/transparent-YCQASJQ4-RbNa0E3N.png",
     "src": "resources/assets/css/transparent-YCQASJQ4.png"
   },
+  "resources/assets/images/media/backgrounds/1.png": {
+    "file": "assets/1-gNOOJfrk.png",
+    "src": "resources/assets/images/media/backgrounds/1.png"
+  },
+  "resources/assets/images/media/media-65.jpg": {
+    "file": "assets/media-65-RYM78kzg.jpg",
+    "src": "resources/assets/images/media/media-65.jpg"
+  },
   "resources/css/auth.css": {
-    "file": "assets/auth-CYpQacad.css",
+    "file": "assets/auth-vHvVN1-n.css",
     "isEntry": true,
     "src": "resources/css/auth.css"
   },
   "resources/css/guest.css": {
-    "file": "assets/guest-oovb93vY.css",
+    "file": "assets/guest-zZTDUdzu.css",
     "isEntry": true,
     "src": "resources/css/guest.css"
   },
   "resources/js/alerts.js": {
-    "file": "assets/alerts-CH8n13sw.js",
+    "file": "assets/alerts-rK8a1eRa.js",
     "isEntry": true,
     "src": "resources/js/alerts.js"
   },
   "resources/js/auth.js": {
-    "file": "assets/auth-kittlZwt.js",
+    "file": "assets/auth-50LgRB96.js",
+    "imports": [
+      "_axios-zOJ20UaM.js"
+    ],
     "isEntry": true,
     "src": "resources/js/auth.js"
   },
@@ -205,17 +219,20 @@
     "src": "resources/js/coming-soon.js"
   },
   "resources/js/datatables.js": {
-    "file": "assets/datatables-LMxEjRHl.js",
+    "file": "assets/datatables-3ow79WW2.js",
     "isEntry": true,
     "src": "resources/js/datatables.js"
   },
   "resources/js/funciones.js": {
-    "file": "assets/funciones-JxBPz0Bc.js",
+    "file": "assets/funciones-TBe_Lbgy.js",
+    "imports": [
+      "_axios-zOJ20UaM.js"
+    ],
     "isEntry": true,
     "src": "resources/js/funciones.js"
   },
   "resources/js/graficas.js": {
-    "file": "assets/graficas-jWcaJClb.js",
+    "file": "assets/graficas-ypDI3Ut1.js",
     "isEntry": true,
     "src": "resources/js/graficas.js"
   },
@@ -225,7 +242,7 @@
     "src": "resources/js/guest.js"
   },
   "resources/js/modales.js": {
-    "file": "assets/modales-z0DW1wKq.js",
+    "file": "assets/modales-WvH7Msdu.js",
     "isEntry": true,
     "src": "resources/js/modales.js"
   },

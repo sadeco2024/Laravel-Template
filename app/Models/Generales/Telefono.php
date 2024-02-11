@@ -24,4 +24,10 @@ class Telefono extends Model
     {
         return $this->hasMany(Activacion::class);
     }
+
+    public static function obtenerTelefono($telefono)
+    {
+        // TODO: Validar que sea 10 dígitos.
+        return self::firstOrCreate(['telefono'=>$telefono]);
+    }
 }

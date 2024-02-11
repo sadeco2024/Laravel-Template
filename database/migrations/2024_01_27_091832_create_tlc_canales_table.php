@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('activa')->default(true);
             $table->string('acox',15)->unique();
             $table->string('contrasena',20)->nullable();
-            $table->boolean('enable')->default(true);
+            $table->boolean('enabled')->default(true);
 
             $table->boolean('question')->default(false); // Servirá para saber si ya se configuró la pregunta secreta del canal.
 
@@ -41,7 +41,7 @@ return new class extends Migration
             $table->date('fecha_alta')->nullable();
            
             $table->foreignId('tlc_canal_id')->constrained('tlc_canales');
-            $table->boolean('enable')->default(true);
+            $table->boolean('enabled')->default(true);
             $table->timestamps();
         });
     }

@@ -61,7 +61,7 @@ class Telcel
             "scrapping" => 'login:first'
         ];
         $doc = $this->sendBrowser($opcs);
-
+        
         $opcs = [
             "method" => "BOTON",
             "methodoption" => "Entrar",
@@ -72,34 +72,39 @@ class Telcel
             "documento" => $doc,
             "scrapping" => 'login:entrar'
         ];
-        $doc = $this->sendBrowser($opcs);
+        //  Se quita, porque el handleErrors, ya lo hace.
 
-        if (strpos($doc->html(), 'La cuenta esta bloqueada 60 minutos') !== false) {
-            $this->setError(1, 'La cuenta esta bloqueada 60 minutos, debe aplicar reinicio.');
-        }
-        if (strpos($doc->html(), 'Usuario o passw') !== false) {
-            $this->setError(1, 'Usuario o password incorrectos');
-        }
 
         // ** Password Expirado
         if (strstr($doc->html(), "Password expirado")) {
             $this->passExpirado($doc);
+            // TODO: Si passwxpirado es false, devolver error.
             $this->setError(0, 'Se cambió la contraseña.');
-            // $this->setError(1, 'Password expirado');
         }
 
 
+        
         try {
             // Si existe algún error en la página login.
             $this->setError(1, 'Login: ' . $doc->filterXPath('//div/font[@color="#FF6600"]')->text());
         } catch (Exception $e) {
             // Si no hay error, se guarda todo. Se obtiene la sessión y los demás frames.
             $frames =  $doc->filterXpath('//frame')->extract(array('name', 'src'));
+            foreach ($frames as $index => $row) 
+            { 
+                dd('Frames:',$frames);
+				if (strstr($row[1], "nt.pl?session=" . $this->usuario))  {
+                    preg_match('/nt.pl\?session=(.*?)&user=/', $row[1], $matches);
+                    $this->session = $matches[1];
+                }
+				$doc = $this->browser->request('GET', $this->url . $row[1]);
+			}            
+
             $this->saveCookies($this->usuario);
         }
 
         return true;
-        return $this->resp;
+        // return $this->resp;
     }
 
     public function getCanales()
@@ -185,9 +190,9 @@ class Telcel
         $doc = $this->sendBrowser($opcs);
 
         $info = $this->readPage($doc, $canal); // Obtiene la información de la página.
+        
 
-
-        $this->setError(0, 'Se obtuvieron los vendedores', $info);
+        $this->setError(0, 'Se obtuvieron '.$this->getTotalVendedores($doc).' vendedores', $info);
         return $this->resp;
         // return ; // Elimina los elementos nulos del array
 
@@ -226,16 +231,16 @@ class Telcel
             "documento" => $doc,
         ];
         $doc = $this->sendBrowser($opcs);
-
+        
         try {
             $this->resp["data"]["anterior"] = $this->contrasena;
             $this->contrasena = $doc->filterXPath('//span[@class="clsPwd"]')->text(); // Cambió el pass.
             $this->resp["data"]["temporal"] = $this->contrasena;
-            // $doc->filterXPath('//span[@class="clsResult"]')->text()
-
+            // $this->passExpirado($doc);
         } catch (\Exception $e) {
             $this->setError(99, 'Reset acox:' . $e->getMessage());
         }
+        $this->setError(0, 'Se cambió la contraseña del canal.');
         $this->login();
         return $this->resp;
     }
@@ -303,21 +308,21 @@ class Telcel
             "fecha2"=>"02052023",
             ];        
         */
-        // dd($tipo,$fecha,$fecha2);
+
         $fecha = Date::createFromFormat('Y-m-d', $fecha)->format('dmY');
         $fecha2 = Date::createFromFormat('Y-m-d', $fecha2)->format('dmY');
         
-
+        
 
         if (!$this->validaSesion()) return $this->resp;
-
+        
         $opcs = [
             "method" => "GET",
             "url" => "/cgi-bin/contellot.pl?session=" . $this->session . "&priv=A",
             "goutte" => "activaciones"
         ];
         $doc = $this->sendBrowser($opcs);
-
+        
         $opcs = [
             "method" => "BOTON",
             "methodoption" => "Consultar",
@@ -330,8 +335,9 @@ class Telcel
             "documento" => $doc,
             "goutte" => "activaciones"
         ];
+        
 		$doc = $this->sendBrowser($opcs);
-
+        
 
         $registros = intval(preg_replace(array('/[^0-9]+/'), '', $doc->filterXpath('//center/font[contains(@face,"tahoma")]')->text()));
 
@@ -351,18 +357,6 @@ class Telcel
         
         return $this->resp;
 
-		// $registros = intval(preg_replace(array('/[^0-9]+/'), '', $doc->filterXpath('//center/font[contains(@face,"tahoma")]')->text()));
-		// try {
-		// 	$urlget = $doc->filterXpath('//a[contains(@href,".csv")]')->attr('href');
-		// 	$file = "temp/activaciones_" . $fecha . "_al_" . $fecha2 . "_$this->usuario.csv";
-		// 	if ($urlget != '') fwrite(fopen($file, "w"), file_get_contents($this->url . $urlget));
-		// 	$this->resp["data"] = ["Registros" => $registros, "file" => $file];
-		// } catch (Exception $e) {
-		// 	$this->resp["data"] = ["Registros" => 0];
-		// }
-		// return $this->resp;        
-
-        // return $this->resp;
     }
 
     //  ############################################################################################################
@@ -371,8 +365,6 @@ class Telcel
 
     private function validaSesion()
     {
-        //$this->url = "https://www2.r8.telcel.com"; // Cuando se manda validasesion, la url de TAF contiene el www2, por lo que se cambia, ya hay loguin, se están pidiendo métodos.
-
         if (!$this->setCookie()) return false;
 
         $opcs = [
@@ -383,14 +375,13 @@ class Telcel
         $doc = $this->sendBrowser($opcs);
 
 
-
         if (strstr($this->browser->getResponse()->getContent(), "Ha alcanzado su")) {
             if (!$this->login()) {
                 $this->setError(1, "Cuenta bloqueada por intentos excedidos. Solicitar un reset a la cuenta: $this->usuario.");
                 unlink($this->cookie);
                 return false;
             }
-        }  //else $this->handleErrors($doc);
+        } 
 
         return true;
     }
@@ -415,7 +406,7 @@ class Telcel
                     "nvopassword2" => $nuevopas,
                 ],
                 "documento" => $doc,
-                "goutte" => "cambiopasswd"
+                "scrapping" => "passExpirado:intentos"
             ];
             try {
 
@@ -424,15 +415,15 @@ class Telcel
                 $this->setError(99, 'Pass expirado: ' . $e->getMessage());
             }
         }
-
-        @unlink($this->cookie); // se elimina la cookie para que no guarde registros.
+        
+        // @unlink($this->cookie); // se elimina la cookie para que no guarde registros.
         $this->contrasena = $nuevopas;
 
         //$this->client = new Client();
         $this->browser = new HttpBrowser(HttpClient::create(['timeout' => 60, 'verify_host' => false, 'verify_peer' => false]));
         $this->resp["data"]["nuevopass"] = $this->contrasena;
         $this->setError(0, 'Se cambió la contraseña: ' . $this->contrasena);
-
+        
         return $this->contrasena;
     }
 
@@ -443,6 +434,19 @@ class Telcel
             return ($value !== NULL && $value !== FALSE && $value !== ''); /* deja los 0's */
         }));
         return $array;
+    }
+
+    private function getTotalVendedores($doc)
+    {
+        $totalVendedores = 0;
+        $tdElements = $doc->filter('label');
+        $tdElements->each(function ($td) use (&$totalVendedores) {
+            $textContent = $td->text();
+            if (strpos($textContent, 'Total: ') !== false) {
+                $totalVendedores = (int) filter_var($textContent, FILTER_SANITIZE_NUMBER_INT);
+            }
+        });
+        return $totalVendedores;
     }
 
     private function readPage($doc, $canal)
@@ -456,6 +460,9 @@ class Telcel
             return $datos;
         });
 
+        $this->getTotalVendedores($doc);
+
+
         $titulos = ["login", "loginnico", "nombre", "fechaalta", "contraseaalta", "resetearpassword", "canal", "estatus"];
 
         $arrayMake = array_map(function ($row) use ($titulos) {
@@ -464,7 +471,97 @@ class Telcel
                 return array_combine($titulos, $row);
             }
         }, $nodos);
-        $this->setError(0, 'Se obtuvieron los vendedores', array_filter($arrayMake));
+        $this->setError(0, 'Se obtuvieron los vendedores, total: '. $this->getTotalVendedores($doc), array_filter($arrayMake));
         return $arrayMake;
     }
+
+
+    public function handleErrors($doc)
+    {
+
+        try {
+            $html = $doc->html();
+        } catch (Exception $e) {
+            $this->setError(0, 'Error en handleErrors: ' . $e->getMessage());
+            return false;
+        }
+
+
+        if (empty($doc)) return false;
+        
+        //** Errores comunes de la intranet. */
+        if (!empty($doc->html()) && strpos($doc->html(), 'FUERA DE SERVICIO') !== false) {
+            $this->setError(1, 'La página está fuera de servicio.');
+        }
+
+        if (strpos($doc->html(), 'rror validando pregunta y respuesta') !== false) {
+            $this->setError(1, 'El canal no tiene definida la pregunta secreta.');
+        }
+
+        if (strpos($doc->html(), 'Intente loguearse nuevamente') !== false)         {
+            $this->setError(0, 'No se pudo loguear desde relogin, intentando manual.');
+            $this->login();
+        }        
+
+        if (strpos($doc->html(), 'La cuenta esta bloqueada 60 minutos') !== false) {
+            $this->setError(1, 'La cuenta esta bloqueada 60 minutos, debe aplicar reinicio.');
+        }
+        if (strpos($doc->html(), 'Usuario o passw') !== false) {
+            $this->setError(1, 'Usuario o password incorrectos');
+        }
+        
+
+        //** REDIRECTS */
+        if ($doc->filterXpath('//redirect')->count() > 0 && !isset($redirect)) {
+            $doc = $this->browser->request('GET', $this->url . $doc->filterXpath('//redirect')->attr('url'));
+            $this->setScrapp(["redirect"]);
+        }
+
+        // ** ERROR DE RE-LOGIN INTRANET
+        if (strpos($doc->html(), 'frmlogin') !== false && strpos($doc->html(), 'j_username') !== false) {
+            // ** RELOGIN PAGE.
+            // El botón de login existe
+            $boton = strpos($doc->html(), 'Entrar') ? 'Entrar' : 'Login';
+            $opcs = [
+                "method" => "BOTON",
+                "methodoption" => "$boton",
+                "array" => [
+                    "j_username" => $this->usuario,
+                    "j_password" => $this->contrasena
+                ],
+                "documento" => $doc,
+                "scrapping" => 'relogin:first'
+            ];
+
+            try {
+                $doc = $this->sendBrowser($opcs);
+
+                $frames =  $doc->filterXpath('//frame')->extract(array('name', 'src'));
+                foreach ($frames as $index => $row) 
+                { 
+                    // dd('Frames:',$frames);
+                    if (strstr($row[1], "nt.pl?session=" . $this->usuario))  {
+                        preg_match('/nt.pl\?session=(.*?)&user=/', $row[1], $matches);
+                        $this->session = $matches[1];
+                    }
+                    $doc = $this->browser->request('GET', $this->url . $row[1]);
+                }            
+    
+                $this->saveCookies($this->usuario);
+
+            }  catch(Exception $e) {
+                $this->setError(99, 'Error en relogin: ' . $e->getMessage());
+            }
+
+            if (strpos($doc->html(), 'Error de Autenticación') !== false)
+                $this->login();
+            else if (strpos($doc->html(), 'Password expirado') !== false)
+                $this->passExpirado($doc);
+            else
+                $this->saveCookies();
+        }
+
+        return $doc;
+    }
+
 }

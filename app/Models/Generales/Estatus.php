@@ -22,6 +22,13 @@ class Estatus extends Model
         'updated_at',
     ];
 
+    public static function obtenerEstatus($estatus)
+    {
+        return self::firstOrCreate(
+            ['estatus' => trim($estatus)]
+        );
+    }
+
     public function estatus(): Attribute
     {
         return Attribute::make(

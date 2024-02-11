@@ -18,6 +18,10 @@ class Concepto extends Model
         'concepto',
     ];
 
+    public static function obtenerConcepto($concepto)
+    {
+        return self::firstOrCreate(['concepto'=>$concepto]);
+    }
 
     protected $hidden = [
         'id',

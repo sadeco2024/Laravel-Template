@@ -4,7 +4,7 @@ use App\Http\Controllers\Configuraciones\MenuController;
 use App\Http\Controllers\Confs\PermisoController;
 use App\Http\Controllers\Confs\RoleController;
 use App\Http\Controllers\Erp\ArticuloController;
-use App\Http\Controllers\Erp\ErpController;
+use App\Http\Controllers\Generales\DataTableController;
 use App\Http\Controllers\GeneralesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Rh\EmpleadoController;
@@ -14,7 +14,6 @@ use App\Http\Controllers\Telcel\ActivacionController;
 use App\Http\Controllers\Telcel\CanalController;
 use App\Http\Controllers\Telcel\DescargaActivacionesController;
 use App\Models\Configuraciones\Menu;
-use App\Models\Rh\Empleado;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,12 +36,6 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', function () {
-
-
-
-
-
-
         return view('dashboard');
     })->name('dashboard');
 
@@ -75,7 +68,10 @@ Route::middleware('auth')->group(function () {
     //** Rutas Telcel::Prepago */
     Route::resource('telcel/activaciones',ActivacionController::class)->only(['index', 'show', 'store', 'update', 'destroy','edit'])->names('telcel.activaciones');
     Route::post('telcel/activaciones/grafica',[ActivacionController::class,'grafica'])->name('telcel.activaciones.grafica');
+    Route::post('telcel/activaciones/grafica/diario', [ActivacionController::class, 'graficaDiario'])->name('telcel.activaciones.grafica.diario');
     Route::post('telcel/activaciones/compara',[ActivacionController::class,'compara'])->name('telcel.activaciones.compara');
+    Route::post('telcel/activaciones/comparadiario',[ActivacionController::class,'comparaDiario'])->name('telcel.activaciones.compara.diario');
+    Route::post('telcel/activaciones/resumen',[ActivacionController::class,'resumen'])->name('telcel.activaciones.compara');
     
 
     Route::resource('telcel/activaciones/download', DescargaActivacionesController::class)->names('telcel.activaciones.download');
@@ -94,6 +90,16 @@ Route::middleware('auth')->group(function () {
         
     });
 
+    //* Rutas de TABLAS de los index.
+    Route::group(['prefix' => 'tables'], function () {
+        Route::get('/telcel/canales', [DataTableController::class, 'canalesTelcel'])->name('tabla.telcel.canales');
+        // Route::get('/getEmpleados', [EmpleadoController::class, 'tablaEmpleados'])->name('getEmpleados');
+        // Route::post('/setRhExtras', [RhExtraController::class, 'store'])->name('set.rhextras');
+        // Route::get('/getRhExtras', [RhExtraController::class, 'getRhextras'])->name('get.rhextras');
+        // Route::get('/getArticulos', [GeneralesController::class, 'getArticulos'])->name('get.articulos');
+
+        
+    });
 
 
 

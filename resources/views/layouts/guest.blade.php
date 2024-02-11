@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" dir="ltr" data-nav-layout="vertical" data-vertical-style="overlay" data-theme-mode="light"
-    data-header-styles="light" data-menu-styles="light" data-toggled="close">
+    <html lang="es" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="light" data-toggled="close">
 
 <head>
     <!-- Meta Data -->
@@ -22,10 +21,10 @@
 
     {{-- @Vite - Start::Css --}}
 
-    <link rel="stylesheet" href="{{ Vite::asset('resources/css/guest.css') }}">
+    {{-- <link rel="stylesheet" href="{{ Vite::asset('resources/css/guest.css') }}"> --}}
 
 
-    {{-- @vite(['resources/css/guest.css']) --}}
+    @vite(['resources/css/guest.css'])
     {{-- @Vite End::css --}}
 
     {{-- @Vite - Start::CssOtros --}}
