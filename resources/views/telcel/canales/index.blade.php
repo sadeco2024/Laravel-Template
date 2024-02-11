@@ -8,10 +8,8 @@
 
 
 
-    {{-- <div class="row"> --}}
+
     {{-- Barra de información --}}
-
-
     <div class="col-xl-12">
         <div class="card custom-card">
             <div class="card-body d-flex align-items-baseline align-items-start flex-wrap">
@@ -43,18 +41,19 @@
     {{-- </div> --}}
 
 
-    {{-- <div class="row"> --}}
+    {{-- Tabla - Canales --}}
     <div class="col-xl-8">
+
+
         <div class="card custom-card">
             <div class="card-header justify-content-between">
                 <x-inputs.search-table :name="'src_telcel_canal'" />
-                <div id="btnTelcelCanales" class="">
-                    {{-- {{ $canales->links() }} --}}
-                </div>
+                <div id="btnTelcelCanales" class=""></div>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
-                    <table id="tblTelcelCanales" class="table table-borderless table-hover table-selected">
+                    <table id="tblTelcelCanales" data-url="{{ route('tabla.telcel.canales') }}"
+                        class="table table-borderless table-hover table-selected w-100">
                         <thead class="text-info text-center">
                             <tr>
                                 <th>Nombre</th>
@@ -69,90 +68,222 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @dd($canales) --}}
-                            @foreach ($canales as $canal)
-                                <tr>
-                                    <td>{{ $canal->nombre }}</td>
-                                    <td>
-                                        <x-badges.modulo :icon="'bi bi-bracesss'" class="badge bg-light text-dark">
-                                            {{ $canal->clave }}
-                                        </x-badges.modulo>
-                                        {{-- {{ $canal->clave }} --}}
-                                    </td>
-                                    <td>{{ $canal->acox }}</td>
-                                    <td>
-                                        {{-- @debug($canal); --}}
-                                        {{-- @php Debug::info($canal); @endphp --}}
-                                        {{-- @dump($canal->concepto->concepto ?? '') --}}
-                                        @switch($canal->concepto->concepto ?? '')
-                                            @case('Distribuidor')
-                                                @if ($canal->id === 1)
-                                                    <span
-                                                        class="badge bg-danger-transparent">{{ $canal->concepto->concepto ?? '' }}</span>
-                                                @else
-                                                    <span
-                                                        class="badge bg-primary-transparent">{{ $canal->concepto->concepto ?? '' }}</span>
-                                                @endif
-                                            @break
-
-                                            @case('Cadena')
-                                                <span
-                                                    class="badge bg-warning-transparent">{{ $canal->concepto->concepto ?? '' }}</span>
-                                            @break
-
-                                            @case('Subs')
-                                                <span
-                                                    class="badge bg-success-transparent">{{ $canal->concepto->concepto ?? '' }}</span>
-                                            @break
-
-                                            @default
-                                                <span class="badge">{{ $canal->concepto->concepto ?? '' }}</span>
-                                        @endswitch
-                                    </td>
-                                    <td>{{ $canal->sucursal->nombre }}</td>
-                                    <td>{{ $canal->sucursal->empleados->count() }}</td>
-                                    <td class="text-center">
-                                        <x-buttons.modal-crud class="btn btn-sm btn-outline-warning" href="#modalCanales"
-                                            :url="route('telcel.canales.edit', $canal->id)" :title="'Editar canal'">
-                                            <i class="bi bi-gear"></i>
-                                        </x-buttons.modal-crud>
-
-                                        </a>
-                                    </td>
-
-                                </tr>
-                            @endforeach
                         </tbody>
                     </table>
-
                 </div>
-
             </div>
-
         </div>
 
     </div>
+
+    {{-- Acordeon: Vendedores, Sucursales --}}
+
+    {{-- <div class="row"> --}}
     <div class="col-xl-4">
+        <div class="card custom-card">
+            {{-- <div class="card-header justify-content-between">
+                    <div class="card-title">
+                        Primary
+                    </div>
+                    <div class="prism-toggle">
+                        <button class="btn btn-sm btn-primary-light">Show Code<i class="ri-code-line ms-2 d-inline-block align-middle"></i></button>
+                    </div>
+                </div> --}}
+            <div class="card-body">
+                <div class="accordion accordion-info" id="accordingInformacion">
+                    {{-- Sucursales --}}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="Sucursales">
+                            <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseSucursales" aria-expanded="false"
+                                aria-controls="collapseSucursales">
+                                Sucursales
+                            </button>
+                        </h2>
+                        <div id="collapseSucursales" class="accordion-collapse collapse show" aria-labelledby="Sucursales"
+                            data-bs-parent="#accordingInformacion">
+                            <div class="accordion-body">
+
+                                <ul class="list-group">
+                                    @foreach ($canalSucursal as $sucursal)
+                                        <li class="list-group-item list-group-flush list-group-item-action">
+                                            <div class="d-sm-flex align-items-top flex-nowrap gap-3">
+
+                                                <div>
+                                                    <span class="avatar avatar-md bg-primary-transparent">
+                                                        {{ $sucursal['abreviatura'] }}
+                                                    </span>
+                                                </div>
+                                                <div class="mt-sm-0 mt-1 fw-medium flex-wrap">
+                                                    <p class="mb-0 lh-1">{{ ucfirst($sucursal['sucursal']) }}</p>
+                                                    <span class="fs-11 text-muted op-7 text-wrap">
+                                                        {{ $sucursal['listado'] }}
+                                                    </span>
+                                                </div>
+                                                <div class="ms-auto">
+                                                    <span class="badge bg-orange-transparent fs-14 rounded-pill">
+                                                        {{ $sucursal['canales'] }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Vendedores --}}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="Vendedores">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseVendedores" aria-expanded="false"
+                                aria-controls="collapseVendedores">
+                                Vendedores
+                            </button>
+                        </h2>
+                        <div id="collapseVendedores" class="accordion-collapse collapse  " aria-labelledby="Vendedores"
+                            data-bs-parent="#accordingInformacion">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush">
+                                    @foreach ($vendedores as $vendedor)
+                                        @if ($vendedor['concepto'] == 'Distribuidor')
+                                            <li class="list-group-item list-group-flush list-group-item-action">
+                                                <div class="d-sm-flex align-items-top flex-nowrap gap-3">
+                                                    <div class="mt-sm-0 mt-1 fw-medium flex-wrap">
+                                                        <div class="flex-nowrap">
+                                                            <span class="badge bg-orange-transparent rounded-pill">
+                                                                {{ $vendedor['canal'] }}
+                                                            </span>
+                                                            <span
+                                                                class="mb-0 lh-1">{{ ucfirst($vendedor['sucursal']) }}</span>
+                                                        </div>
+                                                        <span class="fs-11 text-muted op-7 text-wrap">
+                                                            {{ $vendedor['vendedores'] }}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Subs --}}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="Subs">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseSubs" aria-expanded="false" aria-controls="collapseSubs">
+                                Subs
+                            </button>
+                        </h2>
+                        <div id="collapseSubs" class="accordion-collapse collapse" aria-labelledby="Subs"
+                            data-bs-parent="#accordingInformacion">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush">
+                                    @foreach ($vendedores as $vendedor)
+                                        @if ($vendedor['concepto'] == 'Subs')
+                                            <li class="list-group-item list-group-flush list-group-item-action">
+                                                <div class="d-sm-flex align-items-top flex-nowrap gap-3">
+
+                                                    <div class="mt-sm-0 mt-1 fw-medium flex-wrap">
+                                                        <div class="flex-nowrap">
+                                                            <span class="badge bg-orange-transparent rounded-pill">
+                                                                {{ $vendedor['canal'] }}
+                                                            </span>
+                                                            <span
+                                                                class="mb-0 lh-1">{{ ucfirst($vendedor['sucursal']) }}</span>
+                                                        </div>
+                                                        <span class="fs-11 text-muted op-7 text-wrap">
+                                                            {{ $vendedor['vendedores'] }}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {{-- Cadenas --}}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="Cadenas">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseCadenas" aria-expanded="false" aria-controls="collapseCadenas">
+                                Cadenas
+                            </button>
+                        </h2>
+                        <div id="collapseCadenas" class="accordion-collapse collapse" aria-labelledby="Cadenas"
+                            data-bs-parent="#accordingInformacion">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush">
+                                    @foreach ($vendedores as $vendedor)
+                                        @if ($vendedor['concepto'] == 'Cadena')
+                                            <li class="list-group-item list-group-flush list-group-item-action">
+                                                <div class="d-sm-flex align-items-top flex-nowrap gap-3">
+
+                                                    <div class="mt-sm-0 mt-1 fw-medium flex-wrap">
+                                                        <div class="flex-nowrap">
+                                                            <span class="badge bg-orange-transparent rounded-pill">
+                                                                {{ $vendedor['canal'] }}
+                                                            </span>
+                                                            <span
+                                                                class="mb-0 lh-1">{{ ucfirst($vendedor['sucursal']) }}</span>
+                                                        </div>
+                                                        <span class="fs-11 text-muted op-7 text-wrap">
+                                                            {{ $vendedor['vendedores'] }}
+                                                        </span>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                        @endif
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="card-footer d-none border-top-0">
+
+            </div>
+        </div>
+    </div>
+
+    {{-- </div>     --}}
+
+    {{-- Sucursales --}}
+    {{-- <div class="col-xl-4">
         <div class="card custom-card overflow-hidden">
             <div class="card-header">
                 <div class="card-title d-flex flex-nowrap flex-fill justify-content-between">
                     <div>
-                    <span class="me-2">
-                        Sucursales
-                    </span>
-                </div>
-                <div>
-                    <span class="avatar avatar-sm bg-info-transparent ms-auto">
-                        <i class="bi bi-shop my-1 fs-4 text-info"></i>
-                    </span>
-                </div>
+                        <span class="me-2">
+                            Sucursales
+                        </span>
+                    </div>
+                    <div>
+                        <span class="avatar avatar-sm bg-info-transparent ms-auto">
+                            <i class="bi bi-shop my-1 fs-4 text-info"></i>
+                        </span>
+                    </div>
 
                 </div>
             </div>
-            <div class="card-"  style="overflow-y: auto; max-height: 50vh;">
+            <div class="card-" style="overflow-y: auto; max-height: 50vh;">
                 <ul class="list-group">
                     @foreach ($canalSucursal as $sucursal)
-                        {{-- @dump($sucursal) --}}
                         <li class="list-group-item list-group-flush list-group-item-action">
                             <div class="d-sm-flex align-items-top flex-nowrap gap-3">
 
@@ -167,12 +298,6 @@
                                         {{ $sucursal['listado'] }}
                                     </span>
                                 </div>
-                                {{-- <div class="mt-sm-0 mt-1 fw-medium flex-fill">
-                                        <p class="mb-0 lh-1">{{ ucfirst($sucursal['sucursal'])}}</p>
-                                        <span class="fs-11 text-muted op-7 text-wrap">
-                                            {{ $sucursal["listado"] }}
-                                        </span>
-                                    </div> --}}
                                 <div class="ms-auto">
                                     <span class="badge bg-orange-transparent fs-14 rounded-pill">
                                         {{ $sucursal['canales'] }}
@@ -188,10 +313,10 @@
 
 
 
-    </div>
+    </div> --}}
     {{-- </div> --}}
 
-    <!-- Modal::Agregar Permiso -->
+    <!-- Modal::Editar Canal -->
     <div class="modal fade sd-modalForm" id="modalCanales" data-bs-backdrop="static">
         <div class="modal-dialog modal-dialog-centered " role="document">
             <div class="modal-content modal-content-demo">
@@ -217,14 +342,5 @@
 @section('js')
 
     <x-scripts.jquery :sweetAlert="true" :tables="true" />
-    <script>
-        $(document).ready(function() {
-            // $('#tblTelcelCanales').DataTable();
-        });
-    </script>
-
-    <script>
-        // var table = $('#tblTelcelCanales').DataTable();
-    </script>
 
 @endsection

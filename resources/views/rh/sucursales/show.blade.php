@@ -21,6 +21,10 @@
                     <div>
                         <select class="form-select form-select-sm">
                             <option value="1">Activaciones</option>
+                            <option value="2">Pospago</option>
+                            <option value="3">Paguitos</option>
+                            <option value="4">Payjoy</option>
+                            <option value="5">Microsip</option>
                         </select>
                     </div>
                 </div>
@@ -83,7 +87,39 @@
                         </div>
                     </div>
                     {{-- Gráfica activaciones --}}
-                    <div id="grafica-activaciones-mensuales"></div>
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <div class="form-group mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bi bi-calendar-check-fill'></i>
+                                    </div>
+                                    <select id="slcActivacionesFecha" class="form-select form-select-sm">
+                                        <option value="preactivacion">Fecha preactivación</option>
+                                        <option value="activacion">Fecha Activación</option>
+                                        <option value="primera_llamada">Fecha Primera llamada</option>
+                                        <option value="rep_venta">Fecha Reporte ventas</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 ms-auto text-right">
+                            <div class="form-group mb-2">
+                                <div class="input-group">
+                                    <div class="input-group-text">
+                                        <i class='bi bi-calendar4'></i>
+                                    </div>
+                                    <select id="slcActivacionesAnio" class="form-select form-select-sm">
+                                        <option value="2024">2024</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2022">2022</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        {{-- Gráfica activaciones --}}
+                        <div id="grafica-activaciones-mensuales"></div>
+                    </div>
 
 
                 </div>

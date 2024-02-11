@@ -1,10 +1,10 @@
-/* @import url('../theme/libs/bootstrap/css/bootstrap.min.css');
-@import url('../theme/scss/styles.css');
-@import url('../theme//scss/icons.css'); */
+
+@import url('../assets/libs/bootstrap/css/bootstrap.min.css');
+
+/* @import url('../assets/scss/styles.css'); */
+@import '../assets/css/styles.css';
+@import '../assets//css/icons.css';
 
 
-@import '../assets/libs/bootstrap/css/bootstrap.min.css';
-@import url('../assets/css/styles.css');
-@import url('../assets/css/icons.css');
-/* @import '../assets/scss/styles.css'; */
-/* @import '../assets//scss/icons.css'; */
+
+

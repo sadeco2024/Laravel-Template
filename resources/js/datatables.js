@@ -1,15 +1,87 @@
-if (document.getElementById("tblTelcelCanales")) {
-    const tableCanales = $("#tblTelcelCanales").DataTable({
-        dom: "Brtip",
-        buttons: ["copy", "excel", "print"],
-        pageLength: 10,
-        resposive: true,
-        // processing: true,
-        // serverSide: true,
-        // deferRender: true,
-    });
+(function () {
+    "use strict";
+
+    //** TABLA DE CANALES */
+    if (document.getElementById("tblTelcelCanales")) {
+        var url = $("#tblTelcelCanales").data("url");
+
+        const tableCanales = $("#tblTelcelCanales").DataTable({
+            dom: "Brtip",
+            buttons: ["copy", "excel", "print"],
+            pageLength: 10,
+            // resposive: true,
+            ajax: {
+                url: url,
+                dataSrc: "",
+            },
+            scrollX: true,
+            columns: [
+                { data: "nombre" },
+                {
+                    data: "clave",
+                    render: function (data, type, row) {
+                        return `<span class="badge border bg-light text-default custom-badge px-2">${row.clave}</span>`;
+                    },
+                },
+                { data: "acox" },
+                { data: "concepto.concepto" },
+                { data: "sucursal.nombre" },
+                {
+                    data: "sucursal.empleados",
+                    render: function (data, type, row) {
+                        return data.length;
+                    },
+                },
+                {
+                    data: null,
+                    render: function (data, type, row) {
+                        let qColor = row.question==1 ? 'success' : 'warning';
+                        // console.log(row)
+                        return `
+                        <div class="btn-group btn-group-sm">
+                            <a class="modal-effect btn btn-sm btn-outline-${qColor} waves-effect waves-light"
+                                data-bs-effect="effect-slide-in-right" 
+                                data-bs-toggle="modal" 
+                                href="#modalCanales" 
+                                data-url="${row.ruta_editar}"
+                                data-title="Editar canal"
+                                data-param="${row.id}"
+                            >
+                                <i class="bi bi-gear"></i>
+                            </a>
+               
+                        </div>
+                        `;
+                    },
+                },
+            ],
+            columnDefs: [
+                {
+                    targets: 3,
+                    className: "text-center",
+                    render: function (data, type, row, meta) {
+                        let color =
+                            row.concepto.concepto === "Distribuidor"
+                                ? "primary" : ( row.concepto.concepto === "Subs" ? 'success' : "warning");
+                        color = row.id == 1 ? "danger" : color;
+                        return `
+                        <span class="badge bg-${color}-transparent" />
+                            ${row.concepto.concepto}
+                        </span>
+                        `;
+                    },
+                },
+            ],
+        });
+        moveOptions(tableCanales, "src_telcel_canal", "btnTelcelCanales");
+    }
+})();
+
+function moveOptions(table, search, botones) {
+    $("thead", table).addClass("text-info");
+    $(".pagination", table).addClass("my-2");
     // Selecciona todos los botones en la tabla actual para cambiar estilos
-    const buttons = Array.from(tableCanales.buttons().nodes());
+    const buttons = Array.from(table.buttons().nodes());
     buttons.forEach((button) => {
         button.classList.remove("btn-secondary");
         button.classList.add(
@@ -20,35 +92,16 @@ if (document.getElementById("tblTelcelCanales")) {
             "waves-light"
         );
     });
-    // Cambia el color del texto de lso tds
-    $("thead", tableCanales.table).addClass("text-info");
-    $(".pagination", tableCanales.table).addClass("my-2");
+    table
+        .buttons()
+        .container()
+        .appendTo("#" + botones);
 
-    // Cambia de posición los botones
-    tableCanales.buttons().container().appendTo("#btnTelcelCanales");
-
-    // Cambia de posición el input de búsqueda
-    $("#src_telcel_canal").on("keyup", function () {
-        tableCanales.search(this.value).draw();
-    });
-
-    //TODO: Que se cargue el data actual al modal, para que al cerrar se reestableza. Ya lo hace, pero el detalle que no se muestra el botón, porque no se renderíza por datatable, se hace en php
-    //
-    // var clickedRow = null;
-    // $('#tblTelcelCanales tbody').on('click', 'tr', function () {
-    //     clickedRow = tableCanales.row(this).index();
-    //     clickedRow = tableCanales.row(this).data();
-    //     // Remove HTML from the last column
-    //     clickedRow[clickedRow.length - 1] = $(clickedRow[clickedRow.length - 1]).text();
-    //     console.log(clickedRow);
-    // });
-
-    // $('#modalCanales').on('hidden.bs.modal', function () {
-    //     if (clickedRow !== null) {
-    //         var newData = // obtén los nuevos datos del formulario aquí
-    //         tableCanales.row(clickedRow).data(clickedRow).draw();
-    //     }
-    // });
+    $("#" + search)
+        .val("")
+        .on("keyup", function () {
+            table.search(this.value).draw();
+        });
 }
 
 function setEstatus(estatus) {
@@ -61,7 +114,7 @@ function setEstatus(estatus) {
             color = "danger";
             break;
         default:
-            color = "success"
+            color = "success";
             break;
     }
     return color;
@@ -77,16 +130,15 @@ if (document.getElementById("tblEmpleados")) {
         columnDefs: [
             {
                 targets: 3, // Esto apunta a la tercera columna (la indexación es desde 0)
-                render: function(data, type, row, meta) {
-
+                render: function (data, type, row, meta) {
                     let color = setEstatus(row[3]);
                     return `
                     <span class="badge bg-${color}-transparent" />
                         ${row[3]}
                     </span>
                     `;
-                }
-            }
+                },
+            },
         ],
     });
 

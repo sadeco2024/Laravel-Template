@@ -34,26 +34,71 @@ class ActivacionController extends Controller
      */
     public function index()
     {
+        // $activaciones = Activacion::graficaAnual(2022)->get();
 
-        $activaciones = Activacion::mensual(date('Y'),'preactivacion');
-        $compara = Activacion::anualcompara();
-        // return ($activaciones);
-        return view('telcel.activaciones.index', compact('activaciones','compara'));
+
+        // $activaciones = Activacion::graficaAnual(date('Y'),'preactivacion');
+        // echo json_encode($activaciones);
+        // dd($activaciones);
+
+        // $compara = Activacion::anualcompara();
+        return view('telcel.activaciones.index');
     }
 
     public function grafica(Request $request) {
-        // dd($request->all());
-        // dd($request->input('anio'));
-        $activaciones = Activacion::mensual($request->input('anio') ?? date('Y'),$request->input('tipofecha') ?? 'preactivacion');
-        return $activaciones;
-        return view('telcel.activaciones.grafica', compact('activaciones'));
+        $opcs = [
+            'anio'=> $request->input('anio') ?? date('Y'),
+            'tipofecha'=> $request->input('tipofecha') ?? 'preactivacion',
+            'cadenas'=>$request->input('cadenas') ?? false
+        ];
+        $activaciones = Activacion::graficaAnual($opcs);
+        return response()->json($activaciones);
+        
+    }
+
+    public function graficaDiario(Request $request) {
+        $opcs = [
+            'anio'=> $request->input('anio') ?? date('Y'),
+            'mes'=> $request->input('mes') ?? date('m'),
+            'tipofecha'=> $request->input('tipofecha') ?? 'preactivacion',
+        ];
+        $activaciones = Activacion::diario($opcs);
+        return response()->json($activaciones);
+        
+    }
+
+    public function resumen(Request $request) {
+        $opcs = [
+            'anio'=> $request->input('anio') ?? date('Y'),
+            'mes'=> $request->input('mes') ?? date('m'),
+            'tipofecha'=> $request->input('tipofecha') ?? 'preactivacion',
+        ];
+        $activaciones = Activacion::CanalesAnual($opcs);
+        return response()->json($activaciones);
     }
 
     public function compara(Request $request) {
-        // $activaciones = Activacion::mescompara();
-        // $activaciones = Activacion::anualcompara();
-        $activaciones = Activacion::CanalesAnual($request->input('anio') ?? date('Y'));
+        // $activaciones = Activacion::CanalesAnual($request->input('anio') ?? date('Y'));
+        $opcs = [
+            'anio'=> $request->input('anio') ?? date('Y'),
+            'mes'=> $request->input('mes') ?? date('m'),
+            'tipofecha'=> $request->input('tipofecha') ?? 'preactivacion',
+        ];
+
+        $activaciones = Activacion::anualcompara($opcs);
+        return response()->json($activaciones);
         return $activaciones;
+    }
+
+    public function comparaDiario(Request $request) {
+
+        $opcs = [
+            'anio'=> $request->input('anio') ?? date('Y'),
+            'mes'=> $request->input('mes') ?? date('m'),
+            'tipofecha'=> $request->input('tipofecha') ?? 'preactivacion',
+        ];
+        $activaciones = Activacion::MensualPorProducto($opcs);
+        return response()->json($activaciones);
         return $activaciones;        
     }
 

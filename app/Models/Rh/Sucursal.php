@@ -55,6 +55,8 @@ class Sucursal extends Model
         ->orderBy('sucursales.nombre','asc');
     }
 
+
+
     public function telefono()
     {
         return $this->belongsTo('App\Models\Generales\Telefono', 'telefono_id');
@@ -109,6 +111,32 @@ class Sucursal extends Model
     public function tlcCanales()
     {
         return $this->hasMany(Canal::class, 'sucursal_id');
+    }    
+
+    public function scopeSucursalAbr($query)
+    {
+        $sucursales = $query->select('nombre')->get();
+        $abreviaturas = [];
+        $result = [];
+    
+        foreach ($sucursales as $sucursal) {
+            $nombre = $sucursal->nombre;
+            $palabras = explode(' ', $nombre);
+            $abreviatura = '';
+    
+            foreach ($palabras as $palabra) {
+                $abreviatura .= substr($palabra, 0, 1);
+            }
+    
+            if (in_array($abreviatura, $abreviaturas)) {
+                $abreviatura = substr($palabras[0], 0, 1) . substr($palabras[1], 1, 1);
+            }
+    
+            $abreviaturas[] = $abreviatura;
+            $result[] = ['sucursal' => $nombre, 'abreviatura' => strtoupper($abreviatura)];
+        }
+    
+        return $result;
     }    
 
     protected $hidden = [

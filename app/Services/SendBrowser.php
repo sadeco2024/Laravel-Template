@@ -68,6 +68,7 @@ trait SendBrowser
             case 'BOTON': // Se hace la búsqueda del botón.
                 try {
                     $form = $documento->selectButton($methodoption)->form();
+                    // dd($form);
                     // $form->setValues($this->arrayMake($array, $form,$documento));
                     $this->arrayResult = isset($array) ? $this->arrayMake($array, $form, $documento) : array();
                     // dd($this->arrayResult,$array,$form->getValues());
@@ -86,13 +87,17 @@ trait SendBrowser
                 break;
         }
         $this->setScrapp($opcs);
-        // Se manejan algunos errores
-        if (!empty($doc)) $this->handleErrors($doc);
 
-        // Se obtiene el último código de respuesta.
+        // Se manejan los errores del Servicio
+        if (method_exists($this, 'handleErrors'))
+            if (!empty($doc)) $this->handleErrors($doc);
 
+        try {
 
-
+            $this->resp["code"] = $this->browser->getResponse()->getStatusCode();
+        } catch (Exception $ex) {
+            // $this->setError(99, 'Form GET:' . $ex->getMessage());
+        }
         return $doc;
     }
 
@@ -135,7 +140,7 @@ trait SendBrowser
                 "faces.ViewState" => "javax.faces.ViewState",
             ];
 
-            $arrayMake[$javaFaces[$index] ?? $index] = $index === "javax.faces.ViewState" && $value=='' ? $this->viewState($doc) : $value;
+            $arrayMake[$javaFaces[$index] ?? $index] = $index === "javax.faces.ViewState" && $value == '' ? $this->viewState($doc) : $value;
         }
         $this->arrayResult = $arrayMake;
 
@@ -285,49 +290,5 @@ trait SendBrowser
             $this->resp["data"] = $data;
 
         if ($numero > 0) die(json_encode($this->resp));
-    }
-
-    private function handleErrors($doc)
-    {
-        $this->resp["code"] = $this->browser->getResponse()->getStatusCode();
-
-        if (strpos($doc->html(), 'FUERA DE SERVICIO') !== false) {
-            $this->setError(1, 'La página está fuera de servicio.');
-        }
-
-        if (strpos($doc->html(), 'rror validando pregunta y respuesta') !== false) {
-            $this->setError(1, 'El canal no tiene definida la pregunta secreta.');
-        }
-
-        
-        //** REDIRECTS */
-        if ($doc->filterXpath('//redirect')->count() > 0 && !isset($redirect)) {
-            $doc = $this->browser->request('GET', $this->url . $doc->filterXpath('//redirect')->attr('url'));
-            $this->setScrapp(["redirect"]);
-        }
-
-        // ** ERROR DE RE-LOGIN INTRANET
-        if (strpos($doc->html(), 'frmlogin') !== false && strpos($doc->html(), 'j_username') !== false) {
-            // ** RELOGIN PAGE.
-            // El botón de login existe
-            $boton = strpos($doc->html(), 'Entrar') ? 'Entrar' : 'Login';
-            $opcs = [
-                "method" => "BOTON",
-                "methodoption" => "$boton",
-                "array" => [
-                    "j_username" => $this->usuario,
-                    "j_password" => $this->contrasena
-                ],
-                "documento" => $doc,
-                "scrapping" => 'relogin'
-            ];
-            $doc = $this->sendBrowser($opcs);
-            if (strpos($doc->html(), 'Error de Autenticación') !== false)
-                $this->login();
-            else if (strpos($doc->html(), 'Password expirado') !== false)
-                $this->passExpirado($doc);
-            else
-                $this->saveCookies();
-        }
     }
 }
