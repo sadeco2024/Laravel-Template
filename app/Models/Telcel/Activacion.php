@@ -35,6 +35,7 @@ class Activacion extends Model
 
     protected $hidden = ['id', 'created_at', 'updated_at'];
 
+
     //? Metodo para crear/actualizar una activacion.
     public static function obtenerActivacion($request)
     {
@@ -70,81 +71,100 @@ class Activacion extends Model
         );
     }
 
-
-    public function scopeDiario($query, $opcs)
+    //? Metodo para obtener los datos por mes de todas las activaciones
+    public function scopeGraficaAnual($query, $opcs)
     {
         /*
-        $opcs = [
-            'mes' => 1,
-            'anio' => 2021,
-            'tipo_fecha' => 'preactivacion'
-        ];
+            $opcs = [
+                'mes' => 1,
+                'anio' => 2021,
+                'tipo_fecha' => 'preactivacion',
+                'sucursal' => 0
+            ];
         */
         extract($opcs);
-        // Obtener el año actual y el anterior
+        $months = $this->generateMonths($anio);
+        $results = $this->executeGrafica($query, $sucursal, $tipofecha, $anio);
+
+        return $results->filter(function ($result) use ($cadenas) {
+            return $cadenas ? $result->tipo === 'Cadena' : $result->tipo !== 'Cadena';
+        })->groupBy('tipo_concepto_id')->mapWithKeys(function ($items, $tipo_concepto_id) use ($months) {
+            $data = $this->generateData($items, $months);
+            // dd($data);
+            return [
+                $tipo_concepto_id => [
+                    'id' => $tipo_concepto_id,
+                    'concepto' => $items->first()->concepto->concepto,
+                    'data' => $data
+                ]
+            ];
+        });
+    }
+    //? Metodo para obtener los datos comparados por año con el anterior.
+    public function scopeAnualcompara($query, $opcs)
+    {
+        extract($opcs);
+        
+        $currentYear = $anio;
+        $lastYear =  $currentYear - 1;
+        $lastYearDate = now()->year($currentYear)->subYear();
+
+        $currentResults = $this->getResults($tipofecha, $currentYear, $sucursal);
+        
+        $lastResults = $currentYear == date('Y') ? $this->getResults($tipofecha, $lastYear, $sucursal, $lastYearDate) : $this->getResults($tipofecha, $lastYear, $sucursal);
+
+        $currentData = $this->groupResults($currentResults);
+        $lastData = $this->groupResults($lastResults);
+
+        
+
+        return [
+            $currentYear => $currentData,
+            $lastYear => $lastData
+        ];
+    }
+
+    // ? Metodo para obtener los datos por mes de todas las activaciones
+    public function scopeGraficaMensual($query, $opcs)
+    {
+        extract($opcs);
         $anioActual = (int)$anio;
         $anioAnterior = $anioActual - 1;
-        $tipo_fecha = $tipofecha; // 'preactivacion';
+        $tipo_fecha = $tipofecha;
 
-        // Obtener las activaciones del mes actual y del mismo mes del año anterior
         $activaciones = $query->select(DB::raw("DAY($tipo_fecha) as dia"), DB::raw("YEAR($tipo_fecha) as anio"), 'tlc_canales.tipo_concepto_id', DB::raw('COUNT(*) as total'))
             ->join('tlc_canales', 'tlc_activaciones.tlc_canal_id', '=', 'tlc_canales.id')
             ->whereIn(DB::raw("MONTH($tipo_fecha)"), [$mes])
             ->whereIn(DB::raw("YEAR($tipo_fecha)"), [$anioActual, $anioAnterior])
-            ->groupBy('anio', 'dia', 'tlc_canales.tipo_concepto_id')
-            ->get();
+            ->groupBy('anio', 'dia', 'tlc_canales.tipo_concepto_id');
 
-        // Inicializar el array de resultados
-        $resultados = [];
-
-
-        foreach ($resultados as $resultado) {
-            $name = $resultado->name;
-
-            if (!isset($formato[$name])) {
-                $formato[$name] = [
-                    "tipo_concepto_id" => $resultado->tipo_concepto_id,
-                    "concepto" => $resultado->concepto,
-                    "name" => $name,
-                    "data" => []
-                ];
-            }
-
-            array_push($formato[$name]['data'], $resultado->data);
+        if ($sucursal != 0) {
+            $activaciones = $activaciones->whereIn('tlc_canales.id', explode(',', $sucursal));
         }
 
-        // Formatear los resultados
-        foreach ($activaciones as $activacion) {
+        $activaciones = $activaciones->get();
 
+        $resultados = [];
+
+        foreach ($activaciones as $activacion) {
             $anio = $activacion->anio;
             $indice = $anio == $anioActual ? $anioActual : $anio;
 
-            // $name = $activaciones->name;
             if (!isset($resultados[$indice . $activacion->tipo_concepto_id])) {
-                $resultados[$indice . $activacion->tipo_concepto_id] = [
-                    "tipo_concepto_id" => $activacion->tipo_concepto_id,
-                    "concepto" => $activacion->concepto->concepto,
-                    "name" => $indice,
-                    "data" => []
-                ];
+                $resultados = $this->initializeResult($resultados, $indice, $activacion, $mes, $anioAnterior, $anioActual);
             }
 
             $dia = $activacion->dia;
             $total = $activacion->total;
 
-            // Obtener la longitud del array de días según el año
-            $diasArrayLength = $anio == $anioActual ? date('t') : date('t', mktime(0, 0, 0, $mes, 1, $anioAnterior));
-
-            // Rellenar el array de días con 0s
-            $resultados[$indice . $activacion->tipo_concepto_id]['data'] = array_pad($resultados[$indice . $activacion->tipo_concepto_id]['data'], $diasArrayLength, 0);
-
-            // Asignar el total al día correspondiente
             $resultados[$indice . $activacion->tipo_concepto_id]['data'][$dia - 1] = $total;
         }
+
         return $resultados;
     }
 
-    public function scopeMensualPorProducto($query, $opcs)
+
+    public function scopeMensualPorProductoAnterior($query, $opcs)
     {
         /*
         $opcs = [
@@ -162,6 +182,9 @@ class Activacion extends Model
         $tipo_fecha = $tipofecha;
 
         // Obtener las activaciones del mes actual y del mismo mes del año anterior
+        if ($sucursal != 0) {
+            $query->whereIn('tlc_canales.id', explode(',', $sucursal));
+        }
         $activaciones = $query->select(DB::raw("MONTH($tipo_fecha) as mes"), DB::raw("YEAR($tipo_fecha) as anio"), 'tactivaciones.concepto as tipo_activa', DB::raw('COUNT(*) as total'))
             ->join('tlc_canales', 'tlc_activaciones.tlc_canal_id', '=', 'tlc_canales.id')
             ->join('conceptos as tactivaciones', 'tlc_activaciones.tipo_concepto_id', '=', 'tactivaciones.id')
@@ -187,47 +210,27 @@ class Activacion extends Model
         return $resultados;
     }
 
-    //? Metodo para obtener los datos por mes de todas las activaciones
-    // public function scopeGraficaAnual($query, $year, $tipofecha,$cadenas=false)
-    public function scopeGraficaAnual($query, $opcs)
+    public function scopeMensualPorProducto($query, $opcs)
     {
         extract($opcs);
-        // Crear un array con todos los meses del año especificado
-        $months = [];
-        for ($i = 1; $i <= 12; $i++) {
-            $months[] = $anio . '-' . str_pad($i, 2, '0', STR_PAD_LEFT);
+    
+        $anioActual = (int)$anio;
+        $anioAnterior = $anioActual - 1;
+        $tipo_fecha = $tipofecha;
+    
+        if ($sucursal != 0) {
+            $query->whereIn('tlc_canales.id', explode(',', $sucursal));
         }
-
-        $results = $query->select('tipo_canal.concepto as tipo', 'tlc_activaciones.tipo_concepto_id', DB::raw('count(*) as total'), DB::raw('DATE_FORMAT(' . $tipofecha . ', "%Y-%m") as month'))
-            ->join('tlc_canales', 'tlc_activaciones.tlc_canal_id', '=', 'tlc_canales.id')
-            ->join('conceptos as tipo_canal', 'tlc_canales.tipo_concepto_id', '=', 'tipo_canal.id')
-            ->whereYear($tipofecha, $anio)
-            ->with(['concepto'])
-            ->groupBy('tipo_canal.concepto', 'tlc_activaciones.tipo_concepto_id', 'month')
-            ->get();
-        return  $results->filter(function ($result) use ($cadenas) {
-            if ($cadenas)
-                return  $result->tipo === 'Cadena';
-            else
-                return $result->tipo !== 'Cadena';
-        })->groupBy('tipo_concepto_id')->map(function ($items, $tipo_concepto_id) use ($months) {
-            $data = [];
-            foreach ($months as $month) {
-                $itemsOfMonth = $items->where('month', $month);
-                // echo "<br>Items: $month", json_encode($itemsOfMonth);
-                $totalOfMonth = $itemsOfMonth->sum('total');
-                $data[] = $totalOfMonth;
-            }
-
-            return [
-                'id' => $tipo_concepto_id,
-                'concepto' => $items->first()->concepto->concepto,
-                'data' => $data
-            ];
-        })->values();
+    
+        $activaciones = $this->getActivaciones($query, $tipo_fecha, $mes, $anioActual, $anioAnterior);
+    
+        return $this->formatResult($activaciones);
     }
 
 
+
+
+    //** RELACIONES */
     public function telefono()
     {
         return $this->belongsTo(Telefono::class);
@@ -258,10 +261,8 @@ class Activacion extends Model
         return $this->belongsTo(CanalVendedor::class, 'tlc_canal_vendedor_id');
     }
 
-    public function scopeFecha($query, $fecha_inicio, $fecha_fin)
-    {
-        return $query->whereBetween('fecha', [$fecha_inicio, $fecha_fin]);
-    }
+
+    //** TERMINA RELACIONES */
 
 
 
@@ -293,8 +294,6 @@ class Activacion extends Model
 
         return ['results' => $groupedResults, 'totalActivaciones' => $totalActivaciones];
     }
-
-
 
     public function scopeMescompara($query)
     {
@@ -338,7 +337,7 @@ class Activacion extends Model
 
 
         // Agrupa los resultados por concepto
-        $currentData = $currentResults->groupBy('tipo_concepto_id')->map(function ($item)  {
+        $currentData = $currentResults->groupBy('tipo_concepto_id')->map(function ($item) {
 
             $conceptos = array_column($valores, 'concepto');
             $index = array_search($item->first()->concepto->concepto, $conceptos);
@@ -350,7 +349,7 @@ class Activacion extends Model
             ];
         });
 
-        $lastData = $lastResults->groupBy('tipo_concepto_id')->map(function ($item)  {
+        $lastData = $lastResults->groupBy('tipo_concepto_id')->map(function ($item) {
             $conceptos = array_column($valores, 'concepto');
             $index = array_search($item->first()->concepto->concepto, $conceptos);
             $texto = $index !== false ? $valores[$index]['texto'] : '';
@@ -366,95 +365,124 @@ class Activacion extends Model
         ];
     }
 
-    public function scopeAnualcompara($query, $opcs)
+
+    //** FUNCIONES PARA GRÁFICA MENSUAL */
+    private function initializeResult($resultados, $indice, $activacion, $mes, $anioAnterior, $anioActual)
     {
+        $diasArrayLength = $indice == $anioActual ? date('t') : date('t', mktime(0, 0, 0, $mes, 1, $anioAnterior));
 
-        /*
-        $opcs = [
-            'mes' => 1,
-            'anio' => 2021,
-            'tipofecha' => 'preactivacion'
+        $resultados[$indice . $activacion->tipo_concepto_id] = [
+            "tipo_concepto_id" => $activacion->tipo_concepto_id,
+            "concepto" => $activacion->concepto->concepto,
+            "name" => $indice,
+            "data" => array_pad([], $diasArrayLength, 0)
         ];
-        */
-        extract($opcs);
 
-        // Obtén el mes y el año actual
-        $currentYear = $anio; //date('Y');
-        $currentMonth = date('m');
-        $currentDay = date('d');
+        return $resultados;
+    }
 
-        // Obtén el año anterior
-        $lastYear =  $currentYear - 1;
-        $lastYearDate = now()->year($currentYear)->subYear(); //now()->subYear();
-        // dd($lastYearDate);
+    //** FUNCIONES PARA COMPARA MENSUAL */
+    private function getActivaciones($query, $tipo_fecha, $mes, $anioActual, $anioAnterior)
+    {
+        return $query->select(DB::raw("MONTH($tipo_fecha) as mes"), DB::raw("YEAR($tipo_fecha) as anio"), 'tactivaciones.concepto as tipo_activa', DB::raw('COUNT(*) as total'))
+            ->join('tlc_canales', 'tlc_activaciones.tlc_canal_id', '=', 'tlc_canales.id')
+            ->join('conceptos as tactivaciones', 'tlc_activaciones.tipo_concepto_id', '=', 'tactivaciones.id')
+            ->join('conceptos as tipo', 'tlc_canales.tipo_concepto_id', '=', 'tipo.id')
+            ->where('tipo.concepto', '<>', 'Cadena')
+            ->whereIn(DB::raw("MONTH($tipo_fecha)"), [$mes])
+            ->whereIn(DB::raw("YEAR($tipo_fecha)"), [$anioActual, $anioAnterior])
+            ->groupBy('anio', 'mes', 'tactivaciones.concepto')
+            ->orderBy('anio', 'desc')
+            ->orderBy('tipo_activa', 'desc')
+            ->get();
+    }
 
-        // Realiza una consulta para obtener los datos del mes actual
-        $currentResults = Activacion::select('tlc_activaciones.tipo_concepto_id', DB::raw('count(*) as total'), DB::raw("DATE_FORMAT($tipofecha, '%Y-%m') as month"))
-            ->whereYear($tipofecha, $currentYear)
+    private function formatResult($activaciones)
+    {
+        $resultados = [];
+
+        $activaciones = $activaciones->toArray();
+        foreach ($activaciones as $activacion) {
+            $resultados[$activacion['anio']][] = [
+                'tipo_activa' => $activacion['tipo_activa'],
+                'total' => $activacion['total']
+            ];
+        }
+
+        return $resultados;
+    }
+
+    //** FUNCIONES PARA LA COMPARACIÓN ANUAL */
+    //? Método que hace la consulta a la base de datos, según el año y la sucursal.
+    private function getResults($tipofecha, $year, $sucursal, $date = null)
+    {
+        $query = Activacion::select('tlc_activaciones.tipo_concepto_id', DB::raw('count(*) as total'), DB::raw("DATE_FORMAT($tipofecha, '%Y-%m') as month"))
+            ->whereYear($tipofecha, $year)
             ->join('tlc_canales', 'tlc_activaciones.tlc_canal_id', '=', 'tlc_canales.id')
             ->join('conceptos as tipo_canal', 'tlc_canales.tipo_concepto_id', '=', 'tipo_canal.id')
             ->with(['concepto'])
             ->where('tipo_canal.concepto', '<>', 'Cadena')
-            ->groupBy('tlc_activaciones.tipo_concepto_id', 'month')
-            ->get();
+            ->groupBy('tlc_activaciones.tipo_concepto_id', 'month');
 
-        // Realiza una consulta para obtener los datos del mismo mes pero del año anterior
-        if ($currentYear == date('Y'))
-            $lastResults = Activacion::select('tlc_activaciones.tipo_concepto_id', DB::raw('count(*) as total'), DB::raw("DATE_FORMAT($tipofecha, '%Y-%m') as month"))
-                ->whereYear($tipofecha, $lastYear)
-                ->where($tipofecha, '<=', $lastYearDate)
-                ->join('tlc_canales', 'tlc_activaciones.tlc_canal_id', '=', 'tlc_canales.id')
-                ->join('conceptos as tipo_canal', 'tlc_canales.tipo_concepto_id', '=', 'tipo_canal.id')
-                ->with(['concepto'])
-                ->where('tipo_canal.concepto', '<>', 'Cadena')
-                ->groupBy('tlc_activaciones.tipo_concepto_id', 'month')
-                ->get();
-        else
-            $lastResults = Activacion::select('tlc_activaciones.tipo_concepto_id', DB::raw('count(*) as total'), DB::raw("DATE_FORMAT($tipofecha, '%Y-%m') as month"))
-                ->whereYear($tipofecha, $lastYear)
-                ->join('tlc_canales', 'tlc_activaciones.tlc_canal_id', '=', 'tlc_canales.id')
-                ->join('conceptos as tipo_canal', 'tlc_canales.tipo_concepto_id', '=', 'tipo_canal.id')
-                ->with(['concepto'])
-                ->where('tipo_canal.concepto', '<>', 'Cadena')
-                ->groupBy('tlc_activaciones.tipo_concepto_id', 'month')
-                ->get();
+        if ($sucursal) {
+            $query->whereIn('tlc_canales.id', explode(',', $sucursal));
+            
+        }
+        
+        if ($date) {
+            $query->where($tipofecha, '<=', $date); //Si es el mes que estamos validando.
+        }
 
-        // dd($currentYear,$lastYear,$currentMonth,$currentResults,$lastResults);
-        // $valores = [
-        //     ["concepto" => "Chip Express", "texto" => "Chips"],
-        //     ["concepto" => "Chip Port IN", "texto" => "Portas"],
-        //     ["concepto" => "KIT Sin Limite", "texto" => "Kit SL"],
-        //     ["concepto" => "Chip Cobro x Seg", "texto" => "ChipXseg"],
-        //     ["concepto" => "Amigo Chip", "texto" => "A.Chip"],
-        //     ["concepto" => "TIP Kit", "texto" => "TIP"],
-        //     ["concepto" => "KIT", "texto" => "Kits"],
-        //     ["concepto" => "ERROR", "texto" => "Error"]
-        // ];
+        return $query->get();
+    }
 
-
-        // Agrupa los resultados por concepto
-        $currentData = $currentResults->groupBy('tipo_concepto_id')->map(function ($item)  {
-            // $conceptos = array_column($valores, 'concepto');
-            // $index = array_search(trim($item->first()->concepto->concepto), $conceptos);
-            // $texto = $index !== false ? $valores[$index]['texto'] : '';
+    //? Método que agrupa los resultados por concepto.
+    private function groupResults($results)
+    {
+        return $results->groupBy('tipo_concepto_id')->map(function ($item) {
             return [
-                'concepto' => $item->first()->concepto->concepto,//$texto,
+                'concepto' => $item->first()->concepto->concepto,
                 'total' => $item->sum('total')
             ];
         });
-        $lastData = $lastResults->groupBy('tipo_concepto_id')->map(function ($item)  {
-            // $conceptos = array_column($valores, 'concepto');
-            // $index = array_search(trim($item->first()->concepto->concepto), $conceptos);
-            // $texto = $index !== false ? $valores[$index]['texto'] : '';
-            return [
-                'concepto' =>$item->first()->concepto->concepto,//  $texto,
-                'total' => $item->sum('total')
-            ];
-        });
+    }
 
-        return [
-            $currentYear => $currentData,
-            $lastYear => $lastData
-        ];
+
+    //** FUNCIONES PARA LA GRÁFICA ANUAL */
+    //? Funcion que genera los meses del año para los indices de la gráfica.
+    private function generateMonths($anio)
+    {
+        $months = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $months[] = $anio . '-' . str_pad($i, 2, '0', STR_PAD_LEFT);
+        }
+        return $months;
+    }
+    //? Función que hace la consulta a la base de datos
+    private function executeGrafica($query, $sucursal, $tipofecha, $anio)
+    {
+        $query = $query->select('tipo_canal.concepto as tipo', 'tlc_activaciones.tipo_concepto_id', DB::raw('count(*) as total'), DB::raw('DATE_FORMAT(' . $tipofecha . ', "%Y-%m") as month'))
+            ->join('tlc_canales', 'tlc_activaciones.tlc_canal_id', '=', 'tlc_canales.id')
+            ->join('conceptos as tipo_canal', 'tlc_canales.tipo_concepto_id', '=', 'tipo_canal.id')
+            ->whereYear($tipofecha, $anio)
+            ->with(['concepto'])
+            ->groupBy('tipo_canal.concepto', 'tlc_activaciones.tipo_concepto_id', 'month');
+
+        if ($sucursal != 0) {
+            $query->whereIn('tlc_canales.id', explode(',', $sucursal));
+        }
+        return $query->get();
+    }
+    //? Función que genera el array de datos por mes.
+    private function generateData($items, $months)
+    {
+        $data = [];
+
+        foreach ($months as $month) {
+            $itemsOfMonth = $items->where('month', $month);
+            $totalOfMonth = $itemsOfMonth->sum('total');
+            $data[] = $totalOfMonth;
+        }
+        return $data;
     }
 }

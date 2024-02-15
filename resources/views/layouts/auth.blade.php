@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-    <html lang="es" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="light" data-toggled="close" data-loader="true">    
+<html lang="es" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light"
+    data-menu-styles="light" data-toggled="close" data-loader="true">
+
 <head>
 
     <!-- Meta Data -->
@@ -34,7 +36,6 @@
 </head>
 
 <body>
-
 
     <!-- Start Switcher -->
     @include('layouts.partials.switcher')
@@ -78,14 +79,34 @@
                     </div>
                     <!-- End::header-element -->
                     <!-- Start::header-element ::MODAL BUTTONS -->
-                    <div class="header-element ms-2 my-auto">
+                    <div class="header-element ms-2 my-auto">´
+                        <div class="btn-group">
+                            <button type="button"
+                                class="btn btn-icon btn-primary-light rounded-pill btn-wave dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-expanded="false" title="Prepago"
+                                data-bs-custom-class="tooltip-primary" data-bs-placement="left">
+                                <i class="lab la-centercode fs-4"></i>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalFullscreen">Activación</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0);">Consulta</a></li>
+
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="javascript:void(0);">Portabilidad</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0);">Recuperación</a></li>
+                            </ul>
+                        </div>
+
+
                         <!-- Start::header-link -->
-                        <a href="#" class="btn btn-icon btn-primary-light rounded-pill btn-wave"
+                        {{-- <a href="#" class="btn btn-icon btn-primary-light rounded-pill btn-wave"
                             data-bs-toggle="tooltip" title="Prepago" data-bs-custom-class="tooltip-primary"
                             data-bs-placement="left">
-                            {{-- <i class="ri-home-smile-line"></i> --}}
                             <i class="lab la-centercode fs-4"></i>
-                        </a>
+                        </a> --}}
 
                         <!-- End::header-link -->
                     </div>
@@ -438,21 +459,50 @@
         </div>
 
         {{-- Toast --}}
-        <div id="toast-alerts" class="toast colored-toast bg-success" role="alert"
-            aria-live="assertive" aria-atomic="true">
+        <div id="toast-alerts" class="toast colored-toast bg-success" role="alert" aria-live="assertive"
+            aria-atomic="true">
             {{--  bg-secondary text-fixed-white --}}
             <div class="toast-header">
-                <img class="bd-placeholder-img rounded me-2" src="{{asset('assets/images/brand-logos/logo.png')}}" alt="...">
+                <img class="bd-placeholder-img rounded me-2" src="{{ asset('assets/images/brand-logos/logo.png') }}"
+                    alt="...">
                 <strong class="me-auto">Sadeco</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
             <div class="toast-body">
-                Registro actualizado
+                
             </div>
         </div>
 
     </div>
 
+    <div class="modal fade" id="exampleModalFullscreen" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+    aria-labelledby="exampleModalFullscreenLabel" aria-hidden="true"
+    style="display: none;">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="exampleModalFullscreenLabel">Activación</h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12 col-md">
+                        <x-selects.orden maximo="20"/>    
+
+                    </div>
+                    <div class="col-12 col-md">
+                        <x-selects.orden maximo="20"/>    
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>    
 
 
     <!-- Scroll To Top -->

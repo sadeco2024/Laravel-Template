@@ -72,7 +72,8 @@ class Sucursal extends Model
     }
     public function empleados()
     {
-        return $this->hasMany('App\Models\Rh\Empleado', 'sucursal_id');
+        return $this->hasMany('App\Models\Rh\Empleado', 'sucursal_id')
+            ->with('nombre', 'puesto','correo');
     }
     public function getCuentaEmpleadosAttribute()
     {

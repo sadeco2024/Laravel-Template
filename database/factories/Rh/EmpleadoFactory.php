@@ -14,9 +14,7 @@ use App\Models\Rh\Sucursal;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Generales\Rfc>
- */
+
 class EmpleadoFactory extends Factory
 {
     /**
@@ -40,7 +38,7 @@ class EmpleadoFactory extends Factory
             'correo_id' => Correo::firstOrCreate(['correo'=> User::latest('id')->first()->email,])->id,
             'corpo_telefono_id' => Telefono::factory()->create()->id,
             'corpo_correo_id' => Correo::create(['correo'=>$this->faker->unique()->safeEmail])->id,
-            'no_empleado' => $this->faker->numberBetween(1000, 9999),            
+            'no_empleado' => $this->faker->numberBetween(1000, 99999),            
             'sucursal_id' => Sucursal::all()->random()->id,
             'direccion_id' => Direccion::factory()->create()->id,
             'estatus_id' => Estatus::firstOrCreate(['estatus'=> $this->faker->randomElement(['activo','suspendido','baja'])])->id,

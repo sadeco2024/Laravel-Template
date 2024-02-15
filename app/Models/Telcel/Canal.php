@@ -114,7 +114,7 @@ class Canal extends Model
                 'canal' => $canal->clave,
                 'sucursal' => $canal->sucursal->nombre,
                 'vendedores' => $vendedores,
-                'concepto' => $canal->concepto->concepto,
+                'concepto' => $canal->concepto->concepto ?? '',
                 'url_edit' => route('telcel.canales.edit', $canal->id),
             ];
         })->filter(function ($canal) {

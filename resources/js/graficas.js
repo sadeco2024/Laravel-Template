@@ -2,41 +2,92 @@
     "use strict";
     const slcActivacionesAnio = document.querySelector("#slcActivacionesAnio");
     const slcActivacionesMes = document.querySelector("#slcActivacionesMes");
-    const slcActivacionesFecha = document.querySelector("#slcActivacionesFecha");
-    
-    slcActivacionesAnio.selectedIndex = 0;
-    slcActivacionesMes.selectedIndex = new Date().getMonth();
-    slcActivacionesFecha.selectedIndex = 0;
+    const slcActivacionesFecha = document.querySelector(
+        "#slcActivacionesFecha"
+    );
 
+    if (slcActivacionesAnio) {
+        slcActivacionesAnio.selectedIndex = 0;
+        slcActivacionesMes.selectedIndex = new Date().getMonth();
+        slcActivacionesFecha.selectedIndex = 0;
+    }
 
     if (slcActivacionesAnio && slcActivacionesFecha) {
         slcActivacionesAnio.addEventListener("change", (e) => {
-            graficaAnual(e.target.value,slcActivacionesMes.value,slcActivacionesFecha.value);
-            graficaMensual(e.target.value,slcActivacionesMes.value,slcActivacionesFecha.value);
+            graficaAnual(
+                e.target.value,
+                slcActivacionesMes.value,
+                slcActivacionesFecha.value
+            );
+            graficaMensual(
+                e.target.value,
+                slcActivacionesMes.value,
+                slcActivacionesFecha.value
+            );
+            comparativoDiario(
+                slcActivacionesAnio.value,
+                slcActivacionesMes.value,
+                slcActivacionesFecha.value
+            );
         });
         slcActivacionesFecha.addEventListener("change", (e) => {
-            graficaAnual(slcActivacionesAnio.value,slcActivacionesMes.value, e.target.value);
-            graficaMensual(slcActivacionesAnio.value, e.target.value,slcActivacionesFecha.value);
+            graficaAnual(
+                slcActivacionesAnio.value,
+                slcActivacionesMes.value,
+                e.target.value
+            );
+            graficaMensual(
+                slcActivacionesAnio.value,
+                slcActivacionesMes.value,
+                e.target.value
+            );
+            comparativoDiario(
+                slcActivacionesAnio.value,
+                slcActivacionesMes.value,
+                slcActivacionesFecha.value
+            );
         });
-        graficaAnual(slcActivacionesAnio.value,slcActivacionesFecha.value);
+        graficaAnual(slcActivacionesAnio.value, slcActivacionesFecha.value);
     }
 
     if (slcActivacionesMes) {
-        
         slcActivacionesMes.addEventListener("change", (e) => {
-            graficaMensual(slcActivacionesAnio.value,e.target.value,slcActivacionesFecha.value);
+            comparativoDiario(
+                slcActivacionesAnio.value,
+                slcActivacionesMes.value,
+                slcActivacionesFecha.value
+            );
+
+            graficaMensual(
+                slcActivacionesAnio.value,
+                e.target.value,
+                slcActivacionesFecha.value
+            );
         });
-        graficaMensual(slcActivacionesAnio.value,slcActivacionesMes.value,slcActivacionesFecha.value);
+        comparativoDiario(
+            slcActivacionesAnio.value,
+            slcActivacionesMes.value,
+            slcActivacionesFecha.value
+        );
+        graficaMensual(
+            slcActivacionesAnio.value,
+            slcActivacionesMes.value,
+            slcActivacionesFecha.value
+        );
     }
 })();
 
-
 //** GRAFICA MENSUAL (DISTS Y SUBS) */
-function graficaMensual(anio,mes, fecha) {
+function graficaMensual(anio, mes, fecha) {
     const csrfToken = document
         .querySelector('meta[name="csrf-token"]')
         .getAttribute("content");
-
+    const slcActivacionesSucursal = document.querySelector(
+        "#slcActivacionesSucursal"
+    );
+    const sucursal_id = slcActivacionesSucursal
+        ? slcActivacionesSucursal.value
+        : 0;
     //** Gráfica de activaciones diarias */
     fetch("/telcel/activaciones/grafica/diario", {
         method: "post",
@@ -48,6 +99,7 @@ function graficaMensual(anio,mes, fecha) {
             anio: anio ?? new Date().getFullYear(),
             mes: mes ?? new Date().getMonth(),
             tipofecha: fecha ?? "preactivacion",
+            sucursal: sucursal_id,
         }),
     })
         .then((response) => response.json())
@@ -67,7 +119,19 @@ function graficaMensual(anio,mes, fecha) {
                 options
             );
         });
+}
 
+//? Funcion para el comparativo de las activaciones diarias
+function comparativoDiario(anio, mes, fecha) {
+    const csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
+    const slcActivacionesSucursal = document.querySelector(
+        "#slcActivacionesSucursal"
+    );
+    const sucursal_id = slcActivacionesSucursal
+        ? slcActivacionesSucursal.value
+        : 0;
     //** Datos de comparativa diaria */
     fetch("/telcel/activaciones/comparadiario", {
         method: "post",
@@ -79,31 +143,36 @@ function graficaMensual(anio,mes, fecha) {
             anio: anio ?? new Date().getFullYear(),
             mes: mes ?? new Date().getMonth(),
             tipofecha: fecha ?? "preactivacion",
+            sucursal: sucursal_id,
         }),
     })
         .then((response) => response.json())
         .then((data) => {
-            const element = document.getElementById("compara-mensual-diario")
-            element.innerHTML = "";
+            const element = document.getElementById("compara-mensual-diario");
+            if (element) {
+                element.innerHTML = "";
 
-            // Obtener el año actual y el año anterior
-            const currentYear = anio.toString(); 
-            const previousYear = (parseInt(currentYear) - 1).toString();
+                // Obtener el año actual y el año anterior
+                const currentYear = anio.toString();
+                const previousYear = (parseInt(currentYear) - 1).toString();
 
-            // Obtener los arrays correspondientes al año actual y al año anterior
-            const currentYearData = data[currentYear] || [];
-            const previousYearData = data[previousYear] || [];
+                // Obtener los arrays correspondientes al año actual y al año anterior
+                const currentYearData = data[currentYear] || [];
+                const previousYearData = data[previousYear] || [];
 
-            currentYearData.forEach((obj) => {
-                const matchingObj = previousYearData.find(
-                    (prevObj) =>
-                        prevObj.tipo_activa === obj.tipo_activa
-                );
-                if (matchingObj) {
-                    obj.anio_anterior = matchingObj.total;
-                }
-            });
-            element.innerHTML = currentYearData.length == 0 ? drawAnalisisAnterior(previousYearData) : drawAnalisis(currentYearData);
+                currentYearData.forEach((obj) => {
+                    const matchingObj = previousYearData.find(
+                        (prevObj) => prevObj.tipo_activa === obj.tipo_activa
+                    );
+                    if (matchingObj) {
+                        obj.anio_anterior = matchingObj.total;
+                    }
+                });
+                element.innerHTML =
+                    currentYearData.length == 0
+                        ? drawAnalisisAnterior(previousYearData)
+                        : drawAnalisis(currentYearData);
+            }
         });
 }
 
@@ -128,8 +197,10 @@ function createChartOptions(series, dias) {
     let colors = [];
     let optWith = [];
     let optDash = [];
-    const currentYear = new Date().getFullYear().toString();
-    const previousYear = (parseInt(currentYear) - 1).toString();    
+    const slcActivacionesAnio = document.querySelector("#slcActivacionesAnio");
+
+    const currentYear = slcActivacionesAnio.value.toString();
+    const previousYear = (parseInt(currentYear) - 1).toString();
     series.forEach((item, index) => {
         if (item.name.includes(previousYear)) {
             optWith.push(3);
@@ -185,9 +256,9 @@ function createChartOptions(series, dias) {
 //? Función para renderizar la gráfica de activaciones diarias
 function renderGrafica(id, series, options) {
     const elemento = document.querySelector(id);
-    if (elemento.chartInstance) {
+    if (elemento && elemento.chartInstance) {
         elemento.chartInstance.updateOptions(options);
-    } else {
+    } else if (elemento) {
         elemento.chartInstance = new ApexCharts(
             document.querySelector(id),
             options
@@ -195,6 +266,7 @@ function renderGrafica(id, series, options) {
         elemento.chartInstance.render();
     }
 }
+
 
 //? Función para dibujar el análisis de activaciones diarias
 function drawAnalisis(data) {
@@ -211,7 +283,7 @@ function drawAnalisis(data) {
                   ).toFixed(2);
 
         diff = isNaN(diff) ? 0 : diff;
-        row.total = Intl.NumberFormat("es-MX", {
+        let total = Intl.NumberFormat("es-MX", {
             maximumFractionDigits: 0,
         }).format(row.total);
 
@@ -222,7 +294,7 @@ function drawAnalisis(data) {
     
         </span>
         <div class="ms-2 align-content-top  text-center">
-            <p class="mb-0 fs-15">${row.total}</p>
+            <p class="mb-0 fs-15">${total}</p>
             <p class="mb-0 me-2 fs-13 text-muted">${row.tipo_activa}</p>
                 <span class="fs-12 text-${
                     row.total > row.anio_anterior || diff == 0
@@ -246,17 +318,16 @@ function drawAnalisis(data) {
 //? Función para dibujar el análisis del año anterior de activaciones diarias
 function drawAnalisisAnterior(data) {
     const currentData = data.map((row, index) => {
-        row.total = Intl.NumberFormat("es-MX", {
+        let total = Intl.NumberFormat("es-MX", {
             maximumFractionDigits: 0,
         }).format(row.total);
         return `
         <div class="d-flex align-items-center me-5">
         <div class="align-content-top  text-center">
-            <p class="mb-0 fs-15">${row.total}</p>
+            <p class="mb-0 fs-15">${total}</p>
             <p class="mb-0 me-2 fs-13 text-muted">${row.tipo_activa}</p>
                 <span class="fs-11 text-danger d-inline-flex align-items-center">
                     Año anterior
-                    
                 </span>
             </div>
         </div>           
@@ -268,101 +339,132 @@ function drawAnalisisAnterior(data) {
 //** GRÁFICA ANUAL (DISTS) */
 function graficaAnual(anio, mes, fecha) {
     // if (document.querySelector("#grafica-activaciones-mensuales")) {
-        const element = document.querySelector("#grafica-activaciones-mensuales")
-        const csrfToken = document
-            .querySelector('meta[name="csrf-token"]')
-            .getAttribute("content");
+    // const element = document.querySelector("#grafica-activaciones-mensuales")
+    const slcActivacionesSucursal = document.querySelector(
+        "#slcActivacionesSucursal"
+    );
+    const sucursal_id = slcActivacionesSucursal
+        ? slcActivacionesSucursal.value
+        : null;
+    const csrfToken = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
 
-        // ** GRÁFICA ANUAL - DISTRIBUIDOR
-        fetch("/telcel/activaciones/grafica", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrfToken,
-            },
-            body: JSON.stringify({
-                anio: anio ?? new Date().getFullYear(),
-                tipofecha: fecha ?? "preactivacion",
-                cadenas: false
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                // Se mapea para obtener las series de la gráfica.
-                const transformedData = data.map((row) => {
-                    return {
-                        name: row.concepto,
-                        data: row.data,
-                    };
-                });
-                // Se valida si existe el gráfico. Para eso se instancia en el elemento.
-                let labels = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-                renderGrafica(
-                    "#grafica-activaciones-mensuales",
-                    transformedData,
-                    createChartOptions2(transformedData, labels)
-                );
+    // ** GRÁFICA ANUAL - DISTRIBUIDOR
+    fetch("/telcel/activaciones/grafica", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken,
+        },
+        body: JSON.stringify({
+            anio: anio ?? new Date().getFullYear(),
+            tipofecha: fecha ?? "preactivacion",
+            cadenas: false,
+            sucursal: sucursal_id,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            // Se mapea para obtener las series de la gráfica.
+            const transformedData = Object.values(data).map((row) => {
+                return {
+                    name: row.concepto,
+                    data: row.data,
+                };
             });
+            // Se valida si existe el gráfico. Para eso se instancia en el elemento.
+            let labels = [
+                "Ene",
+                "Feb",
+                "Mar",
+                "Abr",
+                "May",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dic",
+            ];
+            renderGrafica(
+                "#grafica-activaciones-mensuales",
+                transformedData,
+                createChartOptions2(transformedData, labels)
+            );
+        });
 
-        // ** GRÁFICA ANUAL - CADENAS
-        fetch("/telcel/activaciones/grafica", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrfToken,
-            },
-            body: JSON.stringify({
-                anio: anio ?? new Date().getFullYear(),
-                tipofecha: fecha ?? "preactivacion",
-                cadenas: true
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                // Se mapea para obtener las series de la gráfica.
-                const transformedData = data.map((row) => {
-                    return {
-                        name: row.concepto,
-                        data: row.data,
-                    };
-                });
-                // Se valida si existe el gráfico. Para eso se instancia en el elemento.
-                let labels = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-                renderGrafica(
-                    "#grafica-activaciones-mensuales-cadenas",
-                    transformedData,
-                    createChartOptions2(transformedData, labels)
-                );
-            });      
-        
-        fetch("/telcel/activaciones/compara", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrfToken,
-            },
-            body: JSON.stringify({
-                anio: anio ?? new Date().getFullYear(),
-                tipofecha: fecha ?? "preactivacion",
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
+    // ** GRÁFICA ANUAL - CADENAS
+    fetch("/telcel/activaciones/grafica", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken,
+        },
+        body: JSON.stringify({
+            anio: anio ?? new Date().getFullYear(),
+            tipofecha: fecha ?? "preactivacion",
+            cadenas: true,
+            sucursal: sucursal_id,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            // Se mapea para obtener las series de la gráfica.
+            const transformedData = Object.values(data).map((row) => {
+                return {
+                    name: row.concepto,
+                    data: row.data,
+                };
+            });
+            // Se valida si existe el gráfico. Para eso se instancia en el elemento.
+            let labels = [
+                "Ene",
+                "Feb",
+                "Mar",
+                "Abr",
+                "May",
+                "Jun",
+                "Jul",
+                "Ago",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dic",
+            ];
+            renderGrafica(
+                "#grafica-activaciones-mensuales-cadenas",
+                transformedData,
+                createChartOptions2(transformedData, labels)
+            );
+        });
 
-                console.log('compara:',data)
-
-                const element = document.getElementById("compara-mensual-anual")
+    fetch("/telcel/activaciones/compara", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken,
+        },
+        body: JSON.stringify({
+            anio: anio ?? new Date().getFullYear(),
+            tipofecha: fecha ?? "preactivacion",
+            sucursal: sucursal_id,
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            const element = document.getElementById("compara-mensual-anual");
+            if (element) {
                 element.innerHTML = "";
 
                 // // Obtener el año actual y el año anterior
-                const currentYear = anio.toString(); 
+                const currentYear = anio.toString();
                 const previousYear = (parseInt(currentYear) - 1).toString();
 
                 // // Obtener los arrays correspondientes al año actual y al año anterior
                 const currentYearData = data[currentYear] || [];
                 const previousYearData = data[previousYear] || [];
-                console.log('data currrent:',currentYearData)
-                console.log(typeof currentYearData)
 
                 Object.values(currentYearData).forEach((obj) => {
                     const matchingObj = Object.values(previousYearData).find(
@@ -371,38 +473,77 @@ function graficaAnual(anio, mes, fecha) {
                     if (matchingObj) {
                         obj.anio_anterior = matchingObj.total;
                     }
-                });                
-                // currentYearData.forEach((obj) => {
-                //     const matchingObj = previousYearData.find(
-                //         (prevObj) =>
-                //             prevObj.concepto === obj.concepto
-                //     );
-                //     if (matchingObj) {
-                //         obj.anio_anterior = matchingObj.total;
-                //     }
-                // });
-                console.log(currentYearData)
+                });
                 element.innerHTML = drawAnalisisAnual(currentYearData);
-            });
+
+                // Gráfica por Producto.
+                let maxYear = Math.max(...Object.keys(data));
+                let newData = [];
+
+                let conceptos = [];
+                let totales = [];
+                
+                let conceptoMap = {
+                    'Chip Express': 'Chips',
+                    'Chip 0': 'Chips',
+                    'Amigo Chip': 'Chips',
+                    'Chip Cobro x Seg': 'Chips',
+                    'KIT Sin Limite': 'KIT',
+                    'TIP Kit': 'KIT',
+                    'KIT': 'KIT',
+                    'Chip Port IN': 'Portas'
+                };
+                
+                for (let key in data[maxYear]) {
+                    let row = data[maxYear][key];
+                    let newConcepto = conceptoMap[row.concepto.trim()] || 'Otros';
+                    let existingIndex = conceptos.indexOf(newConcepto);
+                    if (existingIndex !== -1) {
+                        totales[existingIndex] += row.total;
+                    } else {
+                        conceptos.push(newConcepto);
+                        totales.push(row.total);
+                    }
+                }
+
+                console.log(conceptos, totales)
+
+                renderGrafica(
+                    "#grafica-activaciones-producto",
+                    totales,
+                    createChartOptions3(totales, conceptos)
+                );       
+                conceptos.forEach((concepto, index) => {
+                    let span = document.getElementById(`spmActiva${concepto}`);
+                    if (span) {
+                        span.innerHTML = totales[index];
+                    }
+                });
+                
+                
+                
 
 
-            //** Análisis de activaciones por sucursal. */
-        fetch("/telcel/activaciones/resumen", {
-            method: "post",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": csrfToken,
-            },
-            body: JSON.stringify({
-                anio: anio ?? new Date().getFullYear(),
-                mes: mes ?? new Date().getMonth(),
-                tipofecha: fecha ?? "preactivacion",
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('resumen', data);
-                const spTotal = document.getElementById("spnTotalActivas");
+            }
+        });
+
+    //** Análisis de activaciones por sucursal. */
+    fetch("/telcel/activaciones/resumen", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": csrfToken,
+        },
+        body: JSON.stringify({
+            anio: anio ?? new Date().getFullYear(),
+            mes: mes ?? new Date().getMonth(),
+            tipofecha: fecha ?? "preactivacion",
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            const spTotal = document.getElementById("spnTotalActivas");
+            if (spTotal) {
                 const ul = document.getElementById("liActivaSucursales");
                 ul.innerHTML = ""; // Limpiar el contenido existente
                 spTotal.innerHTML = data.totalActivaciones;
@@ -425,12 +566,12 @@ function graficaAnual(anio, mes, fecha) {
                     li.innerHTML = textHtml;
                     ul.appendChild(li);
                 });
-            });
+            }
+        });
     // }
 }
 
 function drawAnalisisAnual(data) {
-    console.log('analisis',data)
     const currentData = Object.values(data).map((row, index) => {
         let diff =
             row.total > row.anio_anterior
@@ -475,8 +616,6 @@ function drawAnalisisAnual(data) {
         `;
     });
     return currentData.join("");
-
-
 }
 
 function createChartOptions2(series, labels) {
@@ -556,4 +695,30 @@ function createChartOptions2(series, labels) {
         labels: labels,
         noData: { text: "No hay datos para mostrar" },
     };
+}
+
+function createChartOptions3(series,labels) {
+    return  {
+        series: series,
+        chart: {
+            width: 220,
+            height: 220,
+            type: "pie",
+        },
+        colors: [ "rgba(69, 214, 91, 0.8)","var(--primary08)", "rgba(243, 156, 18, 0.8)", "rgba(231, 76, 60, 0.8)"],
+        labels: labels,
+        legend: {
+            show: false,
+        },
+        stroke: {
+            width: 0
+        },
+        dataLabels: {
+            enabled: true,
+            dropShadow: {
+                enabled: false,
+            },
+        },
+        noData: { text: "No hay datos para mostrar" },
+    };    
 }

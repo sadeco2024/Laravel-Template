@@ -3,7 +3,7 @@
 @section('vite-js')
 
 @endsection
-@section('title-view', 'Activaciones prepago')
+@section('title-view', 'Activaciones')
 @section('content')
 
 
@@ -14,9 +14,7 @@
             <div class="card custom-card">
                 <div class="card-body d-flex align-items-baseline align-items-center justify-content-between flex-wrap">
 
-
                     <div class="d-flex flex-nowrap">
-
                         {{-- Año --}}
                         <div class="form-group ms-2">
                             <div class="input-group ">
@@ -66,7 +64,6 @@
                                 </select>
                             </div>
                         </div>
-
                     </div>
                     {{-- Descarga --}}
                     <div>
@@ -105,7 +102,8 @@
                     {{-- Análisis por producto --}}
                     <div class="card custom-card mt-2">
                         <div class="card-header align-items-start">
-                            <div id="compara-mensual-diario" class=" d-sm-flex align-items-top justify-content-between mb-3">
+                            <div id="compara-mensual-diario"
+                                class=" d-sm-flex align-items-top justify-content-between mb-3">
                             </div>
 
                         </div>
@@ -121,76 +119,14 @@
                     <div class="card custom-card mt-2">
                         <div class="card-header align-items-start">
                             <div id="compara-mensual-anual" class=" d-sm-flex align-items-top justify-content-between mb-3">
-{{-- 
-                                @foreach ($compara['current'] as $row)
-                                    <div class="d-flex align-items-center me-5">
-                                        <span class="fs-8 text-secondary">
-                                            <i class="mdi mdi-circle"></i>
 
-                                        </span>
-                                        <div class="ms-2 align-content-top  text-center">
-                                            <p class="mb-0 fs-15">{{ $row['total'] }}</p>
-                                            <p class="mb-0 me-2 fs-13 text-muted">{{ $row['concepto'] }}</p>
-                                            @foreach ($compara['last'] as $last)
-                                                @if ($last['concepto'] == $row['concepto'])
-                                                    @if ($last['total'] > $row['total'])
-                                                        <span class="fs-12 text-danger d-inline-flex align-items-center"
-                                                            title="Mes anterior: {{ $last['total'] }}">
-                                                            <i class="ti ti-trending-down me-1"></i>
-                                                            {{ number_format((($last['total'] - $row['total']) / $last['total']) * 100, 2) }}%
-                                                        </span>
-                                                    @else
-                                                        <span class="fs-12 text-success d-inline-flex align-items-center"
-                                                            title="Mes anterior: {{ $last['total'] }}">
-                                                            <i class="ti ti-trending-up me-1"></i>
-                                                            {{ number_format((($row['total'] - $last['total']) / $last['total']) * 100, 2) }}%
-                                                        </span>
-                                                    @endif
-                                                @endif
-                                            @endforeach
-
-                                        </div>
-                                    </div>
-                                @endforeach --}}
                             </div>
 
                         </div>
 
                         <div class="card-body">
-                            {{-- Selects de búsquedas --}}
-                            {{-- <div class="row">
-                                <div class="col-xl-3">
-                                    <div class="form-group mb-2">
-                                        <div class="input-group">
-                                            <div class="input-group-text">
-                                                <i class='bi bi-calendar-check-fill'></i>
-                                            </div>
-                                            <select id="slcActivacionesFecha" class="form-select form-select-sm">
-                                                <option value="preactivacion">Fecha preactivación</option>
-                                                <option value="activacion">Fecha Activación</option>
-                                                <option value="primera_llamada">Fecha Primera llamada</option>
-                                                <option value="rep_venta">Fecha Reporte ventas</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-3 ms-auto text-right">
-                                    <div class="form-group mb-2">
-                                        <div class="input-group">
-                                            <div class="input-group-text">
-                                                <i class='bi bi-calendar4'></i>
-                                            </div>
-                                            <select id="slcActivacionesAnio" class="form-select form-select-sm">
-                                                <option value="2024">2024</option>
-                                                <option value="2023">2023</option>
-                                                <option value="2022">2022</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div> --}}
-                            {{-- Gráfica activaciones --}}
+
                             <div id="grafica-activaciones-mensuales"></div>
-                            {{-- </div> --}}
                         </div>
 
                     </div>
@@ -234,7 +170,7 @@
                 </div>
                 <div class="card-body">
                     <ul id="liActivaSucursales" class="list-unstyled crm-top-deals mb-0">
-              
+
                     </ul>
                 </div>
             </div>
