@@ -206,7 +206,7 @@
     "src": "resources/js/alerts.js"
   },
   "resources/js/auth.js": {
-    "file": "assets/auth-ZSRowh4T.js",
+    "file": "assets/auth-bWLYlDaF.js",
     "imports": [
       "_axios-zOJ20UaM.js"
     ],
@@ -232,7 +232,7 @@
     "src": "resources/js/funciones.js"
   },
   "resources/js/graficas.js": {
-    "file": "assets/graficas-Ri8WtSDr.js",
+    "file": "assets/graficas-HgOJJGEn.js",
     "isEntry": true,
     "src": "resources/js/graficas.js"
   },
@@ -247,7 +247,7 @@
     "src": "resources/js/modales.js"
   },
   "resources/js/sucursales.js": {
-    "file": "assets/sucursales-0bfFeDuE.js",
+    "file": "assets/sucursales-w40geAFS.js",
     "isEntry": true,
     "src": "resources/js/sucursales.js"
   },
