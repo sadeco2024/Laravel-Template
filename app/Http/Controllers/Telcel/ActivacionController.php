@@ -46,10 +46,17 @@ class ActivacionController extends Controller
     }
 
     public function grafica(Request $request) {
+        if ($request->input('sucursal') !=0) {
+            $canales = Canal::where('sucursal_id',$request->input('sucursal'))->pluck('id')->join(',');
+        } else {
+            $canales = 0;
+        }
+
         $opcs = [
             'anio'=> $request->input('anio') ?? date('Y'),
             'tipofecha'=> $request->input('tipofecha') ?? 'preactivacion',
-            'cadenas'=>$request->input('cadenas') ?? false
+            'cadenas'=>$request->input('cadenas') ?? false,
+            'sucursal'=>$canales,
         ];
         $activaciones = Activacion::graficaAnual($opcs);
         return response()->json($activaciones);
@@ -57,12 +64,18 @@ class ActivacionController extends Controller
     }
 
     public function graficaDiario(Request $request) {
+        if ($request->input('sucursal') !=0) {
+            $canales = Canal::where('sucursal_id',$request->input('sucursal'))->pluck('id')->join(',');
+        } else {
+            $canales = 0;
+        }        
         $opcs = [
             'anio'=> $request->input('anio') ?? date('Y'),
             'mes'=> $request->input('mes') ?? date('m'),
             'tipofecha'=> $request->input('tipofecha') ?? 'preactivacion',
+            'sucursal'=>$canales,
         ];
-        $activaciones = Activacion::diario($opcs);
+        $activaciones = Activacion::graficaMensual($opcs);
         return response()->json($activaciones);
         
     }
@@ -78,24 +91,35 @@ class ActivacionController extends Controller
     }
 
     public function compara(Request $request) {
-        // $activaciones = Activacion::CanalesAnual($request->input('anio') ?? date('Y'));
+        // dd($request->all());
+        if ($request->input('sucursal') !=0) {
+            $canales = Canal::where('sucursal_id',$request->input('sucursal'))->pluck('id')->join(',');
+            $canales = $canales=="" ? 999 : $canales; // Se manda con 0, porque si necesita sucursal, para que no tome todos los valores.
+            
+        } 
         $opcs = [
             'anio'=> $request->input('anio') ?? date('Y'),
             'mes'=> $request->input('mes') ?? date('m'),
             'tipofecha'=> $request->input('tipofecha') ?? 'preactivacion',
+            'sucursal'=>$canales ?? NULL //$request->input('sucursal') ?? NULL
         ];
-
+        
         $activaciones = Activacion::anualcompara($opcs);
         return response()->json($activaciones);
         return $activaciones;
     }
 
     public function comparaDiario(Request $request) {
-
+        if ($request->input('sucursal') !=0) {
+            $canales = Canal::where('sucursal_id',$request->input('sucursal'))->pluck('id')->join(',');
+        } else {
+            $canales = 0;
+        }
         $opcs = [
             'anio'=> $request->input('anio') ?? date('Y'),
             'mes'=> $request->input('mes') ?? date('m'),
             'tipofecha'=> $request->input('tipofecha') ?? 'preactivacion',
+            'sucursal'=>$canales,
         ];
         $activaciones = Activacion::MensualPorProducto($opcs);
         return response()->json($activaciones);

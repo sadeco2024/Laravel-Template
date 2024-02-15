@@ -61,6 +61,8 @@ class Empleado extends Model
     }
 
 
+
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -117,4 +119,13 @@ class Empleado extends Model
     {
         return $this->belongsTo(Direccion::class, 'direccion_id');
     }  
+
+    protected function empleado(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => ucwords($value),
+            set: fn (string $value) => strtolower($value)
+        );
+    }
+
 }

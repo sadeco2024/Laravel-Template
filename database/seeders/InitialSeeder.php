@@ -105,16 +105,30 @@ class InitialSeeder extends Seeder
 
         //** Se debe generar el canal principal */
         $concepto = Concepto::firstOrCreate(['concepto' => 'Distribuidor']);
+        //  DISTRICEL
+        // Canal::obtenerCanal([
+        //     'nombre' => 'DISTRICEL',
+        //     'clave' => 'RPHAESC',
+        //     'acox' => 'acox17274',
+        //     'contrasena' => 'acox88682',
+        //     'activa' => true,
+        //     'sucursal_id' => 1,
+        //     'estatus_id' => 1,
+        //     'tipo_concepto_id' => $concepto->id
+        // ]);
+
         Canal::obtenerCanal([
-            'nombre' => 'DISTRICEL',
-            'clave' => 'RPHAESC',
-            'acox' => 'acox17274',
-            'contrasena' => 'acox88682',
+            'nombre' => 'PHONESALE',
+            'clave' => 'RPHSMER',
+            'acox' => 'acox20155',
+            'contrasena' => 'acox35393',
             'activa' => true,
             'sucursal_id' => 1,
             'estatus_id' => 1,
-            'concepto_id' => $concepto->id
-        ]);
+            'tipo_concepto_id' => $concepto->id
+        ]);        
+
+        
         
         // Canal::create(['nombre' => 'DISTRICEL', 'clave' => 'RPHAESC', 'acox' => 'acox17274', 'contrasena' => 'acox88682', 'activa' => true, 'sucursal_id' => 1, 'estatus_id' => 1]);
 
